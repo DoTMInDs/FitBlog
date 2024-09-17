@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}Dashboard{% endblock  %}
+{% block content %}
+    {% include "dashboard/dashboard_nav.html" %}
+
+    <div class="container">
+        <div class="my-[20px] ">
+            <div class="row gap-0 w-full p-[15px] flex justify-between h-full bg-slate-100">
+                <div class="col-md-8 ">
+                    {% for article in articles %}
+                        <div class="card text-bg-light my-[20px] p-[20px] ">
+                            
+                           {% if article.image %}
+                                <img src="{{ article.image.url }}" class="card-img-top w-[150px] h-[150px] object-scale-down object-center"  alt="...">
+                           {% endif %}
+                            <div class="card-body">
+                                <div class="flex justify-between items-center">
+                                    <h5 class="card-title"> {{ article.title }} </h5>
+                                    <small class="font-semibold text-[12px] text-[#cfc7c7]"> {{ article.dated_on }} </small>
+                                </div>
+                                <p class="py-[5px] font-semibold text-[12px] text-[#ffffff] "><small class="bg-green-400 px-[8px] py-[3px]">{{ article.slug }}</small></p>
+                                <div class="flex items-center gap-[10px]">
+                                        <p class="card-text"><small>{{ article.articles_content }}</small></p>
+                                </div>
+                            </div>
+                            <div class="flex gap-[10px] justify-end items-end">
+                                <button ><a href="{% url "user-dashboard-edit" article.id %}" class="btn btn-block btn-secondary">Edit</a></button>
+                                <button><a href="{% url "user-post-delete" article.id %}" class="btn btn-block btn-danger"> Delete</a></button>
+                            </div>
+                        </div> 
+                    {% endfor %}
+
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-[#f7f4f4] p-[20px] my-[20px]">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ user_post_form|crispy }}
+                            <input type="submit" value="Post" class="btn btn-primary w-full ">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

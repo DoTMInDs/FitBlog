@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}Home{% endblock  %}
+{% block content %}
+    {% include "partials/nav.html" %}
+    <div class="w-full p-[15px] flex justify-between h-full bg-slate-100">
+        <div class="__grid_card container">
+            {% for article in articles %}
+                <a href="{% url "blog-post-detail" article.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    <div class="card text-bg-light ">
+                        <img src="{{article.image.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h5 class="card-title"> {{ article.title }} </h5>
+                        <div class="flex items-center gap-[10px]">
+                                <p class="card-text"><small>{{article.dated_on}}</small></p>
+                                <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ article.slug }}</small></p>
+                        </div>
+                        </div>
+                    </div> 
+                </a>                         
+            {% endfor %}
+
+            {% for blog_post in posts %}
+                <a href="{% url "blog-postmodel-detail" blog_post.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                    <div class="card text-bg-light ">
+                        {% if blog_post.image %}
+                            <img src="{{blog_post.image.url}}" class="card-img-top" alt="...">
+                        {% endif %}
+                        <div class="card-body">
+                        <h5 class="card-title"> {{ blog_post.title }} </h5>
+                        <div class="flex items-center gap-[10px]">
+                                <p class="card-text"><small>{{blog_post.created_on}}</small></p>
+                                <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ blog_post.slug }}</small></p>
+                        </div>
+                        </div>
+                    </div> 
+                </a> 
+            {% endfor %}
+        </div>
+    </div>
+    
+{% endblock content %}

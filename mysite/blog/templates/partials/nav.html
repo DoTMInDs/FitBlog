@@ -1,0 +1,94 @@
+    {% extends "base.html" %}
+    {% load static %}
+    {% block nav %}
+    <nav class=" py-6 px-[20px] w-full bg-slate-300 z-50 ">
+        <div class=" w-full flex items-center justify-between py-6 container">
+                <div class="flex items-center cursor-pointer">
+                    <a href="{% url "home" %}" class="navbar-brand flex items-center">
+                        <img src="{% static 'images/logo.png' %}" height="64px" class="pr-2 h-8 ">
+                        <h4 class=" text-gray-600 ">FitBlog</h4>
+                    </a>
+                </div>
+
+               <div class="flex items-center gap-[20px]">
+                    {% if user.is_authenticated %}
+                        <div class="flex gap-[20px] items-center">
+                            <div class="flex gap-[15px]">
+                                <a href="" class=""><i class="fa-brands fa-youtube fa-xl" style='color: #Ff0000'></i></a>
+                                <a href="" class=""><i class="fa-brands fa-facebook fa-xl" style='color: #00008B'></i></a>
+                                <a href="" class=""><i class="fa-brands fa-twitter fa-xl" ></i></a>
+                            </div>
+                            <div class="flex items-center w-[250px] bg-gray-50 border border-gray-300 px-4 rounded-full shadow-md">
+                                <i class="fa-solid fa-magnifying-glass fa-lg text-gray-300 cursor-pointer"></i>
+                                <input type="search" placeholder="Search FitBlog..." class="w-full  py-[5px] px-[3px] bg-transparent outline-none">
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="">
+                        {% if user.is_authenticated %}
+                            <div class="flex items-center ">
+                                <div class="flex items-center gap-[10px]">
+                                    <div class="flex items-center">
+                                        <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="">
+                                        <a href="{% url "profile" %}" class="nav-link hover:text-[red] transition">Profile</a>
+                                    </div>
+                                    <a href="{% url "logout" %}" class="nav-link rounded-full py-[6px] px-[10px] bg-[#ffffff9f] hover:text-[red] transition">
+                                        Logout
+                                    </a>
+                                </div>
+                            </div>                    
+                        {% else %}
+                            <div class="flex justify-between items-center gap-[10px] w-full">
+                                <div class="flex items-center gap-[10px]">
+                                    <a href="{% url "sign_up" %}" class=" rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#ff8686] __nav_text_style transition">
+                                        Sign up
+                                    </a>
+                                    <a href="{% url "login" %}" class="rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#ff8686] __nav_text_style transition">
+                                        Login
+                                    </a>
+                                </div>
+                            </div>                                        
+                        {% endif %}
+                    </div>
+               </div>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="container">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-[10px]">
+                        <p class="font-semibold text-[13px] bg-[#fff] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"> Welcome Home <small class="font-semibold text-[15px] capitalize text-[#154d8b]"> {{ user }} ! </small></p>
+                        <p class="uppercase bg-[#ffffff8e] px-[10px] py-[2px] rounded-full "> <a href="{% url "user-dashboard" %}" class="text-[13px] font-semibold __nav_text_style"> dashboard</a> </p>
+                    </div>
+                </div>
+            </div>
+            <div class="__nav-links container">
+                <ul class="nav nav-pills nav-fill">
+                    <li class="nav-item bg-[#95c78e]">
+                        <a class="nav-link __nav_text" href="{% url "news-page" %}">News</a>
+                    </li>
+                    <li class="nav-item bg-[#f05a3f]">
+                        <a class="nav-link __nav_text" href="{% url "sports-page" %}">Sports</a>
+                    </li>
+                    <li class="nav-item bg-[#2bbcf5]">
+                        <a class="nav-link __nav_text" href="{% url "business-page" %}">Business</a>
+                    </li>
+                    <li class="nav-item bg-[#bd2a98]">
+                        <a class="nav-link __nav_text" href="{% url "entertainment-page" %}">Entertainment</a>
+                    </li>
+                    <li class="nav-item bg-[#e1f52b]">
+                        <a class="nav-link __nav_text" href="{% url "africa-page" %}">Africa</a>
+                    </li>
+                    <li class="nav-item bg-[#225a88]">
+                        <a class="nav-link __nav_text" href="{% url "ghanaweb-page" %}">GhanaWeb Tv</a>
+                    </li>
+                    <li class="nav-item bg-[#6692a3]">
+                        <a class="nav-link __nav_text" href="{% url "opinions-page" %}">Opinions</a>
+                    </li>
+                </ul>
+            </div>  
+        {% endif %}      
+       
+    </nav>
+    
+    {% endblock nav %}
+          

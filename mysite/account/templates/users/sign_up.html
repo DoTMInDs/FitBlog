@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}
+register
+{% endblock  %}
+{% block content %}
+    {% include "partials/nav.html" %}
+    <div class="flex justify-center items-center w-full h-[100%] mt-[50px]">
+        <form action="" method="post" class="w-[600px] p-[30px] rounded shadow bg-slate-50">
+            <div class="">
+                <h1 class="text-[28px] font-sans font-semibold my-[20px] text-center">Sign Up</h1>
+            </div>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="text-[#fff] bg-blue-400 px-[30px] py-[10px] w-full mt-[30px]">Sign Up</button>
+            <p class="text-[12px] py-[20px] font-medium font-[poppins] text-center">Already have an account? <a href="{% url "login" %}" class="text-[#2888E1] hover:text-[#595454]">Sign In</a></p>
+        </form>
+    </div>
+{% endblock  %}
+

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}Sign In{% endblock  %}
+{% block content %}
+    {% include "partials/nav.html" %}
+    <div class="flex justify-center items-center w-full h-[100%] mt-[50px] flex-col">
+        <form action="" method="post" class="w-[600px] p-[30px] rounded shadow bg-slate-50 login-form">
+            <div class="">
+                <h1 class="text-[28px] font-sans font-semibold my-[20px] text-center">Login</h1>
+            </div>
+            {% csrf_token %}   
+                   
+            <div class="">
+                <div class="my-[10px]">
+                    <label for="id_username" class="mb-[8px]">Username</label>
+                    <input type="text" id="id_username" name="username" class="border border-slate-300  rounded outline-none w-full bg-white py-[10px] px-[10px]" placeholder="" required> 
+                </div>                
+                <div class="my-[10px]">
+                    <label for="id_password" class="mb-[8px]">Password</label>
+                    <input type="password" id="id_password" name="password" class="border border-slate-300 outline-none  rounded  w-full bg-white py-[10px] px-[10px]" placeholder="" required> 
+                </div>
+            </div>           
+            <p class="text-right"><a href="{% url "reset-password" %}">Forgot password?</a></p>
+            <button type="submit" class="text-[#fff] bg-blue-400 px-[30px] py-[10px] w-full mt-[30px]">Login</button>
+                <p class="text-[12px] py-[20px] font-medium font-[poppins] text-center">New to FitBlog? <a href="{% url "sign_up" %}" class="text-[#2888E1] hover:text-[#595454]">Create account</a></p>
+        </form>
+    </div>
+
+{% endblock  %}
+
+
+<!---
+    <div class="w-[80%] m-auto h-[100vh] p-[20px]">
+            <div class="flex justify-center items-center w-full h-[100%] ">
+                <form action="" method="post">
+                    {% csrf_token %}
+                   <div class="w-[600px] p-[30px] rounded shadow bg-slate-50">
+                    <div class="fieldWrapper">
+                        {{ form.errors }}
+                    </div>
+                    {{ form.non_field_errors }}
+
+                        <h2 class="text-slate-700 text-center font-[poppins] font-medium text-[22px] mt-[20px]">Sign in to your account</h2>
+                        {% comment %} {{ form.email.label }} <br>
+                        {{ form.email }}<br>
+                        {{ form.password.label }} <br>
+                        {{ form.password1 }} {% endcomment %}
+                        
+                       <div class="w-full">
+                            <label for="username" class="text-[14px] font-[poppins] font-medium">Username</label>
+                            <input type="text" name="username" id="id_username" placeholder="" class="w-full border outline-none rounded border-slate-200 py-[10px]">
+                        </div>
+                        <div class="w-full">
+                            <label for="password1" class="text-[14px] font-[poppins] font-medium flex justify-between">
+                                Password
+                                <span ><a href="" class="font-[poppins] font-light text-[10px] hover:text-[#595454] transition text-[#2888E1]">Forgot your password?</a></span>
+                            </label>
+                            <input type="password" name="password1" id="id_password1" placeholder="" class="w-full border outline-none rounded border-slate-200 py-[10px]">
+                        </div>
+                        <div class="check flex gap-2">
+                            <input type="checkbox" name="news" id="news" class="">
+                            <p class="text-[#595454] font-[poppins] text-[12px]">
+                                Stay signed in for a week 
+                            </p>
+                        </div>
+                        <button type="submit" class="text-[#fff] bg-blue-400 px-[30px] py-[10px] w-full mt-[30px]">Sign Up</button>
+                   </div>
+                </form>
+            </div>
+            <div class="field-foot bg-[#f3ececbe] w-full p-5 rounded-br-2xl absolute bottom-0">
+                <p class="text-[12px] font-medium font-[poppins] text-center">New to FitBlog? <a href="{% url "sign_up" %}" class="text-[#2888E1] hover:text-[#595454]">Create account</a></p>
+            </div>
+        </div>
+    </div>
+-->

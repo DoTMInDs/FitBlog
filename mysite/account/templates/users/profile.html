@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}Sign In{% endblock  %}
+{% block content %}
+    {% include "dashboard/dashboard_nav.html" %}
+    <div class="flex justify-center items-center w-full mt-[150px]">
+        <div class="w-[600px] p-[30px] rounded shadow bg-slate-50">
+            <div class="flex justify-between items-center">
+                <h1 class="font-bold text-[18px]">Profile Page</h1>
+                <!-- Button trigger modal -->
+                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="bg-teal-500 hover:bg-teal-600 py-[4px] px-[8px] text-[12px] text-[#fff] rounded">Edit Profile</button>
+            </div>
+            <hr class="my-[10px]">
+           <div class="flex gap-5">
+                <div class="w-[200px] h-[200px]">
+                    <img src="{{ user.profilemodel.image.url }}" alt="profile.img">
+                </div>
+                <div class="">
+                    <p class="">Name: {{ user.username }} </p>
+                    <p class="">Email: {{ user.email }} </p>
+                </div>
+           </div>
+        </div>
+    </div>
+
+    
+
+  <!-- Modal -->    
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Profile</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="flex justify-between w-full p-[10px] gap-[25px]">
+              <div class="">
+                  <img src="{{ user.profilemodel.image.url }}" alt="profile.png">
+              </div>
+              <div class="">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+
+                    <div class="modal-footer ">
+                      <div class="flex justify-center items-center w-full gap-[20px]">
+                        <button type="button" class="px-[50px] py-[12px] rounded bg-[#c2bfbf]" data-bs-dismiss="modal">cancel</button>
+                          <button type="submit" class="bg-blue-500 px-[50px] py-[12px] rounded text-[#fff] text-[14px] font-medium">Save</button>
+                      </div>
+                    </div>
+                   
+                </form>
+              </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+{% endblock  %}

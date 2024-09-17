@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}Logout{% endblock  %}
+{% block content %}
+    {% include "partials/nav.html" %}
+    <div class="flex justify-center items-center w-full h-[100%] mt-[50px]">
+        <form method="post" action="{% url "home" %}" class="w-[600px] p-[30px] rounded shadow bg-slate-50 login-form">
+            {% csrf_token %}
+            <div class="">
+                <h1 class="text-[28px] font-sans font-semibold my-[20px] text-center">Logout Page</h1>
+            </div>
+            <p class="text-center">Are you sure you want to logout?</p>
+            <div class=" bg-blue-400 px-[30px] py-[10px] w-full mt-[30px] flex justify-center items-center">
+                <a href="{% url "login" %}" class="text-[#fff] text-center w-[80%] m-auto ">Logout</a>
+            </div>
+        </form>
+    </div>
+    <div class="field-foot bg-[#f3ececbe] w-full py-[10px] rounded-br-2xl absolute bottom-0">
+        <p class="text-[12px] font-medium font-[poppins] text-center"> <a href="{% url "login" %}" class="text-[#2888E1] hover:text-[#595454]">Login</a></p>
+    </div>
+
+{% endblock  %}
