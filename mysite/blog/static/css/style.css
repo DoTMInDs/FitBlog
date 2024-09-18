@@ -74,6 +74,14 @@ body{
     border-bottom-left-radius: 10px;
 }
 
+/* collapse-body */
+.collapse-body{
+    display: none;
+}
+.active-collapse{
+    display: block;
+}
+
 @media screen and (max-width:1500px) {
     .register-wrap{
         width: 80%;

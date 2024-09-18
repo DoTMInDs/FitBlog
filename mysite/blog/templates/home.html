@@ -9,7 +9,9 @@
             {% for article in articles %}
                 <a href="{% url "blog-post-detail" article.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                     <div class="card text-bg-light ">
-                        <img src="{{article.image.url}}" class="card-img-top" alt="...">
+                        {% if article.image %}
+                            <img src="{{article.image.url}}" class="card-img-top" alt="...">
+                        {% endif %}
                         <div class="card-body">
                         <h5 class="card-title"> {{ article.title }} </h5>
                         <div class="flex items-center gap-[10px]">

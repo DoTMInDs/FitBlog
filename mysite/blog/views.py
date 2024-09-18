@@ -1,5 +1,7 @@
-from django.shortcuts import render # type: ignore
+from django.shortcuts import render,redirect # type: ignore
 from .models import PostModel,ArticlePostModel
+
+from.forms import CommentForm,ArticleCommentForm
 
 
 # from django.http import HttpResponse
@@ -17,14 +19,36 @@ def HomePageView(request):
 
 def post_detail(request, pk):
     articles = ArticlePostModel.objects.get(id=pk)
+    if request.method == 'POST':
+        c_form = ArticleCommentForm(request.POST)
+        if c_form.is_valid():
+            instance = c_form.save(commit=False)
+            instance.user = request.user
+            instance.article = articles
+            instance.save()
+            return redirect('blog-post-detail', pk=articles.id)
+    else:
+        c_form = ArticleCommentForm()
     context = {
-        'articles': articles
+        'articles': articles,
+        'c_form': c_form,
     }
     return render(request, 'blog/post_detail.html', context)
 
 def postmodel_detail(request, pk):
     post_mod = PostModel.objects.get(id=pk)
+    if request.method == 'POST':
+        c_form = CommentForm(request.POST)
+        if c_form.is_valid():
+            instance = c_form.save(commit=False)
+            instance.post_user = request.user
+            instance.post_com = post_mod
+            instance.save()
+            return redirect('blog-postmodel-detail', pk=post_mod.id)
+    else:
+        c_form = CommentForm()
     context = {
-        'post_mod': post_mod
+        'post_mod': post_mod,
+        'c_form': c_form,
     }
     return render(request, 'blog/postmodel_detail.html', context)

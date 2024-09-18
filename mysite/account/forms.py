@@ -37,7 +37,7 @@ class ProfileUpdateForm(forms.ModelForm):
 class UserPostForm(forms.ModelForm):
     class Meta:
         model = ArticlePostModel
-        fields = ("title", "article_content", "image", "slug")
+        fields = ("title", "sub_title", "article_content", "image", "slug")
 
 class PostEditForm(forms.ModelForm):
     class Meta:

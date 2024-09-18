@@ -32,6 +32,12 @@ class PostModel(models.Model):
     class Meta:
         ordering = ('-created_on',)
 
+    def post_comment_count(self):
+        return self.postcomment_set.all().count()
+    
+    def post_comments(self):
+        return self.postcomment_set.all()
+
     def __str__(self):
         return self.title
     
@@ -39,6 +45,7 @@ class ArticlePostModel(models.Model):
     title=models.CharField(max_length=200, unique=True)
     sub_title=models.CharField(max_length=200, unique=True,null=True)
     image=models.ImageField(upload_to='images/',null=True,blank=True)
+    author=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     slug=models.SlugField(max_length=200, unique=True)
     article_content=models.TextField(null=True)
     dated_on=models.DateTimeField(auto_now_add=True)
@@ -47,5 +54,30 @@ class ArticlePostModel(models.Model):
     class Meta:
         ordering = ('-dated_on',)
     
+    def article_comment_count(self):
+        return self.articlecomment_set.all().count()
+    
+    def article_comments(self):
+        return self.articlecomment_set.all()
+    
     def __str__(self):
         return self.title
+
+class ArticleComment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey(ArticlePostModel, on_delete=models.CASCADE)
+    content = models.CharField(max_length=200)
+
+    def __str__(self) :
+        return self.content
+         
+class PostComment(models.Model):
+    post_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_com = models.ForeignKey(PostModel, on_delete=models.CASCADE)
+    post_content = models.CharField(max_length=200)
+
+    def __str__(self) :
+        return self.post_content
+         
+
+         

@@ -92,7 +92,7 @@ def user_dashboard(request):
 def user_dashboard_edit(request, pk):
     articles = ArticlePostModel.objects.get(id=pk)
     if request.method == 'POST':
-        form = PostEditForm(request.POST, request.FILES, instance=articles)
+        form = PostEditForm(request.POST, instance=articles)
         if form.is_valid():
             form.save()
             return redirect('user-dashboard')

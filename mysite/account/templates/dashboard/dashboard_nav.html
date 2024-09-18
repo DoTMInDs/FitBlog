@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="">
-                        {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                        {% if user.is_authenticated %}
                             <div class="flex items-center ">
                                 <div class="flex items-center gap-[10px]">
                                     <div class="flex items-center">
@@ -36,8 +36,8 @@
                                 </div>
                             </div>
                     
-                        {% comment %} {% else %} {% endcomment %}
-{% comment %} 
+                        {% else %}
+ 
                             <div class="flex justify-between items-center gap-5 w-full">
                                 <div class="flex items-center gap-[25px]">
                                     <a href="{% url "sign_up" %}" class=" rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#ff8686] transition">
@@ -48,22 +48,22 @@
                                     </a>
                                 </div>
                             </div>
-                                         {% endcomment %}
-                        {% comment %} {% endif %} {% endcomment %}
+                                        
+                        {% endif %}
                     </div>
                 </div>
             </div>
             <div class="container">
                 <div class="flex justify-between items-center">
-                        {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                        {% if user.is_authenticated %}
                             <div class="flex items-center gap-[10px]">
                                 <p class="font-semibold text-[13px] bg-[#fff] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"> Welcome Home <small class="font-semibold text-[15px] capitalize text-[#154d8b]"> {{ user }} ! </small></p>
                                 <p class="uppercase bg-[#ffffff8e] px-[10px] py-[2px] rounded-full"> <a href="{% url "user-dashboard" %}" class="text-[13px] font-semibold __nav_text_style"> dashboard</a> </p>
                             </div>
-                        {% comment %} {% else %} {% endcomment %}
-                            {% comment %} <p class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]">You are here:Home</p>
-                            <p id="current-time" class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"></p> {% endcomment %}
-                        {% comment %} {% endif %} {% endcomment %}
+                        {% else %}
+                            <p class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]">You are here:Home</p>
+                            <p id="current-time" class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"></p> 
+                        {% endif %}
                 </div>
             </div>
             <div class="__nav-links container">

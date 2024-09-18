@@ -25,10 +25,12 @@
                                         <p class="card-text"><small>{{ article.articles_content }}</small></p>
                                 </div>
                             </div>
-                            <div class="flex gap-[10px] justify-end items-end">
-                                <button ><a href="{% url "user-dashboard-edit" article.id %}" class="btn btn-block btn-secondary">Edit</a></button>
-                                <button><a href="{% url "user-post-delete" article.id %}" class="btn btn-block btn-danger"> Delete</a></button>
-                            </div>
+                            {% if article.author == request.user %}
+                                <div class="flex gap-[10px] justify-end items-end">
+                                    <button><a href="{% url "user-dashboard-edit" article.id %}" class="btn btn-block btn-secondary">Edit</a></button>
+                                    <button><a href="{% url "user-post-delete" article.id %}" class="btn btn-block btn-danger"> Delete</a></button>
+                                </div>
+                            {% endif %}
                         </div> 
                     {% endfor %}
 

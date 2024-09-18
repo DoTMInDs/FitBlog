@@ -1,9 +1,16 @@
 # from django.contrib.auth.models import User
 from django import forms # type: ignore
-# from .models import PostModel
+from .models import PostComment,ArticleComment
 
-# class PostModelForm(forms.ModelForm):
-#     class Meta:
-#         model = PostModel
-#         fields = ("title", "content")
+class CommentForm(forms.ModelForm):
+    post_content = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Add comments here....'}))
+    class Meta:
+        model = PostComment
+        fields = ("post_content",)
+
+class ArticleCommentForm(forms.ModelForm):
+    content = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Add comments here....'}))
+    class Meta:
+        model = ArticleComment
+        fields = ("content",)
 

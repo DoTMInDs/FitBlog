@@ -4,29 +4,61 @@
 {% block title %}{{post.title}}{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    <div class="w-full p-[15px] flex justify-between h-full bg-slate-100">
-        <div class="container p-[20px]">
-            <div class="bg-[#fff] p-[10px]">
-                <div class="flex justify-between items-center">
-                    <p class="font-medium"> Opinions of, <small class="font-semibold text-blue-500"> {{ post_mod.created_on }} </small></p>
-                    <p class="font-semibold">Columnist: <small class="font-medium text-blue-500 capitalize"> {{ user }} </small></p>
-                </div>
-                <div class="py-[20px]">
-                    <h4 class=""> {{ post_mod.title }} </h4>
-                </div>
-                <div class="row gap-0">
-                    <div class="col-md-4">
-                        <img src="{{post_mod.image.url}}" class="card-img-left" alt="...">
+    <div class=" p-[15px] flex justify-between h-full bg-slate-100">
+       <div class="container">
+        <div class=" row gap-0">
+            <div class=" p-[20px] col-md-8">
+                <div class="bg-[#fff] p-[10px]">
+                    <div class="flex justify-between items-center">
+                        <p class="font-medium"> Opinions of, <small class="font-semibold text-blue-500"> {{ post_mod.created_on }} </small></p>
+                        <p class="font-semibold">Columnist: <small class="font-medium text-blue-500 capitalize"> {{ user }} </small></p>
                     </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <div class="flex items-center gap-[10px]">
-                                <p class="card-text"><small>{{post_mod.content}}</small></p>
+                    <div class="py-[20px]">
+                        <h4 class=""> {{ post_mod.title }} </h4>
+                    </div>
+                    <div class="row gap-0">
+                        <div class="col-md-4">
+                            <img src="{{post_mod.image.url}}" class="card-img-left" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="flex items-center gap-[10px]">
+                                    <p class="card-text"><small>{{post_mod.content}}</small></p>
+                                </div>
                             </div>
                         </div>
+                    </div>                                   
+                </div> 
+            </div>
+            <div class=" p-[20px] col-md-4">
+                <div class="bg-[#fff] p-[10px] relative w-[100%] transition-all overflow-hidden">
+                    <input type="checkbox" class="peer absolute top-0 inset-x-0 w-full h-12 opacity-0 z-10 cursor-pointer">
+                    <a href="#!" class="hover:text-[#8a7f7f] font-semibold">
+                        Comments: {{post_mod.post_comment_count}}  
+                    </a>
+                    <div  class="peer-checked:max-h-full bg-white overflow-hidden transition-all duration-500 max-h-0">
+                        <div style="height:250px; overflow-y: scroll;" class="card card-body my-[20px]">
+                            {% for comment in post_mod.postcomment_set.all %}
+                                <div class="flex gap-[20px]">
+                                    <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ comment.post_user.profilemodel.image.url }} " alt="">                                    
+                                    <p class="flex flex-col text-[15px] text-[#6b6565]"> {{ comment.post_content }}
+                                        <small class="text-[10px] text-[#a09e9e] capitalize">{{ comment.post_user }}</small>
+                                    </p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>    
+                    <div class="py-[20px]">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                                {{ c_form|crispy }}
+                            <input type="submit" value="comment" class="btn btn-primary">
+                        </form>
                     </div>
-                </div>                 
-            </div>                        
+                </div>
+            </div>
         </div>
+       </div>
+        
     </div>
 {% endblock %}
