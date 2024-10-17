@@ -3,23 +3,39 @@
 {% load tailwind_filters %}
 {% block title %}Sign In{% endblock  %}
 {% block content %}
-    {% include "dashboard/dashboard_nav.html" %}
-    <div class="flex justify-center items-center w-full mt-[150px]">
-        <div class="w-[600px] p-[30px] rounded shadow bg-slate-50">
-            <div class="flex justify-between items-center">
-                <h1 class="font-bold text-[18px]">Profile Page</h1>
+    {% include "partials/nav.html" %}
+    <div class="flex justify-center items-center w-full  mt-[12rem] mb-[4rem]">
+        <div class="w-[65%] m-auto p-[30px] rounded shadow bg-slate-50 __profile-container">
+            <div class="flex justify-center flex-col items-center">
+                <h1 class="font-bold text-[25px] text-teal-500">Member Information</h1>
+                <div class="w-[150px] h-[150px] ">
+                    <img src="{{ user.profilemodel.image.url }}" alt="profile.img" class="rounded-[50%] object-cover object-center">
+                </div>
                 <!-- Button trigger modal -->
-                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="bg-teal-500 hover:bg-teal-600 py-[4px] px-[8px] text-[12px] text-[#fff] rounded">Edit Profile</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="my-[30px] text-teal-500 transition-all duration-200 hover:text-teal-600 py-[4px] px-[8px] text-[15px] ">Edit Profile<i class="fa-regular fa-pen-to-square fa-xl ml-[10px]"></i></button>
             </div>
-            <hr class="my-[10px]">
-           <div class="flex gap-5">
-                <div class="w-[200px] h-[200px]">
-                    <img src="{{ user.profilemodel.image.url }}" alt="profile.img">
-                </div>
-                <div class="">
-                    <p class="">Name: {{ user.username }} </p>
-                    <p class="">Email: {{ user.email }} </p>
-                </div>
+            {% comment %} <hr class="my-[10px] h-[1px] bg-slate-50"> {% endcomment %}
+           <div class="">
+              <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                  <h3 class="text-[18px] basis-2/6">Firstname</h3>
+                  <p class="mt-[10px] basis-3/5">{{ user.profilemodel.full_name }} </p>
+              </div>
+              <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                <h3 class="text-[18px] basis-2/6">Username</h3>
+                <p class="mt-[10px] basis-3/5">{{ user.username }} </p>
+              </div>
+              <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                <h3 class="text-[18px] basis-2/6">Email address</h3>
+                <p class="mt-[10px] basis-3/5">{{ user.email }} </p>
+              </div>
+              <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                <h3 class="text-[18px] basis-2/6">Talks About</h3>
+                <p class="mt-[10px] basis-3/5">{{ user.profilemodel.talks_about }} </p>
+              </div>
+              <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                <h3 class="text-[18px] basis-2/6">About me</h3>
+                <p class="mt-[10px] basis-3/5">{{ user.profilemodel.about }} </p>
+              </div>
            </div>
         </div>
     </div>
@@ -28,18 +44,18 @@
 
   <!-- Modal -->    
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Profile</h1>
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Profile <i class="fa-regular fa-pen-to-square"></i></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="flex justify-between w-full p-[10px] gap-[25px]">
-              <div class="">
-                  <img src="{{ user.profilemodel.image.url }}" alt="profile.png">
+          <div class="flex justify-center flex-col items-center w-full p-[10px] gap-[25px]">
+              <div class="w-[250px]">
+                  <img src="{{ user.profilemodel.image.url }}" alt="profile.png" class="rounded-[50%] w-[250px] h-[250px] object-cover object-center">
               </div>
-              <div class="">
+              <div class="w-[100%]">
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
 

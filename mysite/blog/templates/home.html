@@ -4,42 +4,90 @@
 {% block title %}Home{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    <div class="w-full p-[15px] flex justify-between h-full bg-slate-100">
-        <div class="__grid_card container">
+    <div class="w-full p-[15px] flex justify-between h-full __home_content">
+        <div class="__grid_card container bg-slate-100 p-[10px]">
             {% for article in articles %}
                 <a href="{% url "blog-post-detail" article.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                     <div class="card text-bg-light ">
-                        {% if article.image %}
-                            <img src="{{article.image.url}}" class="card-img-top" alt="...">
-                        {% endif %}
                         <div class="card-body">
-                        <h5 class="card-title"> {{ article.title }} </h5>
-                        <div class="flex items-center gap-[10px]">
-                                <p class="card-text"><small>{{article.dated_on}}</small></p>
+                            <h5 class="card-title"> {{ article.title }} </h5> 
+                            <div class="flex  justify-between items-center">
+                                <p class="card-text text-[13px] text-[#444] font-semibold"><small>{{article.dated_on}}</small></p>
+                                <p class="text-[13px] text-[#444] font-semibold">
+                                    <i class="fa-solid fa-comments px-[2px]"></i>
+                                    {{article.article_comment_count}}
+                                     Comments
+                                </p>
+                            </div>
+                            <div class="flex justify-between items-center gap-[10px]">
+                                <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ article.author }} </p> 
                                 <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ article.slug }}</small></p>
+                            </div>                           
+                            <div class=" flex gap-3">
+                                {% if article.image %}
+                                    <img src="{{article.image.url}}" class="img-thumbnail w-[100px]" alt="...">
+                                {% endif %}
+                                <p class="card-text "><small >{{article.article_content|truncatewords:8}}</small></p>
+                            </div>
+                           
                         </div>
-                        </div>
+                       
                     </div> 
                 </a>                         
             {% endfor %}
 
             {% for blog_post in posts %}
-                <a href="{% url "blog-postmodel-detail" blog_post.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
-                    <div class="card text-bg-light ">
-                        {% if blog_post.image %}
-                            <img src="{{blog_post.image.url}}" class="card-img-top" alt="...">
-                        {% endif %}
-                        <div class="card-body">
-                        <h5 class="card-title"> {{ blog_post.title }} </h5>
-                        <div class="flex items-center gap-[10px]">
-                                <p class="card-text"><small>{{blog_post.created_on}}</small></p>
-                                <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ blog_post.slug }}</small></p>
+            <a href="{% url "blog-postmodel-detail" blog_post.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                <div class="card text-bg-light ">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{ blog_post.title }} </h5> 
+                        <div class="flex  justify-between items-center">
+                            <p class="card-text text-[13px] text-[#444] font-semibold"><small>{{blog_post.created_on}}</small></p>
+                            <p class="text-[13px] text-[#444] font-semibold">
+                                <i class="fa-solid fa-comments px-[2px]"></i>
+                                {{blog_post.post_comment_count}}
+                                 Comments
+                            </p>
                         </div>
+                        <div class="flex justify-between items-center gap-[10px]">
+                            <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ blog_post.author }} </p> 
+                            <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ blog_post.slug }}</small></p>
+                        </div>                           
+                        <div class=" flex gap-3">
+                            {% if blog_post.image %}
+                                <img src="{{blog_post.image.url}}" class="img-thumbnail w-[100px]" alt="...">
+                            {% endif %}
+                            <p class="card-text "><small >{{blog_post.content|truncatewords:8}}</small></p>
                         </div>
-                    </div> 
-                </a> 
+                       
+                    </div>
+                   
+                </div> 
+            </a>       
             {% endfor %}
         </div>
     </div>
+
+    <div class="my-[50px]">
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_article.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ page_article.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ page_article.number }} of {{ page_article.p.num_pages }}.
+                </span>
+        
+                {% if page_article.has_next %}
+                    <a href="?page={{ page_article.next_page_number }}">next</a>
+                    <a href="?page={{ page_article.p.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
     
 {% endblock content %}
+

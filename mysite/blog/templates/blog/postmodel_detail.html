@@ -4,21 +4,32 @@
 {% block title %}{{post.title}}{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    <div class=" p-[15px] flex justify-between h-full bg-slate-100">
-       <div class="container">
+    <div class="p-[15px] flex justify-between h-full bg-slate-100 ">
+       <div class="container __post_detail_content ">
         <div class=" row gap-0">
             <div class=" p-[20px] col-md-8">
                 <div class="bg-[#fff] p-[10px]">
                     <div class="flex justify-between items-center">
                         <p class="font-medium"> Opinions of, <small class="font-semibold text-blue-500"> {{ post_mod.created_on }} </small></p>
-                        <p class="font-semibold">Columnist: <small class="font-medium text-blue-500 capitalize"> {{ user }} </small></p>
+                        <p class="font-semibold">Columnist: <small class="font-medium text-blue-500 capitalize"> {{ post_mod.author }} </small></p>
                     </div>
                     <div class="py-[20px]">
                         <h4 class=""> {{ post_mod.title }} </h4>
+                        <div class="flex gap-[5px] justify-between items-center">                               
+                            <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ post_mod.author }} </p> 
+                            <p class="text-[13px] text-[#444] font-semibold">
+                                <i class="fa-solid fa-comments px-[2px]"></i>
+                                {{post_mod.post_comment_count}}
+                                 Comments
+                            </p>
+                            <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ post_mod.slug }}</small></p>
+                        </div>
                     </div>
                     <div class="row gap-0">
                         <div class="col-md-4">
-                            <img src="{{post_mod.image.url}}" class="card-img-left" alt="...">
+                            {% if post_mod.image %}
+                                <img src="{{post_mod.image.url}}" class="card-img-left" alt="...">
+                            {% endif %}
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -58,7 +69,6 @@
                 </div>
             </div>
         </div>
-       </div>
-        
+       </div>        
     </div>
 {% endblock %}

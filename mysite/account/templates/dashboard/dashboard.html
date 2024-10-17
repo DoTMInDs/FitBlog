@@ -4,39 +4,65 @@
 {% block title %}Dashboard{% endblock  %}
 {% block content %}
     {% include "dashboard/dashboard_nav.html" %}
-
-    <div class="container">
-        <div class="my-[20px] ">
-            <div class="row gap-0 w-full p-[15px] flex justify-between h-full bg-slate-100">
-                <div class="col-md-8 ">
+    <div class="container flex justify-between mt-[180px] ">
+        <div class="__dashboard_media_container">            
+            <div class=" w-full p-[15px] h-full bg-slate-100">
+                <div class="row ">
                     {% for article in articles %}
-                        <div class="card text-bg-light my-[20px] p-[20px] ">
-                            
-                           {% if article.image %}
-                                <img src="{{ article.image.url }}" class="card-img-top w-[150px] h-[150px] object-scale-down object-center"  alt="...">
-                           {% endif %}
+                    <div class="my-[20px]">
+                        <div class=" card text-bg-light  p-[20px] ">                            
                             <div class="card-body">
-                                <div class="flex justify-between items-center">
-                                    <h5 class="card-title"> {{ article.title }} </h5>
-                                    <small class="font-semibold text-[12px] text-[#cfc7c7]"> {{ article.dated_on }} </small>
+                                <h5 class="card-title"> {{ article.title }} </h5> 
+                                <div class="flex  justify-between items-center">
+                                    <p class="card-text text-[13px] text-[#444] font-semibold"><small>{{article.dated_on}}</small></p>
+                                    <p class="text-[13px] text-[#444] font-semibold">
+                                        <i class="fa-solid fa-comments px-[2px]"></i>
+                                        {{article.article_comment_count}}
+                                         Comments
+                                    </p>
                                 </div>
-                                <p class="py-[5px] font-semibold text-[12px] text-[#ffffff] "><small class="bg-green-400 px-[8px] py-[3px]">{{ article.slug }}</small></p>
-                                <div class="flex items-center gap-[10px]">
-                                        <p class="card-text"><small>{{ article.articles_content }}</small></p>
-                                </div>
-                            </div>
+                                <div class="flex justify-between items-center gap-[10px]">
+                                    <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ article.author }} </p> 
+                                    <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ article.slug }}</small></p>
+                                </div>                           
+                                <div class=" flex gap-3">
+                                    {% if article.image %}
+                                        <img src="{{ article.image.url }}" class="img-thumbnail w-[100px] object-scale-down object-center"  alt="...">
+                                    {% endif %}
+                                    <p class="card-text "><small >{{article.article_content|truncatewords:12}}</small></p>
+                                </div>                               
+                            </div>                        
                             {% if article.author == request.user %}
                                 <div class="flex gap-[10px] justify-end items-end">
-                                    <button><a href="{% url "user-dashboard-edit" article.id %}" class="btn btn-block btn-secondary">Edit</a></button>
-                                    <button><a href="{% url "user-post-delete" article.id %}" class="btn btn-block btn-danger"> Delete</a></button>
+                                    <button>
+                                        <a href="{% url "user-dashboard-edit" article.id %}" class="btn btn-block btn-secondary">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </a>
+                                    </button>
+                                    <button>
+                                        <a href="{% url "user-post-delete" article.id %}" class="btn btn-block btn-danger">
+                                            <i class="fa-solid fa-trash-can"></i>                                         
+                                        </a>
+                                    </button>
                                 </div>
                             {% endif %}
                         </div> 
+                    </div>
                     {% endfor %}
+                </div>                
+            </div>
+        </div>      
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 " id="exampleModalLabel">Create your Post <i class="fa-brands fa-blogger-b ml-[10px] mt-[3px]"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="col-md-4">
-                    <div class="card bg-[#f7f4f4] p-[20px] my-[20px]">
+                <div class="modal-body">
+                    <div class="card bg-[#f7f4f4] p-[20px] my-[20px]" >
                         <form action="" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ user_post_form|crispy }}
@@ -44,6 +70,7 @@
                         </form>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

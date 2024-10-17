@@ -3,22 +3,23 @@
 {% load tailwind_filters %}
 {% block title %}Dashboard{% endblock  %}
 {% block content %}
-    {% include "dashboard/dashboard_nav.html" %}
+    {% include "partials/nav.html" %}
 
-    <div class="container">
+    <div class="container mt-[12rem]">
         <div class="my-[20px] ">
             <div class="row gap-0 w-full p-[15px] flex justify-between h-full bg-slate-100">
                 <div class="col-md-8">
                     <div class="card text-bg-light my-[20px] p-[20px]">
-                        <div class="alert alert-danger">
-                            Do you want to Delete this post?
+                        <div class="alert alert-danger ">
+                            Are you sure you want to delete <small class="font-bold capitalize">{{ articles.title }}?</small> it will be permanently removed.
+                            This action cannot be undone.
                         </div>
                         <form action="" method="post">
                             {% csrf_token %}
 
                             <div class="flex gap-[10px] justify-end items-end">
                                 <button><a href="{% url "user-dashboard" %}" class="btn btn-block btn-secondary">cancel</a></button>
-                                <button type="submit" class="btn btn-block btn-warning"> Confirm</button>
+                                <button type="submit" class="btn btn-block btn-danger"> Yes, Delete</button>
                             </div>
                         </form>
                     </div> 

@@ -32,9 +32,10 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = ProfileModel
-        fields = [ "image"]
+        fields = [ "full_name", "image", "about", "talks_about"]
 
 class UserPostForm(forms.ModelForm):
+    article_content = forms.CharField(widget=forms.Textarea(attrs={'rows': 4}))
     class Meta:
         model = ArticlePostModel
         fields = ("title", "sub_title", "article_content", "image", "slug")

@@ -4,7 +4,7 @@
 {% block title %}Logout{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    <div class="flex justify-center items-center w-full h-[100%] mt-[50px]">
+    <div class="flex justify-center items-center w-full h-[100%] ">
         <form method="post" action="{% url "home" %}" class="w-[600px] p-[30px] rounded shadow bg-slate-50 login-form">
             {% csrf_token %}
             <div class="">

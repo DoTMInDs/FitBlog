@@ -1,12 +1,126 @@
 {% extends "base.html" %}
 {% load static %}
 {% load tailwind_filters %}
-{% block title %}News Page{% endblock  %}
+{% block title %}News{% endblock  %}
 {% block content %}
-    {% include "dashboard/dashboard_nav.html" %}
+    {% include "partials/nav.html" %}
     
-
-    <div class="container">
-        <h2>news page</h2>
+    <div class="container mt-[11rem] mb-[6rem]">
+        <div class="flex gap-2">
+            <div class="w-[20%] bg-slate-100 h-[60%]">
+                <div class="">
+                    <div class="bg-green-300">
+                        <h2 class="p-[5px] text-[15px]">Latest News</h2> 
+                    </div>
+                    <div class="flex flex-col _new-a">
+                        <a href="{% url "home" %}" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Home</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Twi News</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Poll</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Cartoons</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Your In Review</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">News Archive</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Crime & Punishment</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Politics</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Regional</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Health</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Africa</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Religion</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Election 2024</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">Press Release</a>
+                        <a href="" class="text-[12px] text-[#222] border-b-[1px] border-slate-300 p-[2px]">News Blogs</a>
+                    </div>                   
+                </div>
+            </div>
+            <div class="w-[60%]">
+                <div class=" bg-slate-100">
+                    <h2 class="p-[5px] text-[15px]">General News</h2> 
+                </div>
+                <div class="w-full p-[15px] flex justify-between h-full bg-slate-100">
+                    <div class="__grid_card container">
+                        {% for article in articles %}
+                        <a href="{% url "blog-post-detail" article.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                            <div class="card text-bg-light ">
+                                <div class="card-body">
+                                    <h5 class="card-title"> {{ article.title }} </h5> 
+                                    <div class="flex  justify-between items-center">
+                                        <p class="card-text text-[13px] text-[#444] font-semibold"><small>{{article.dated_on}}</small></p>
+                                        <p class="text-[13px] text-[#444] font-semibold">
+                                            <i class="fa-solid fa-comments px-[2px]"></i>
+                                            {{article.article_comment_count}}
+                                             Comments
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-between items-center gap-[10px]">
+                                        <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ article.author }} </p> 
+                                        <p class="font-bold text-[12px] "><small class="bg-green-400 px-[8px] py-[3px]">{{ article.slug }}</small></p>
+                                    </div>                           
+                                    <div class=" flex gap-3">
+                                        {% if article.image %}
+                                            <img src="{{article.image.url}}" class="img-thumbnail w-[100px]" alt="...">
+                                        {% endif %}
+                                        <p class="card-text "><small >{{article.article_content|truncatewords:8}}</small></p>
+                                    </div>
+                                   
+                                </div>
+                               
+                            </div> 
+                        </a>   
+                            {% comment %} <a href="{% url "blog-post-detail" article.id %}" class="card flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                                <div class=" text-bg-light ">
+                                    {% if article.image %}
+                                        <img src="{{article.image.url}}" class="card-img-top" alt="...">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title"> {{ article.title }} </h5>
+                                        <div class="flex items-center gap-[10px]">
+                                            <p class="card-text"><small>{{article.dated_on}}</small></p>
+                                            <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ article.slug }}</small></p>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </a>   {% endcomment %}
+                        {% endfor %}                                       
+                    </div>
+                </div>
+               
+            </div>
+            <div class="w-[30%] ">
+                <div class="bg-rose-300">
+                    <h2 class="p-[5px] text-[15px]">Spotlight</h2>
+                    <div class="w-full p-[15px] flex justify-between h-full bg-slate-100">
+                        <div class="flex flex-col">
+                            {% for blog_post in posts %}
+                                <a href="{% url "blog-postmodel-detail" blog_post.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                                    <div class="card mb-3" style="max-width: 540px;">
+                                        <div class="row g-0">
+                                            <div class="col-md-4">
+                                                {% if blog_post.image %}
+                                                    <img src="{{blog_post.image.url}}" class=" rounded-start w-[100%]  h-[100%] object-cover object-center" alt="...">
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body  my-0 py-0">
+                                                    <h5 class="card-title mt-[10px] text-[14px] py-0 "> {{ blog_post.title|truncatewords:2 }}</h5>
+                                                    <p class="card-text text-[10px] py-0 my-0"><small>{{blog_post.created_on}}</small></p>
+                                                    <p class="text-[10px] text-[#444] py-0 my-0 font-semibold">
+                                                        <i class="fa-solid fa-comments px-[2px]"></i>
+                                                        {{blog_post.post_comment_count}}
+                                                         Comments
+                                                    </p>
+                                                    <div class="flex justify-between items-center gap-[10px]">
+                                                        <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ blog_post.author }} </p> 
+                                                        <p class="text-[8px] truncate font-bold"><small class="bg-green-400 px-[8px] py-[3px]">{{ blog_post.slug }}</small></p>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a> 
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock content %}

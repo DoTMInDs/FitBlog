@@ -1,22 +1,37 @@
 from django.shortcuts import render,redirect # type: ignore
-from .models import PostModel,ArticlePostModel
+from django.contrib.auth.decorators import login_required
 
+from .models import PostModel,ArticlePostModel
 from.forms import CommentForm,ArticleCommentForm
+from django.db.models import Q
+
+from django.core.paginator import Paginator
 
 
 # from django.http import HttpResponse
 # from django.views.generic.base import TemplateView
 # from .models import BlogProfile
 
+@login_required
 def HomePageView(request):
     posts = PostModel.objects.all()
     articles = ArticlePostModel.objects.all()
+
+    filter_query = request.GET.get('search') if request.GET.get('search') != None else ''
+    articles = ArticlePostModel.objects.filter(
+        Q(title__icontains=filter_query) |
+        Q(author__username__icontains=filter_query) |
+        Q(sub_title__icontains=filter_query) 
+    )
+
     context = {
         'posts': posts,
-        'articles': articles
+        'articles': articles,
+        
     }
     return render(request, 'home.html', context)
 
+@login_required
 def post_detail(request, pk):
     articles = ArticlePostModel.objects.get(id=pk)
     if request.method == 'POST':
@@ -35,6 +50,7 @@ def post_detail(request, pk):
     }
     return render(request, 'blog/post_detail.html', context)
 
+@login_required
 def postmodel_detail(request, pk):
     post_mod = PostModel.objects.get(id=pk)
     if request.method == 'POST':

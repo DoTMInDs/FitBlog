@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+import socket
+socket.getaddrinfo('localhost', 8001)
+
 # from dotenv import load_dotenv
 
 # load_dotenv()
@@ -49,6 +52,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'crispy_tailwind',
+    # 'embed_video',
 
     # 'tailwind',
     # 'theme'
@@ -158,9 +162,17 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 LOGIN_REDIRECT_URL = 'home'
-# LOGIN_URL = 'login'
+LOGIN_URL = 'login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smpt.gmail.com'
+EMAIL_HOST_USER = 'esmondabban3@gmail.com'
+EMAIL_HOST_PASSWORD = 'Dhonnie33@@'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+

@@ -4,17 +4,26 @@
 {% block title %}{{post.title}}{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    <div class="w-full p-[15px] flex justify-between h-full bg-slate-100">
-        <div class="container">
+    <div class="w-full  p-[15px] flex justify-between h-full bg-slate-100 ">
+        <div class="container mt-[3rem] __post_details_media_container">
             <div class="row gap-0">
                 <div class="col-md-8">
                     <div class="bg-[#fff] p-[10px]">
                         <div class="flex justify-between items-center">
                             <p class="font-medium"> Opinions of, <small class="font-semibold text-blue-500"> {{ articles.dated_on }} </small></p>
-                            <p class="font-semibold">Columnist: <small class="font-medium text-blue-500 capitalize"> {{ user }} </small></p>
+                            <p class="font-semibold">Columnist: <small class="font-medium text-blue-500 capitalize"> {{ articles.author }} </small></p>
                         </div>
                         <div class="py-[20px]">
                             <h4 class=""> {{ articles.sub_title }} </h4>
+                            <div class="flex gap-[5px] justify-between items-center">                               
+                                <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ articles.author }} </p> 
+                                <p class="text-[13px] text-[#444] font-semibold">
+                                    <i class="fa-solid fa-comments px-[2px]"></i>
+                                    {{articles.article_comment_count}}
+                                     Comments
+                                </p>
+                                <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ articles.slug }}</small></p>
+                            </div>
                         </div>
                         <div class="row gap-0">
                             <div class="col-md-4">
@@ -25,7 +34,7 @@
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <div class="flex items-center gap-[10px]">
-                                        <p class="card-text"><small>{{articles.article_content}}</small></p>
+                                        <p class="card-text"><small>{{articles.article_content }}</small></p>
                                     </div>
                                 </div>
                             </div>
