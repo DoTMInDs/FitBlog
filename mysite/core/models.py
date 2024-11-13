@@ -44,3 +44,18 @@ class CreateSong(models.Model):
     def __str__(self):
         return f'{str(self.artist_song_title_create)} by {str(self.song_artist_name_create)}'
     
+class SportsModel(models.Model):
+    title=models.CharField(max_length=200, unique=True)
+    sub_title=models.CharField(max_length=200, unique=True,null=True)
+    artist_song_create = models.FileField(upload_to='video/',null=True,blank=True, validators=[FileExtensionValidator(['MOV', 'WMV', 'MP4', 'FLV', 'WEBM', 'AVI', 'MKV'])])
+    image=models.ImageField(upload_to='images/',null=True,blank=True)
+    author=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    slug=models.SlugField(max_length=200, unique=True)
+    article_content=models.TextField(null=True)
+    dated_on=models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-dated_on',)
+
+    def __str__(self):
+        return self.title

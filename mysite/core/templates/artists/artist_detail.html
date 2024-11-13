@@ -124,51 +124,53 @@
                 </div>                         
             </div>
 
-            <div class="">
-                {% for song_upload in song_uploads %}
-                   <div class="flex flex-col">
-                        <button type="button" class="artist_detail_link " data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                            <div class="flex gap-[7px]">
-                                <div class="artist_img_wrapper">
-                                    {% if song_upload.artist_profile  %}
-                                        <img src="{{ song_upload.artist_profile.url }}" alt="pic.png" class="artist_img_detail">                            
-                                    {% endif %} 
-                                </div>
-                                <div class="">
-                                    <h3 class="song_title">{{ song_upload.song_title }}</h3>
-                                </div>
-                            </div>
-                        </button>  
-                   </div>  
-                {% endfor %} 
-                
-                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content p-[30px]">                            
-                            <div class="float-end close_btn">
-                                <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="flex justify-between gap-[20px]">
-                                    <div class="image_cover_art_wrapper">     
-                                        {% if song_uploads.artist_profile_create  %}
-                                            <img src="{{ song_uploads.artist_profile_create.url }}" alt="" class="image_cover_art">
+            {% comment %}
+                <div class="">
+                    {% for song_upload in song_uploads %}
+                    <div class="flex flex-col">
+                            <button type="button" class="artist_detail_link " data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                <div class="flex gap-[7px]">
+                                    <div class="artist_img_wrapper">
+                                        {% if song_upload.artist_profile  %}
+                                            <img src="{{ song_upload.artist_profile.url }}" alt="pic.png" class="artist_img_detail">                            
                                         {% endif %} 
-                                        {% if song_uploads.artist_song_create %}
-                                            <audio src="{{ song_uploads.artist_song_create.url }}" controls class="song_track"></audio>  
-                                        {% endif %}                                     
                                     </div>
                                     <div class="">
-                                        <h2 class="text-center mt-[10px] text-[#666665] font-bold">Start listening with a click or hit the Download button to download</h2>
-                                        <button class="downlod_btn"><a class="download_a" href="#!" download="">Download</a></button>                                         
+                                        <h3 class="song_title">{{ song_upload.song_title }}</h3>
+                                    </div>
+                                </div>
+                            </button>  
+                    </div>  
+                    {% endfor %} 
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content p-[30px]">                            
+                                <div class="float-end close_btn">
+                                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="flex justify-between gap-[20px]">
+                                        <div class="image_cover_art_wrapper">     
+                                            {% if song_uploads.artist_profile_create  %}
+                                                <img src="{{ song_uploads.artist_profile_create.url }}" alt="" class="image_cover_art">
+                                            {% endif %} 
+                                            {% if song_uploads.artist_song_create %}
+                                                <audio src="{{ song_uploads.artist_song_create.url }}" controls class="song_track"></audio>  
+                                            {% endif %}                                     
+                                        </div>
+                                        <div class="">
+                                            <h2 class="text-center mt-[10px] text-[#666665] font-bold">Start listening with a click or hit the Download button to download</h2>
+                                            <button class="downlod_btn"><a class="download_a" href="#!" download="">Download</a></button>                                         
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> 
+            {% endcomment %}
 
         </div>
     </div>

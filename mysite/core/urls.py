@@ -11,4 +11,5 @@ urlpatterns = [
     path('africa/', views.AfricaPage, name='africa-page' ),
 
     path('artist_detail/<int:pk>/', views.ArtistDetailPage, name='artist-detail' ),
+    path('sport_detail/<int:pk>/', views.SportDetailPage, name='sport-detail' ),
 ]

@@ -57,12 +57,18 @@
         {% if user.is_authenticated %}
             <div class="_nav_container">
                 <div class="flex justify-between items-center">
-                    <div class="flex items-center gap-[10px]">
+                    <div class="flex items-center gap-[10px] w-[500px]">
                         <p class="font-semibold text-[13px] bg-[#fff] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"> Welcome Home <small class="font-semibold text-[15px] capitalize text-[#154d8b]"> {{ user.profilemodel.full_name }} </small></p>
                         <p class="uppercase bg-[#ffffff8e] px-[10px] py-[2px] rounded-full "> <a href="{% url "user-dashboard" %}" class="text-[13px] font-semibold __nav_text_style"> Dashboard
                             <i class="fa-solid fa-user"></i>
                         </a> </p>
+                        <div>
+                            <marquee direction="right" class="text-[#ffffff]">
+                                Welcome to fitblog
+                            </marquee>
+                        </div>
                     </div>
+                    
                     <div class="">
                         <p id="current-time" class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"></p> 
                     </div>

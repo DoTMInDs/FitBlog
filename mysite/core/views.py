@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from blog.models import PostModel,ArticlePostModel
 from blog.forms import CommentForm,ArticleCommentForm,ArtistPostForm,SongPostForm,ArtistSongPost
 from django.db.models import Q
-from .models import Artist,CreateSong
+from .models import Artist,CreateSong,SportsModel
 
 from django.contrib.auth.decorators import login_required
 # from django.views.generic.list import ListView
@@ -48,7 +48,12 @@ def NewsPage(request):
     return render(request, 'core/news.html', context)
 
 def SportsPage(request):
-    return render(request, 'core/sports.html')
+    posts = SportsModel.objects.all()
+
+    context = {
+        'posts': posts
+    }
+    return render(request, 'core/sports.html',context)
 
 def  BusinessPage(request):
     return render(request, 'core/business.html')
@@ -110,3 +115,13 @@ def ArtistDetailPage(request, pk):
         # "song_form": song_form,
     }
     return render(request, 'artists/artist_detail.html', context)
+
+def SportDetailPage(request, pk):
+    posts = SportsModel.objects.get(id=pk)
+    post_mod = PostModel.objects.get(id=pk)
+
+    context = {
+        'posts': posts,
+        'post_mod': post_mod,
+    }
+    return render(request, 'artists/sport_detail.html', context)
