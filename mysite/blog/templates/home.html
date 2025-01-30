@@ -4,90 +4,171 @@
 {% block title %}Home{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    <div class="w-full p-[15px] flex justify-between h-full __home_content">
-        <div class="__grid_card container bg-slate-100 p-[10px]">
+    <div class="w-full flex justify-between h-full __home_content">
+        <div class="__grid_card ">
             {% for article in articles %}
-                <a href="{% url "blog-post-detail" article.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                     <div class="card text-bg-light ">
                         <div class="card-body">
                             <h5 class="card-title"> {{ article.title }} </h5> 
                             <div class="flex  justify-between items-center">
-                                <p class="card-text text-[13px] text-[#444] font-semibold"><small>{{article.dated_on}}</small></p>
-                                <p class="text-[13px] text-[#444] font-semibold">
+                                <p class="card-text text-nowrap text-[13px] text-[#3d5361c4] font-semibold">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <small>{{article.dated_on}}</small>
+                                </p>
+                                <p class="text-[13px] text-nowrap text-[#3d5361c4] font-semibold">
                                     <i class="fa-solid fa-comments px-[2px]"></i>
                                     {{article.article_comment_count}}
                                      Comments
                                 </p>
                             </div>
                             <div class="flex justify-between items-center gap-[10px]">
-                                <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ article.author }} </p> 
-                                <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ article.slug }}</small></p>
+                                <p class="card-text flex text-nowrap items-center gap-[5px] text-[13px] text-[#444] font-semibold">
+                                   <a href="" 
+                                    type="button" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#staticBackdrop"  
+                                    class="text-[#3d5361c4]">
+                                        <i class="fa-solid fa-user"></i> 
+                                        {{ article.author }} 
+                                   </a>
+                                </p> 
+                                <p class="d-inline-block text-truncate"><small class=" text-[12px] px-[8px] py-[3px] font-medium bg-[#3D5361] text-[#fcfcfcfc] rounded-full">{{ article.slug }}</small></p>
                             </div>                           
                             <div class=" flex gap-3">
                                 {% if article.image %}
-                                    <img src="{{article.image.url}}" class="img-thumbnail w-[100px]" alt="...">
+                                    <img src="{{article.image.url}}" class="img-thumbnail w-[100px] object-center object-cover" alt="...">
                                 {% endif %}
-                                <p class="card-text "><small >{{article.article_content|truncatewords:8}}</small></p>
+                                <p class="card-text text-[#3D5361] overflow-hidden"><small >{{article.article_content|truncatewords:14}}</small></p>
                             </div>
-                           
+                        </div>
+                        <div class="px-[1rem] pb-[1rem] flex justify-between items-center">
+                            <button class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] text-[13px]">
+                               <a href="{% url "blog-post-detail" article.id %}" class="__detail_link">
+                                <i class="fa-solid fa-eye mr-[0.5rem]"></i>
+                                Detail
+                               </a>
+                            </button>                               
+                            <div class="">
+                                {% if article.author == request.user %}
+                                    <button>
+                                        <a href="{% url "user-dashboard-edit" article.id %}" class="text-[#fefefefe] bg-[#3D5361] rounded-full py-[0.3rem] px-[0.8rem]">
+                                            <i class="fa-regular fa-pen-to-square text-[12px]"></i>
+                                        </a>
+                                    </button>
+                                    <button>
+                                        <a href="{% url "user-post-delete" article.id %}" class="text-[#fefefefe] bg-rose-500 rounded-full py-[0.3rem] px-[0.8rem]">
+                                            <i class="fa-solid fa-trash-can text-[12px]"></i>                                         
+                                        </a>
+                                    </button>
+                                {% endif %}
+                            </div>
                         </div>
                        
                     </div> 
-                </a>                         
             {% endfor %}
 
             {% for blog_post in posts %}
-            <a href="{% url "blog-postmodel-detail" blog_post.id %}" class="flex link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
                 <div class="card text-bg-light ">
                     <div class="card-body">
                         <h5 class="card-title"> {{ blog_post.title }} </h5> 
                         <div class="flex  justify-between items-center">
-                            <p class="card-text text-[13px] text-[#444] font-semibold"><small>{{blog_post.created_on}}</small></p>
-                            <p class="text-[13px] text-[#444] font-semibold">
+                            <p class="card-text text-nowrap text-[13px] text-[#3d5361c4] font-semibold">
+                                <small>{{blog_post.created_on}}</small>
+                            </p>
+                            <p class="text-[13px] text-nowrap text-[#3d5361c4]font-semibold">
                                 <i class="fa-solid fa-comments px-[2px]"></i>
                                 {{blog_post.post_comment_count}}
                                  Comments
                             </p>
                         </div>
                         <div class="flex justify-between items-center gap-[10px]">
-                            <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ blog_post.author }} </p> 
-                            <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ blog_post.slug }}</small></p>
+                            <p class="card-text flex text-nowrap items-center gap-[5px] text-[13px] text-[#444] font-semibold">
+                               <a href="" class="text-[#3d5361c4]">
+                                <i class="fa-solid fa-user"></i>
+                                {{ blog_post.author }} 
+                               </a>
+                            </p> 
+                            <p class="d-inline-block text-truncate"><small class="text-[12px] px-[8px] py-[3px] font-medium bg-[#3D5361] text-[#fcfcfcfc] rounded-full">{{ blog_post.slug|truncatewords:8 }}</small></p>
                         </div>                           
                         <div class=" flex gap-3">
                             {% if blog_post.image %}
                                 <img src="{{blog_post.image.url}}" class="img-thumbnail w-[100px]" alt="...">
                             {% endif %}
-                            <p class="card-text "><small >{{blog_post.content|truncatewords:8}}</small></p>
+                            <p class="card-text text-[#3D5361] overflow-hidden"><small >{{blog_post.content|truncatewords:14}}</small></p>
                         </div>
-                       
                     </div>
-                   
+                    <div class="px-[1rem] pb-[1rem] flex justify-between items-center">
+                        <button class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] text-[13px]">
+                           <a href="{% url "blog-postmodel-detail" blog_post.id %}" class="__detail_link">
+                            <i class="fa-solid fa-eye mr-[0.5rem]"></i>
+                            Detail
+                           </a>
+                        </button>                               
+                    </div>
                 </div> 
-            </a>       
             {% endfor %}
         </div>
     </div>
 
-    <div class="my-[50px]">
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_article.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ page_article.previous_page_number }}">previous</a>
-                {% endif %}
-        
-                <span class="current">
-                    Page {{ page_article.number }} of {{ page_article.p.num_pages }}.
-                </span>
-        
-                {% if page_article.has_next %}
-                    <a href="?page={{ page_article.next_page_number }}">next</a>
-                    <a href="?page={{ page_article.p.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+    </nav>
+
+
+    <!-- Modal -->    
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Profile <i class="fa-regular fa-pen-to-square"></i></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <div class="flex justify-center flex-col items-center w-full p-[10px] gap-[25px]">
+              <div class="w-[200px]">
+                  <img src="{{ user.profilemodel.image.url }}" alt="profile.png" class="rounded-[50%] w-[200px] h-[200px] object-cover object-center">
+              </div>
+              <div class="w-[100%]">
+                <div class="">
+                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                        <h3 class="text-[18px] basis-2/6">Firstname</h3>
+                        <p class="mt-[10px] basis-3/5"></p>
+                    </div>
+                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                      <h3 class="text-[18px] basis-2/6">Username</h3>
+                      <p class="mt-[10px] basis-3/5"></p>
+                    </div>
+                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                      <h3 class="text-[18px] basis-2/6">Email address</h3>
+                      <p class="mt-[10px] basis-3/5"> </p>
+                    </div>
+                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                      <h3 class="text-[18px] basis-2/6">Talks About</h3>
+                      <p class="mt-[10px] basis-3/5"> </p>
+                    </div>
+                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+                      <h3 class="text-[18px] basis-2/6">About me</h3>
+                      <p class="mt-[10px] basis-3/5"> </p>
+                    </div>
+                 </div>
+              </div>
+          </div>
+        </div>
+        
+      </div>
     </div>
-</div>
+  </div>
+
     
 {% endblock content %}
 

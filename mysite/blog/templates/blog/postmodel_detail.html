@@ -1,28 +1,34 @@
 {% extends "base.html" %}
 {% load static %}
 {% load tailwind_filters %}
-{% block title %}{{post.title}}{% endblock  %}
+{% block title %}{{post_mod.title}}{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    <div class="p-[15px] flex justify-between h-full bg-slate-100 ">
-       <div class="container __post_detail_content ">
-        <div class=" row gap-0">
-            <div class=" p-[20px] col-md-8">
+    <div class=" flex justify-between h-full __post_details_media_wrapper">
+       <div class="  __post_details_media_container">
+        <div class=" row gap-5 __post_detail_wrapper">
+            <div class=" col-lg-12 shadow-md rounded border-t-[3px] border-[#3D5361]">
                 <div class="bg-[#fff] p-[10px]">
                     <div class="flex justify-between items-center">
-                        <p class="font-medium"> Opinions of, <small class="font-semibold text-blue-500"> {{ post_mod.created_on }} </small></p>
-                        <p class="font-semibold">Columnist: <small class="font-medium text-blue-500 capitalize"> {{ post_mod.author }} </small></p>
+                        <p class="font-medium text-nowrap">
+                            <i class="fa-solid fa-clock"></i>
+                            <small class="font-semibold text-[#EC9595]"> {{ post_mod.created_on }} </small></p>
+                        <p class="font-semibold text-nowrap">
+                            <i class="fa-regular fa-address-book"></i>
+                            Columnist: 
+                            <small class="font-medium text-[#EC9595] capitalize"> {{ user}} </small>
+                        </p>
                     </div>
                     <div class="py-[20px]">
                         <h4 class=""> {{ post_mod.title }} </h4>
-                        <div class="flex gap-[5px] justify-between items-center">                               
+                        <div class="flex gap-[5px] justify-between items-center __account_comment_slug">                               
                             <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ post_mod.author }} </p> 
                             <p class="text-[13px] text-[#444] font-semibold">
                                 <i class="fa-solid fa-comments px-[2px]"></i>
                                 {{post_mod.post_comment_count}}
                                  Comments
                             </p>
-                            <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ post_mod.slug }}</small></p>
+                            <p class=""><small class="text-[12px] px-[8px] py-[3px] font-medium bg-[#3D5361] text-[#fcfcfcfc] rounded-full">{{ post_mod.slug }}</small></p>
                         </div>
                     </div>
                     <div class="row gap-0">
@@ -41,10 +47,10 @@
                     </div>                                   
                 </div> 
             </div>
-            <div class=" p-[20px] col-md-4">
+            <div class=" p-[20px] col-md-6  shadow-md rounded border-t-[3px] border-[#3D5361]">
                 <div class="bg-[#fff] p-[10px] relative w-[100%] transition-all overflow-hidden">
                     <input type="checkbox" class="peer absolute top-0 inset-x-0 w-full h-12 opacity-0 z-10 cursor-pointer">
-                    <a href="#!" class="hover:text-[#8a7f7f] font-semibold">
+                    <a href="#!" class="text-[#EC9595] font-semibold">
                         Comments: {{post_mod.post_comment_count}}  
                     </a>
                     <div  class="peer-checked:max-h-full bg-white overflow-hidden transition-all duration-500 max-h-0">
@@ -63,7 +69,7 @@
                         <form action="" method="post">
                             {% csrf_token %}
                                 {{ c_form|crispy }}
-                            <input type="submit" value="comment" class="btn btn-primary">
+                            <input type="submit" value="comment" class="text-[#fefefefe] bg-[#3D5361] w-full rounded-full py-[6px] px-[18px]">
                         </form>
                     </div>
                 </div>

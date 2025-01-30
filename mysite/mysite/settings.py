@@ -14,7 +14,7 @@ from pathlib import Path
 
 import socket
 socket.getaddrinfo('localhost', 8001)
-
+listen_addresses = 'localhost'
 # from dotenv import load_dotenv
 
 # load_dotenv()
@@ -110,8 +110,8 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blog_db',
-        'USER': 'admin',
+        'NAME': 'blog_db4',
+        'USER': 'blog_user',
         'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -175,4 +175,5 @@ EMAIL_HOST_USER = 'esmondabban3@gmail.com'
 EMAIL_HOST_PASSWORD = 'Dhonnie33@@'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
 

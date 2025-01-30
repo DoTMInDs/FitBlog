@@ -5,21 +5,23 @@
 {% block content %}
     {% include "partials/nav.html" %}
 
-    <div class="container mt-[12rem]">
-        <div class="my-[20px] ">
-            <div class="row gap-0 w-full p-[15px] flex justify-between h-full bg-slate-100">
-                <div class="col-md-8">
+    <div class="__post_edit_wrapper">
+        <div class="__post_edit_container">
+            <div class="row gap-0 w-full flex justify-between h-full ">
+                <div class="col-md-12">
                     <div class="card text-bg-light my-[20px] p-[20px]">
                         <div class="alert alert-danger ">
-                            Are you sure you want to delete <small class="font-bold capitalize">{{ articles.title }}?</small> it will be permanently removed.
+                            Are you sure you want to delete <small class="font-bold text-[18px] text-rose-500 capitalize">{{ articles.title }}?</small> it will be permanently removed.
                             This action cannot be undone.
                         </div>
                         <form action="" method="post">
                             {% csrf_token %}
 
-                            <div class="flex gap-[10px] justify-end items-end">
-                                <button><a href="{% url "user-dashboard" %}" class="btn btn-block btn-secondary">cancel</a></button>
-                                <button type="submit" class="btn btn-block btn-danger"> Yes, Delete</button>
+                            <div class="flex gap-[10px] justify-end items-end __delet_btn_wrapper">
+                                <button class="_edit_detail_btn text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
+                                    <a href="{% url "user-dashboard" %}" class="text-[#fefefe] btn_link_cancel">cancel</a>
+                                </button>
+                                <button type="submit" class="_edit_detail_btn text-[#fefefefe] bg-[#FF0000] rounded-full py-[10px] px-[5rem]"> Yes, Delete</button>
                             </div>
                         </form>
                     </div> 

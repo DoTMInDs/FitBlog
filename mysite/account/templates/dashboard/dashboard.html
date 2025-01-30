@@ -4,69 +4,68 @@
 {% block title %}Dashboard{% endblock  %}
 {% block content %}
     {% include "dashboard/dashboard_nav.html" %}
-    <div class="container flex justify-between mt-[180px] ">
-        <div class="__dashboard_media_container">            
-            <div class=" w-full p-[15px] h-full bg-slate-100">
-                <div class="row ">
-                    {% for article in articles %}
-                    <div class="my-[20px]">
-                        <div class=" card text-bg-light  p-[20px] ">                            
-                            <div class="card-body">
-                                <h5 class="card-title"> {{ article.title }} </h5> 
-                                <div class="flex  justify-between items-center">
-                                    <p class="card-text text-[13px] text-[#444] font-semibold"><small>{{article.dated_on}}</small></p>
-                                    <p class="text-[13px] text-[#444] font-semibold">
-                                        <i class="fa-solid fa-comments px-[2px]"></i>
-                                        {{article.article_comment_count}}
-                                         Comments
-                                    </p>
-                                </div>
-                                <div class="flex justify-between items-center gap-[10px]">
-                                    <p class="card-text flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ article.author }} </p> 
-                                    <p class=" "><small class="bg-green-400 px-[8px] py-[3px]">{{ article.slug }}</small></p>
-                                </div>                           
-                                <div class=" flex gap-3">
-                                    {% if article.image %}
-                                        <img src="{{ article.image.url }}" class="img-thumbnail w-[100px] object-scale-down object-center"  alt="...">
-                                    {% endif %}
-                                    <p class="card-text "><small >{{article.article_content|truncatewords:12}}</small></p>
-                                </div>                               
-                            </div>                        
-                            {% if article.author == request.user %}
-                                <div class="flex gap-[10px] justify-end items-end">
-                                    <button>
-                                        <a href="{% url "user-dashboard-edit" article.id %}" class="btn btn-block btn-secondary">
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                        </a>
-                                    </button>
-                                    <button>
-                                        <a href="{% url "user-post-delete" article.id %}" class="btn btn-block btn-danger">
-                                            <i class="fa-solid fa-trash-can"></i>                                         
-                                        </a>
-                                    </button>
-                                </div>
-                            {% endif %}
-                        </div> 
-                    </div>
-                    {% endfor %}
-                </div>                
-            </div>
+    <div class=" flex justify-between __home_content">
+        <div class="__dashboard_grid_card ">
+            {% for article in articles %}
+                <div class="__dashboard_grid_wrapper">
+                    <div class="card text-bg-light p-[20px]">                            
+                        <div class="card-body">
+                            <h5 class="card-title"> {{ article.title }} </h5> 
+                            <div class="flex  justify-between items-center">
+                                <p class="card-text text-[13px] text-[#444] font-semibold">
+                                    <i class="fa-solid fa-clock"></i>
+                                    <small>{{article.dated_on}}</small>
+                                </p>
+                                <p class="text-[13px] text-[#444] font-semibold">
+                                    <i class="fa-solid fa-comments px-[2px]"></i>
+                                    {{article.article_comment_count}}
+                                    Comments
+                                </p>
+                            </div>
+                            <div class="flex justify-between items-center gap-[10px]">
+                                <p class="card-text flex items-center gap-[5px] text-nowrap text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ article.author }} </p> 
+                                <p class=" d-inline-block text-truncate"><small class="font-medium bg-[#3D5361] text-[#fcfcfcfc] rounded-full px-[8px] py-[3px]">{{ article.slug }}</small></p>
+                            </div>                           
+                            <div class=" flex gap-3">
+                                {% if article.image %}
+                                    <img src="{{ article.image.url }}" class="img-thumbnail w-[100px] object-scale-down object-center"  alt="...">
+                                {% endif %}
+                                <p class="card-text "><small>{{article.article_content|truncatewords:12}}</small></p>
+                            </div>                               
+                        </div>                        
+                        {% if article.author == request.user %}
+                            <div class="flex gap-[10px] justify-end items-end">
+                                <button>
+                                    <a href="{% url "user-dashboard-edit" article.id %}" class="text-[#fefefefe] bg-[#3D5361] rounded-full py-[0.3rem] px-[0.8rem]">
+                                        <i class="fa-regular fa-pen-to-square text-[12px]"></i>
+                                    </a>
+                                </button>
+                                <button>
+                                    <a href="{% url "user-post-delete" article.id %}" class="text-[#fefefe] bg-rose-500 rounded-full py-[0.3rem] px-[0.8rem]">
+                                        <i class="fa-solid fa-trash-can text-[12px]"></i>                                         
+                                    </a>
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div> 
+                </div>
+            {% endfor %}
         </div>      
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-dialog modal-dialog-centered modal-fullscreen-lg-down">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 " id="exampleModalLabel">Create your Post <i class="fa-brands fa-blogger-b ml-[10px] mt-[3px]"></i></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="card bg-[#f7f4f4] p-[20px] my-[20px]" >
+                    <div class=" bg-[#ffffff8e] p-[20px] my-[20px]" >
                         <form action="" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ user_post_form|crispy }}
-                            <input type="submit" value="Post" class="btn btn-primary w-full ">
+                            <input type="submit" value="Post" class="py-[8px] px-[18px] mt-[2rem] rounded-[2rem] text-[#fefefefe] bg-[#3D5361] w-full ">
                         </form>
                     </div>
                 </div>
@@ -74,4 +73,18 @@
             </div>
         </div>
     </div>
+
+    <nav aria-label="Page navigation example" class="mt-[4rem]">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+    </nav>
 {% endblock %}

@@ -8,31 +8,145 @@ body{
     text-decoration: none;
 }
 /* ------------------------------------------------
+                        Mobile
+---------------------------------------------------*/
+.menu_toggle{
+    justify-items: end;
+    align-items: end;
+    flex-direction: column;
+    display: none;
+    cursor: pointer;
+    z-index: 9999;
+    width: 30px;
+    margin: auto 0;
+}
+.menu_toggle .m_bar{
+    width: 28px;
+    height: 2.5px;
+    background-color: #3D5361;
+    margin: 2.5px 0;
+    transition: 0.4s;
+}
+.list_t{
+    display: none;
+    position: relative;
+}
+.nav_v{
+    list-style: none;
+    transition: height 0.5s ease-out;
+    z-index: 999;
+}
+.mobil_search_wrapper{
+    display: none;
+    gap: 20px;
+    align-items: center;
+}
+
+
+@media screen and (max-width:1000px) {
+    .mobil_search_wrapper{
+        display: flex;
+    }
+    ._form_search{
+        /* width: 40vw; */
+        transition: width 300ms ease;
+    }
+    
+    .menu_toggle{
+        display: flex;
+    }
+    ._nav_container .__nav_links_ul{
+        display: none;
+    }
+    
+    .change .m_bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .change .m_bar:nth-child(2) {
+        opacity: 0;
+    }
+    .change .m_bar:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+    .list_t{
+        display: block;
+    }
+    .list_t .nav_v.showing{
+        height: 500px;
+        opacity: 1;
+        transition: height 300ms ease-in-out, 
+                    opacity 300ms ease;
+       }
+    .list_t .nav_v li{
+        /* margin: 1.8rem 0; */
+        display: none;
+    }
+    .list_t .nav_v li:last-child{
+        border-bottom: none;
+    }
+    .list_t .nav_v.showing li{
+        display: block;
+    }
+    .list_t .nav_v{
+        background: #3D5361;
+        position: absolute;
+        width: 100%;
+        padding: 2rem 2rem;
+        top: 10px;
+        height: 0;
+        opacity: 0;
+    }
+    .list_t .nav_v li{
+        width: 100%;
+        border-bottom: 1px solid #62879e4b;
+        padding: 1.2rem 1rem;
+        cursor: pointer;
+    }
+    .list_t .nav_v li:hover{
+        background: #6a7f8d28;
+    }
+    .list_t .nav_v li .navv-link{
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 15px;
+        
+    }
+    .search-wrap{
+        display: none;
+    }
+}
+
+/* ------------------------------------------------
                         nav-section 
 ---------------------------------------------------*/
 
 .nav-container{
-    background: #f1eded;
+    background: #ffffff;
     width: 100%;
-    background-image: linear-gradient(#438bdd98, #438bdd98), url(../images/nav_bg1.png);
     background-position: center;
     background-size: contain;
     position: fixed;
     top: 0;
     z-index: 100;
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);
 }
 ._nav_container{
     width: 80%;
     margin: auto;
+    /* z-index: 9999; */
 }
 main{
-    margin-top: 8%;
+    margin-top: 200px;
 }
+.__home_content{
+    /* margin-top: 100px; */
+    width: 80%;
+    margin: auto;
+}
+
+
 @media screen and (max-width:1380px) {
-    .__home_content{
-        margin-top: 8.5rem;
-    }
+  
     .__post_detail_content{
         margin-top: 2rem;
     }
@@ -43,24 +157,22 @@ main{
 /* ----------------------------------
             home-styling
 ------------------------------------- */
+
 .__form_container_bg{
-    background-image: url(../images/form_bg.png);
     background-position: center;
     background-size: contain;
     width: 100%;
-    height: 100%;
+    background-blend-mode: multiply;
 }
 
 .__nav-links ul li .__nav_text{
     color: #fff;
 }
 .__grid_card{
-    background-image: url(../images/home_bg1.png);
+    padding-bottom: 50px;
     background-position: center;
     background-size: contain;
     width: 100%;
-    /* height: 100%; */
-    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 20px;
@@ -71,6 +183,15 @@ main{
  .__dashboard_user{
     margin-top: 6rem;
  }
+
+/* ------------------------------------------
+                Dashboard-Grid-Section
+--------------------------------------------- */
+.__dashboard_grid_card{
+    display: grid;
+      grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+      gap: 20px;
+}
 
 /* ------------------------------------------
                 nav-link-a-styling
@@ -102,7 +223,6 @@ main{
                     register
 ---------------------------------------------------- */
 .form{
-    /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
     border-radius: 10px;
     margin: 0 50px;
 }
@@ -127,6 +247,10 @@ main{
 .__login{
     width: 50%;
     margin: auto;
+}
+.login-form{
+    margin-top: 120px;
+    transition: width 300ms ease;
 }
 .__sign-bg{
     background-image: linear-gradient(#00AAFFa1,#00aaffa1), url(../images/bg1.jpg);
@@ -173,6 +297,15 @@ main{
     }
 }
 @media screen and (max-width:1000px) {
+    .__home_content{
+       width: 100%;
+       padding:0 15px;
+       transition: width 300ms ease;
+    }
+    ._nav_container{
+        width: 100%;
+        transition: width 300ms ease;
+    }
     .register-wrap{
         flex-wrap: wrap;
     }
@@ -196,39 +329,45 @@ main{
     .__btns{
         display: none;
     }
-    ._nav_container{
-        width: 100%;
-    }
+    
     .__profile-container{
         width: 95%;
         margin: auto;
     }
-    
-   
+    .login-form{
+        margin-top: 120px;
+        width: 500px;
+        transition: width 300ms ease;
+    }
+    .__post_edit_wrapper .__post_edit_container{
+        width: 100%;
+        padding: 0 30px;
+    }
+    .__post_details_media_wrapper .__post_details_media_container{
+        width: 100%;
+        padding: 0 30px;
+        transition: width 300ms ease;
+        color: #3d5361;
+    }
+
 }
 @media screen and (max-width:900px) {
     .content2{
         padding: 0 10px;
     }
     .login-form{
+        margin-top: 120px;
         width: 500px;
         transition: width 300ms ease;
     }
-    .search-wrap{
-        display: none;
-    }
+  
 
     ._nav_container{
         width: 100%;
     }
-    .__home_content{
-        margin-top: 11rem;
-    }
-   .__dashboard_media_container{
-        margin-top: 2rem;
-   }
    
 }
+
 @media screen and (max-width:700px) {
     .content2{
         padding: 0 10px;
@@ -240,24 +379,72 @@ main{
         width: 500px;
         transition: width 300ms ease;
     }
-    .__home_content{
+    /* .__home_content{
         margin-top: 11rem;
-    }
-    .__post_details_media_container{
-        margin-top: 11rem;
-    }
+    } */
+   
     .__post_detail_content{
         margin-top: 8rem;
     }
+    .__dashboard_grid_card {
+        grid-template-columns: 1fr; /* Switch to one column on smaller screens */
+        /* margin-top: 20px */
+      }
+      ._form_search{
+        /* width: 300px; */
+        transition: width 300ms ease;
+    }
+    
 }
+
 @media screen and (max-width:500px) {
+    .__account_comment_slug{
+        display: flex;
+        justify-content: start;
+        align-items: start;
+        flex-direction: column;
+        gap: 5px;
+    }
+  
     
     .login-form{
         width: 95%;
         transition: width 300ms ease;
     }
+    ._edit_detail_btn{
+        width: 100%;
+        transition: width 0.5s ease;
+    }
+    .__delet_btn_wrapper{
+        flex-direction: column-reverse;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
+/* ----------------------------------------------------------
+                        Post-Detail
+------------------------------------------------------------- */
+.__post_details_media_container{
+    width: 80%;
+    margin: auto;
+}
+._detail_account_section{
+   width: 100%;
+}
+.__detail_link{
+    text-decoration: none;
+    color: #f7f7f7;
+}
+.__post_edit_container{
+    width: 80%;
+    margin: auto;
+}
+.btn_link_cancel{
+    text-decoration: none;
+    text-transform: capitalize;
+}
 /* ----------------------------------------------------------
                         Music-section
 ------------------------------------------------------------- */
@@ -463,6 +650,16 @@ image-section
     align-items: end;
     gap: 10px;
     margin-top: 3rem;
+}
+
+/* ---------------------------------------------------------------------------
+                    News-Scetion
+------------------------------------------------------------------------------ */
+@media screen and (max-width:1000px) {
+    .__latest_news_wrapper{
+        display: none;
+    }
+  
 }
 
 /* ---------------------------------------------------------------------------

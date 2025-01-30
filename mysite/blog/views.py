@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 # from django.views.generic.base import TemplateView
 # from .models import BlogProfile
 
-@login_required
+
 def HomePageView(request):
     posts = PostModel.objects.all()
     articles = ArticlePostModel.objects.all()
@@ -21,7 +21,8 @@ def HomePageView(request):
     articles = ArticlePostModel.objects.filter(
         Q(title__icontains=filter_query) |
         Q(author__username__icontains=filter_query) |
-        Q(sub_title__icontains=filter_query) 
+        Q(sub_title__icontains=filter_query) |
+        Q(article_content__icontains=filter_query)
     )
 
     context = {

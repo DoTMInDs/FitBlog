@@ -5,9 +5,10 @@
             <div class=" w-full flex items-center justify-between py-[10px]  _nav_container">
                 <div class="flex items-center cursor-pointer">
                     <a href="{% url "home" %}" class="navbar-brand flex items-center">
-                        <img src="{% static 'images/logo.png' %}" height="64px" class="pr-2 h-8 ">
-                        <h4 class=" text-[#fff] ">FitBlog</h4>
-                    </a>
+                        <a href="{% url "home" %}" class="navbar-brand flex items-center">
+                            <img src="{% static 'images/rpl-logo@4x.png' %}" height="64px" class="pr-2 h-8 ">
+                            <h4 class=" text-[#444444] ">FitBlog</h4>
+                        </a>
                 </div>
 
                 <div class="flex items-center gap-[20px]">
@@ -29,13 +30,13 @@
                             <div class="flex items-center ">
                                 <div class="flex items-center gap-[10px]">
                                     <div class="flex items-center">
-                                        <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="">
-                                        <a href="{% url "profile" %}" class="rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#ff8686] __nav_text_style transition">
-                                            <i class="fa-duotone fa-solid fa-user"></i>
-                                            Profile
+                                        <a href="{% url "profile" %}" class="flex items-center text-[#3D5361] rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#3D5261] __nav_text_style transition">
+                                            <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="default.png">
+                                            {% comment %} <i class="fa-duotone fa-solid fa-user mr-[0.5rem]"></i> {% endcomment %}
+                                            My Profile
                                         </a>
                                     </div>
-                                    <a href="{% url "logout" %}" class="rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#ff8686] __nav_text_style transition">
+                                    <a href="{% url "logout" %}" class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] text-[13px] font-semibold hover:text-[#fcfcfcfc] __nav_text_style transition">
                                         <i class="fa-solid fa-right-from-bracket mr-[3px]"></i>
                                         Logout
                                     </a>
@@ -46,10 +47,12 @@
  
                             <div class="flex justify-between items-center gap-5 w-full">
                                 <div class="flex items-center gap-[25px]">
-                                    <a href="{% url "sign_up" %}" class=" rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#ff8686] transition">
+                                    <a href="{% url "sign_up" %}" class=" rounded-full py-[6px] px-[18px] text-[13px] font-semibold text-[#3D5361] __nav_text_style transition">
+                                        <i class="fa-solid fa-right-from-bracket mr-[3px]"></i>
                                         Sign up
                                     </a>
-                                    <a href="{% url "login" %}" class="rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#ff8686] transition">
+                                    <a href="{% url "login" %}" class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] text-[13px] font-semibold __nav_text_style transition">
+                                        <i class="fa-solid fa-right-from-bracket mr-[3px]"></i>
                                         Login
                                     </a>
                                 </div>
@@ -63,44 +66,95 @@
                 <div class="flex justify-between items-center">
                         {% if user.is_authenticated %}
                             <div class="flex items-center gap-[10px]">
-                                <p class="font-semibold text-[13px] bg-[#fff] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"> Welcome Home <small class="font-semibold text-[15px] capitalize text-[#154d8b]"> {{ user.profilemodel.full_name }} </small></p>
-                                <button type="button" class="bg-blue-500 text-[13px] flex items-center text-[#fff] py-[5px] px-[15px] rounded-full mb-[15px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <p class="font-semibold text-[13px] text-nowrap bg-[#fff] py-[2px] rounded-full text-[#6d6d6d]"> Welcome <small class="font-semibold text-[13px] capitalize text-[#154d8b]"> {{ user.profilemodel.full_name }} </small></p>
+                                <button type="button" class="text-[#fefefefe] text-nowrap bg-[#3D5361] text-[13px] flex items-center text-[#fff] py-[5px] px-[15px] rounded-full mb-[15px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     Create post
                                     <i class="fa-brands fa-blogger-b ml-[10px] mt-[3px]"></i>
                                 </button>
                             </div>
-                            <p id="current-time" class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"></p>
+                            <div>
+                                <marquee direction="left" class="text-[#3D5361]">
+                                    Welcome to fitblog!!! 
+                                </marquee>
+                            </div>
+                            <p id="current-time" class="text-nowrap font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"></p>
                         {% else %}
-                            <p class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]">You are here:Home</p>
-                            <p id="current-time" class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"></p> 
+                            <p class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] text-nowrap py-[2px] rounded-full text-[#6d6d6d]">You are here:Home</p>
+                            <p id="current-time" class=" text-nowrap font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"></p> 
                         {% endif %}
                 </div>
             </div>
+
+            <div class="mobil_search_wrapper">
+                <div class="menu_toggle" id="mobile_menu">
+                    <span class="m_bar"></span>
+                    <span class="m_bar"></span>
+                    <span class="m_bar"></span>
+                </div>
+                {% if user.is_authenticated %}
+                    <div class="flex gap-[20px] items-center ">
+                        <form action="" method="get" class="_form_search">
+                            <div class="flex items-center w-[100%] bg-slate-50 border-[1px] border-[#3d53618a] px-4 rounded-full shadow-md">
+                                <i class="fa-solid fa-magnifying-glass fa-lg text-[#3D5361] cursor-pointer"></i>
+                                <input type="search" name="search" placeholder="Search FitBlog..." class="w-full   py-[5px] px-[3px] bg-transparent outline-none">
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+
             <div class="__nav-links _nav_container">
-                <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item bg-[#95c78e]">
+                <ul class="nav nav-pills nav-fill __nav_links_ul">
+                    <li class="nav-item bg-[#666666]">
                         <a class="nav-link __nav_text" href="{% url "news-page" %}">News</a>
                     </li>
-                    <li class="nav-item bg-[#f05a3f]">
+                    <li class="nav-item bg-[#444444]">
                         <a class="nav-link __nav_text" href="{% url "sports-page" %}">Sports & Entertainment</a>
                     </li>
-                    <li class="nav-item bg-[#2bbcf5]">
+                    <li class="nav-item bg-[#3D5361]">
                         <a class="nav-link __nav_text" href="{% url "business-page" %}">Business</a>
                     </li>
-                    <li class="nav-item bg-[#bd2a98]">
-                        <a class="nav-link __nav_text" href="{% url "music-page" %}">Music</a>
+                    <li class="nav-item bg-[#cccccc] text-[#3D5361]">
+                        <a class="nav-link __nav_text " href="{% url "music-page" %}">Music</a>
                     </li>
-                    <li class="nav-item bg-[#e1f52b]">
+                    <li class="nav-item bg-[#777777]">
                         <a class="nav-link __nav_text" href="{% url "africa-page" %}">Africa</a>
                     </li>
-                    <li class="nav-item bg-[#225a88]">
+                    <li class="nav-item bg-[#3D5361]">
                         <a class="nav-link __nav_text" href="{% url "ghanaweb-page" %}">GhanaWeb Tv</a>
                     </li>
-                    <li class="nav-item bg-[#6692a3]">
+                    <li class="nav-item bg-[#444444]">
                         <a class="nav-link __nav_text" href="{% url "opinions-page" %}">Opinions</a>
                     </li>
                 </ul>
-            </div>
+            </div>  
+
+              <!--Mobile-responsive-->
+              <div class="list_t">
+                <ul class="nav_v no-search" id="nav-links">
+                    <li class="color-active">
+                        <a class="navv-link" href="{% url "news-page" %}">News</a>
+                    </li>
+                    <li class="">
+                        <a class="navv-link" href="{% url "sports-page" %}">Sports & Entertainment</a>
+                    </li>
+                    <li class="">
+                        <a class="navv-link" href="{% url "business-page" %}">Business</a>
+                    </li>
+                    <li class="">
+                        <a class="navv-link" href="{% url "music-page" %}">Music</a>
+                    </li>
+                    <li class="">
+                        <a class="navv-link" href="{% url "africa-page" %}">Africa</a>
+                    </li>
+                    <li class="">
+                        <a class="navv-link" href="{% url "ghanaweb-page" %}">GhanaWeb Tv</a>
+                    </li>
+                    <li class="">
+                        <a class="navv-link" href="{% url "opinions-page" %}">Opinions</a>
+                    </li>
+                </ul>
+            </div>  
         </nav>
 
     {% endblock %}

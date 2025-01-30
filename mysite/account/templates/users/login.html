@@ -3,9 +3,8 @@
 {% load tailwind_filters %}
 {% block title %}Sign In{% endblock  %}
 {% block content %}
-    {% include "partials/nav.html" %}
     <div class="flex justify-center items-center w-full h-[100%]  flex-col __form_container_bg">
-        <form action="" method="post" class="w-[600px] p-[30px] rounded shadow bg-slate-50 login-form">
+        <form action="" method="post" class=" w-[600px] p-[30px] opacity rounded shadow bg-slate-50 ">
             <div class="">
                 <h1 class="text-[28px] font-sans font-semibold my-[20px] text-center">Login</h1>
             </div>
@@ -21,12 +20,11 @@
                     <input type="password" id="id_password" name="password" class="border border-slate-300 outline-none  rounded  w-full bg-white py-[10px] px-[10px]" placeholder="" required> 
                 </div>
             </div>           
-            <p class="text-right"><a href="{% url "password_reset" %}">Forgot password?</a></p>
-            <button type="submit" class="text-[#fff] bg-blue-400 px-[30px] py-[10px] w-full mt-[30px]">Login</button>
-                <p class="text-[12px] py-[20px] font-medium font-[poppins] text-center">New to FitBlog? <a href="{% url "sign_up" %}" class="text-[#2888E1] hover:text-[#595454]">Create account</a></p>
+            <p class="text-right text-[#FF0000]"><a href="{% url "password_reset" %}" class='text-[#FF0000]'>Forgot password?</a></p>
+            <button type="submit" class="rounded-[2rem] text-[#fff] bg-[#3D5361] px-[30px] py-[10px] w-full mt-[30px]">Login</button>
+                <p class="text-[12px] py-[20px] font-medium font-[poppins] text-center">New to FitBlog? <a href="{% url "sign_up" %}" class="text-[#FF0000] hover:text-[#595454]">Create account</a></p>
         </form>
     </div>
-
 {% endblock  %}
 
 
