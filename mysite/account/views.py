@@ -1,5 +1,6 @@
-from django.shortcuts import render,redirect # type: ignore
+from django.shortcuts import render,redirect, get_object_or_404 # type: ignore
 from django.contrib.auth.forms import UserCreationForm # type: ignore
+from django.contrib.auth.models import User
 from django.contrib.auth import  logout # type: ignore
 from django.contrib import auth, messages # type: ignore
 from django.contrib.auth.decorators import login_required # type: ignore
@@ -9,6 +10,7 @@ from django.db.models import Q
 from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm,UserPostForm,PostEditForm
 
 from blog.models import ArticlePostModel
+from .models import ProfileModel
 # from django.core.paginator import Paginator
 
 
@@ -53,25 +55,55 @@ def sign_up(request):
     return render(request, 'users/sign_up.html', context)
 
 @login_required
-def profile(request):
+def profile_view(request, username, id):
+    user = get_object_or_404(User, username=username, id=id)
+    profile = get_object_or_404(ProfileModel, user=user)
 
     if request.method == "POST":
-        u_form = UserUpdateForm(request.POST or None, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST or None, request.FILES or None, instance=request.user.profilemodel)
+        u_form = UserUpdateForm(request.POST or None, instance=user)
+        p_form = ProfileUpdateForm(request.POST or None, request.FILES or None, instance=profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            return redirect('profile')
-
+            return redirect('profile', username=username, id=id)
     else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profilemodel)
+        u_form = UserUpdateForm(instance=user)
+        p_form = ProfileUpdateForm(instance=profile)
     
     context = {
+        'profile': profile,
         'u_form': u_form,
         'p_form': p_form,
+        'username': username, 
+        'id': id
     }
     return render(request, 'users/profile.html', context)
+
+# @login_required
+# def profile(request, username, id):
+#     user = get_object_or_404(User, username=username, id=id)
+#     profile = get_object_or_404(ProfileModel, user=user)
+
+#     if request.method == "POST":
+#         u_form = UserUpdateForm(request.POST or None, instance=request.user)
+        # p_form = ProfileUpdateForm(request.POST or None, request.FILES or None, instance=request.user.profilemodel)
+#         if u_form.is_valid() and p_form.is_valid():
+#             u_form.save()
+#             p_form.save()
+#             return redirect('profile', username=username, id=id)
+
+#     else:
+#         u_form = UserUpdateForm(instance=request.user)
+#         p_form = ProfileUpdateForm(instance=request.user.profilemodel)
+    
+#     context = {
+#         'profile': profile,
+#         'u_form': u_form,
+#         'p_form': p_form,
+#         'username': username, 
+#         'id': id
+#     }
+#     return render(request, 'users/profile.html', context)
 
 @login_required
 def user_dashboard(request):

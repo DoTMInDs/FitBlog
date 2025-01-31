@@ -26,8 +26,12 @@
                             <div class="flex items-center ">
                                 <div class="flex items-center gap-[10px]">
                                     <div class="flex items-center">
-                                        <a href="{% url "profile" %}" class="flex items-center text-[#3D5361] rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#3D5261] __nav_text_style transition">
-                                            <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="default.png">
+                                        <a href="{% url "profile" user.username user.id %}" class="flex items-center text-[#3D5361] rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#3D5261] __nav_text_style transition">
+                                            {% if profile.image %}
+                                            <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ profile.image.url }} " alt="default.png">
+                                            {% else %}
+                                                <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="default.png">
+                                            {% endif %}
                                             {% comment %} <i class="fa-duotone fa-solid fa-user mr-[0.5rem]"></i> {% endcomment %}
                                             My Profile
                                         </a>

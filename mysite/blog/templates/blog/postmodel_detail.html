@@ -6,6 +6,10 @@
     {% include "partials/nav.html" %}
     <div class=" flex justify-between h-full __post_details_media_wrapper">
        <div class="  __post_details_media_container">
+           <button onclick="goBack()" class="mb-[2rem] rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] text-[13px]">
+               <i class="fa-solid fa-arrow-left mr-[0.5rem]"></i>
+               Back
+           </button>
         <div class=" row gap-5 __post_detail_wrapper">
             <div class=" col-lg-12 shadow-md rounded border-t-[3px] border-[#3D5361]">
                 <div class="bg-[#fff] p-[10px]">
@@ -47,33 +51,55 @@
                     </div>                                   
                 </div> 
             </div>
-            <div class=" p-[20px] col-md-6  shadow-md rounded border-t-[3px] border-[#3D5361]">
-                <div class="bg-[#fff] p-[10px] relative w-[100%] transition-all overflow-hidden">
-                    <input type="checkbox" class="peer absolute top-0 inset-x-0 w-full h-12 opacity-0 z-10 cursor-pointer">
-                    <a href="#!" class="text-[#EC9595] font-semibold">
-                        Comments: {{post_mod.post_comment_count}}  
-                    </a>
-                    <div  class="peer-checked:max-h-full bg-white overflow-hidden transition-all duration-500 max-h-0">
-                        <div style="height:250px; overflow-y: scroll;" class="card card-body my-[20px]">
-                            {% for comment in post_mod.postcomment_set.all %}
-                                <div class="flex gap-[20px]">
-                                    <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ comment.post_user.profilemodel.image.url }} " alt="">                                    
-                                    <p class="flex flex-col text-[15px] text-[#6b6565]"> {{ comment.post_content }}
-                                        <small class="text-[10px] text-[#a09e9e] capitalize">{{ comment.post_user }}</small>
-                                    </p>
-                                </div>
-                            {% endfor %}
+           <div class="row gap-2 __post_detail_wrapper">
+                <div class=" p-[20px] col-md-4 h-full shadow-md rounded border-t-[3px] border-[#3D5361]">
+                    <div class="bg-[#fff] p-[10px] relative w-[100%] transition-all overflow-hidden">
+                        <p class="text-[#EC9595] font-semibold">
+                            Write your <i class="fa-solid fa-comments px-[2px]"></i> Comments 
+                        </p>
+                        <div  class="peer-checked:max-h-full bg-white overflow-hidden transition-all duration-500 max-h-0">
+                            <div style="height:250px; overflow-y: scroll;" class="card card-body my-[20px]">
+                                {% for comment in post_mod.postcomment_set.all %}
+                                    <div class="flex gap-[20px]">
+                                        <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ comment.post_user.profilemodel.image.url }} " alt="">                                    
+                                        <p class="flex flex-col text-[15px] text-[#6b6565]"> {{ comment.post_content }}
+                                            <small class="text-[10px] text-[#a09e9e] capitalize">{{ comment.post_user }}</small>
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>    
+                        <div class="py-[20px]">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                    {{ c_form|crispy }}
+                                <input type="submit" value="comment" class="text-[#fefefefe] bg-[#3D5361] w-full rounded-full py-[6px] px-[18px]">
+                            </form>
                         </div>
-                    </div>    
-                    <div class="py-[20px]">
-                        <form action="" method="post">
-                            {% csrf_token %}
-                                {{ c_form|crispy }}
-                            <input type="submit" value="comment" class="text-[#fefefefe] bg-[#3D5361] w-full rounded-full py-[6px] px-[18px]">
-                        </form>
                     </div>
                 </div>
-            </div>
+                <div class=" p-[20px] col-md-7  shadow-md rounded border-t-[3px] border-[#3D5361]">
+                    <div class="bg-[#fff] p-[10px] relative w-[100%] transition-all overflow-hidden">
+                        <input type="checkbox" class="peer absolute top-0 inset-x-0 w-full h-12  opacity-0 z-10 cursor-pointer">
+                        <p class="text-[#EC9595] font-semibold">
+                            <i class="fa-solid fa-comments px-[2px]"></i>
+                            View Comments: {{post_mod.post_comment_count}}  
+                        </p>
+                        <div  class="peer-checked:max-h-full bg-white overflow-hidden transition-all duration-500 max-h-0">
+                            <div style="height:250px; overflow-y: scroll;" class="card card-body my-[20px]">
+                                {% for comment in post_mod.postcomment_set.all %}
+                                    <div class="flex gap-[20px]">
+                                        <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ comment.post_user.profilemodel.image.url }} " alt="">                                    
+                                        <p class="flex flex-col text-[15px] text-[#6b6565]"> {{ comment.post_content }}
+                                            <small class="text-[10px] text-[#a09e9e] capitalize">{{ comment.post_user }}</small>
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+           </div>
         </div>
        </div>        
     </div>

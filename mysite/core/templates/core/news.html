@@ -4,7 +4,7 @@
 {% block title %}News{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    
+   
     <div class="__home_content">
         <div class="flex gap-2 news_page_main">
             <div class="w-[20%] bg-slate-100 h-[60%] __latest_news_wrapper">
@@ -53,7 +53,12 @@
                                         </p>
                                     </div>
                                     <div class="flex justify-between items-center gap-[10px]">
-                                        <p class="card-text text-nowrap flex items-center gap-[5px] text-[13px] text-[#444] font-semibold"><i class="fa-solid fa-user"></i> {{ article.author }} </p> 
+                                        <p class="card-text flex text-nowrap items-center gap-[5px] text-[13px] text-[#444] font-semibold">
+                                            <a href="{% url "profile" article.author.username article.author.id  %}" class="text-[#3d5361c4]">
+                                                <i class="fa-solid fa-user"></i> 
+                                                {{ article.author }} 
+                                            </a>
+                                        </p> 
                                         <p class="font-bold text-[12px] d-inline-block text-truncate"><small class="font-medium bg-[#3D5361] text-[#fcfcfcfc] rounded-full px-[8px] py-[3px]">{{ article.slug }}</small></p>
                                     </div>                           
                                     <div class=" flex gap-3">
@@ -134,4 +139,6 @@
             </div>
         </div>
     </div>
-{% endblock content %}
+
+    {% endblock content %}
+    

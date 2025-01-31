@@ -1,47 +1,50 @@
 {% extends "base.html" %}
 {% load static %}
 {% load tailwind_filters %}
-{% block title %}Sign In{% endblock  %}
+{% block title %}Profile{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
     <div class="flex justify-center items-center w-full  mt-[12rem] mb-[4rem]">
         <div class="w-[65%] m-auto p-[30px] rounded shadow border-t-[4px] border-slate-500  bg-slate-50 __profile-container">
-            <div class="flex justify-center flex-col items-center">
-                <h1 class="font-bold text-[25px] text-[#3D5361]">Member Information</h1>
+          <h1 class="font-bold text-[25px] text-[#3D5361]">Member Information</h1>
+          <hr>
+            <div class="flex justify-between items-center mb-[2rem]">
                 <div class="w-[150px] h-[150px] ">
-                    <img src="{{ user.profilemodel.image.url }}" alt="profile.img" class="rounded-[50%] object-cover object-center">
+                    <img src="{{ profile.image.url }}" alt="profile.img" class="w-[150px] h-[150px] rounded-[50%] object-cover object-center">
                 </div>
                 <!-- Button trigger modal -->
-                <button 
-                  type="button" 
-                  data-bs-toggle="modal" 
-                  data-bs-target="#staticBackdrop" 
-                  class="my-[30px] text-[#3D5361] transition-all duration-200 hover:text-teal-600 py-[4px] px-[8px] text-[15px] ">
-                  Edit Profile
-                  <i class="fa-regular fa-pen-to-square fa-xl ml-[10px]"></i>
-                </button>
+                 {% if profile.user == user %}
+                  <button 
+                    type="button" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#staticBackdrop" 
+                    class="my-[30px] text-[#3D5361] transition-all duration-200 hover:text-teal-600 py-[4px] px-[8px] text-[15px] ">
+                    Edit Profile
+                    <i class="fa-regular fa-pen-to-square fa-xl ml-[10px]"></i>
+                  </button>
+                {% endif %}
             </div>
             {% comment %} <hr class="my-[10px] h-[1px] bg-slate-50"> {% endcomment %}
            <div class="">
               <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
-                  <h3 class="text-[18px] basis-2/6">Firstname</h3>
-                  <p class="mt-[10px] basis-3/5">{{ user.profilemodel.full_name }} </p>
+                  <h3 class="text-[18px] basis-2/6">Full Name</h3>
+                  <p class="mt-[10px] basis-3/5">{{ profile.full_name }} </p>
               </div>
               <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
                 <h3 class="text-[18px] basis-2/6">Username</h3>
-                <p class="mt-[10px] basis-3/5">{{ user }} </p>
+                <p class="mt-[10px] basis-3/5">{{ profile.user.username }} </p>
               </div>
               <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
                 <h3 class="text-[18px] basis-2/6">Email address</h3>
-                <p class="mt-[10px] basis-3/5">{{ user.email }} </p>
+                <p class="mt-[10px] basis-3/5">{{ profile.user.email }} </p>
               </div>
-              <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+              <div class="flex  border-t border-[#e7e0e07e] py-[10px]">
                 <h3 class="text-[18px] basis-2/6">Talks About</h3>
-                <p class="mt-[10px] basis-3/5">{{ user.profilemodel.talks_about }} </p>
+                <p class=" basis-3/5">{{ profile.talks_about }} </p>
               </div>
-              <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
+              <div class="flex  border-t border-[#e7e0e07e] py-[10px]">
                 <h3 class="text-[18px] basis-2/6">About me</h3>
-                <p class="mt-[10px] basis-3/5">{{ user.profilemodel.about }} </p>
+                <p class=" basis-3/5">{{ profile.about }} </p>
               </div>
            </div>
         </div>

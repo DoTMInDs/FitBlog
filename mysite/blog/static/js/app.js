@@ -8,6 +8,9 @@ mobileMenu.addEventListener('click', () => {
     // console.log('clicked');
 });
 
+function goBack() {
+    window.history.back();
+}
 
 
 let time = document.getElementById('current-time');

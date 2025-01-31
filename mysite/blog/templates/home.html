@@ -13,7 +13,7 @@
                             <div class="flex  justify-between items-center">
                                 <p class="card-text text-nowrap text-[13px] text-[#3d5361c4] font-semibold">
                                     <i class="fa-solid fa-clock"></i>
-                                    <small>{{article.dated_on}}</small>
+                                    <small>{{ article.dated_on|date:"M. d, Y" }}</small>
                                 </p>
                                 <p class="text-[13px] text-nowrap text-[#3d5361c4] font-semibold">
                                     <i class="fa-solid fa-comments px-[2px]"></i>
@@ -23,10 +23,7 @@
                             </div>
                             <div class="flex justify-between items-center gap-[10px]">
                                 <p class="card-text flex text-nowrap items-center gap-[5px] text-[13px] text-[#444] font-semibold">
-                                   <a href="" 
-                                    type="button" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#staticBackdrop"  
+                                   <a href="{% url "profile" article.author.username article.author.id  %}" 
                                     class="text-[#3d5361c4]">
                                         <i class="fa-solid fa-user"></i> 
                                         {{ article.author }} 
@@ -75,7 +72,7 @@
                             <p class="card-text text-nowrap text-[13px] text-[#3d5361c4] font-semibold">
                                 <small>{{blog_post.created_on}}</small>
                             </p>
-                            <p class="text-[13px] text-nowrap text-[#3d5361c4]font-semibold">
+                            <p class="text-[13px] text-nowrap text-[#3d5361c4] font-semibold">
                                 <i class="fa-solid fa-comments px-[2px]"></i>
                                 {{blog_post.post_comment_count}}
                                  Comments
@@ -83,7 +80,7 @@
                         </div>
                         <div class="flex justify-between items-center gap-[10px]">
                             <p class="card-text flex text-nowrap items-center gap-[5px] text-[13px] text-[#444] font-semibold">
-                               <a href="" class="text-[#3d5361c4]">
+                               <a href="{% url "profile" blog_post.author.username blog_post.author.id  %}" class="text-[#3d5361c4]">
                                 <i class="fa-solid fa-user"></i>
                                 {{ blog_post.author }} 
                                </a>
@@ -126,7 +123,7 @@
 
 
     <!-- Modal -->    
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  {% comment %} <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog ">
       <div class="modal-content">
         <div class="modal-header">
@@ -167,7 +164,7 @@
         
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
     
 {% endblock content %}
