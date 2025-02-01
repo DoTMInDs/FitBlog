@@ -5,95 +5,59 @@
 {% block content %}
     {% include "partials/nav.html" %}
     <!-- Music-header -->
-    <div class="__music_container">
-        <div class="container">
-            <div class=" p-[15px] " >
-                <div class="flex justify-between items-center">
-                    <ul class="flex gap-[20px]">
-                        <li><a class="uppercase music_links" href="{% url 'music-page' %}">Home</a></li>
-                        <li><a class="uppercase music_links" href="">All Songs</a></li>
-                        <div class="dropdown">
-                            <button class="uppercase music_links dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-headphones-simple"></i>
-                                My Music
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                        <div class="">
-                            <button type="button" class="song_upload_btn bg-blue-500 text-[13px] flex items-center text-[#fff] py-[5px] px-[15px] rounded-full mb-[15px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Create Artist
-                                <i class="fa-solid fa-music ml-[10px] mt-[3px]"></i>
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Create your Artist</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="" method="post" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            {{ form|crispy }}
-                                           
-                                            <div class="song_post_btn ">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <input type="submit" value="Post Artist" class="btn btn-primary">
-                                            </div>
-                                        </form>
-                                    </div>
+    <div class="__post_details_media_wrapper __music_container">
+        <div class="__post_details_media_container">
+            <div class="border-b-[1px] border-[#3d5361c4] w-full flex justify-start items-start">
+                <div class="flex gap-[20px]">
+                    <p><a class="uppercase  music_links" href="{% url 'music-page' %}">Home</a></p>
+                    <p><a class="uppercase  music_links" href="">All Songs</a></p>
+                    <div class="dropdown">
+                        <button class="uppercase music_links dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-headphones-simple"></i>
+                            My Music
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                    <div class="">
+                        <button type="button" class="text-[13px] rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] mt-[-21px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Create Artist
+                            <i class="fa-solid fa-music ml-[10px] mt-[3px]"></i>
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create your Artist</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+                                <div class="modal-body">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ form|crispy }}
+                                        
+                                        <div class="song_post_btn ">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <input type="submit" value="Post Artist" class="btn btn-primary">
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                        <div class="">
-                            <button type="button" class="song_upload_btn bg-blue-500 text-[13px] flex items-center text-[#fff] py-[5px] px-[15px] rounded-full mb-[15px]" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-                                Post Song
-                                <i class="fa-solid fa-music ml-[10px] mt-[3px]"></i>
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Create your Artist</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="" method="post" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            {{ song_form|crispy }}
-                                           
-                                            <div class="song_post_btn ">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <input type="submit" value="Post Artist" class="btn btn-primary">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                </div>
                             </div>
                         </div>
-                    </ul>
-                    <div class="flex gap-[15px]">
-                        <a href="" class=""><i class="fa-brands fa-youtube fa-lg" style='color: #Ff0000'></i></a>
-                        <a href="" class=""><i class="fa-brands fa-facebook fa-lg" style='color: #00008B'></i></a>
-                        <a href="" class=""><i class="fa-brands fa-twitter fa-lg" ></i></a>
                     </div>
                 </div>
-                <div class="divider"></div>
-            </div>          
+            </div>
         </div>
     </div>
 
     <!-- Music-main-section -->
-    <div class="container">
-        <div class="container">
+    <div class="__post_details_media_wrapper mt-[2rem]">
+        <div class="__post_details_media_container">
             <div class="flex justify-between">
                 <h2 class="text-[18px] font-bold">Popular Artists</h2>
                 <p class="text-[#fff]"><a class="text_decoration" href="">Show all</a></p>
@@ -111,7 +75,7 @@
                                     {% endif %}
                                 </div>
                                 <div class="artist_name">
-                                    <h3 class="name">{{ artist_upload.song_artist_name }}</h3>
+                                    <h3 class="name">{{ artist_upload.artist }}</h3>
                                     <p class="genre">{{ artist_upload.artist_genre }}</p>
                                 </div>
                             </div>

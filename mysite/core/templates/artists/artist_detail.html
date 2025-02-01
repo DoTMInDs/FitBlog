@@ -5,13 +5,12 @@
 {% block content %}
     {% include "partials/nav.html" %}
     <!-- Music-header -->
-    <div class="__music_container">
-        <div class="container">
-            <div class=" p-[15px] " >
-                <div class="flex justify-between items-center">
-                    <ul class="flex gap-[20px]">
-                        <li><a class="uppercase music_links" href="{% url 'music-page' %}">Home</a></li>
-                        <li><a class="uppercase music_links" href="">All Songs</a></li>
+    <div class="__post_details_media_wrapper">
+        <div class="__post_details_media_container">
+                <div class="border-b-[1px] border-[#3d5361c4]  w-full flex justify-start items-start">
+                    <div class="flex gap-[20px]">
+                        <p><a class="uppercase music_links" href="{% url 'music-page' %}">Home</a></p>
+                        <p><a class="uppercase music_links" href="">All Songs</a></p>
                         <div class="dropdown">
                             <button class="uppercase music_links dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-headphones-simple"></i>
@@ -24,7 +23,7 @@
                             </ul>
                         </div>
                         <div class="">
-                            <button type="button" class="song_upload_btn bg-blue-500 text-[13px] flex items-center text-[#fff] py-[5px] px-[15px] rounded-full mb-[15px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button type="button" class="song_upload_btn text-[13px] rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] flex items-center mt-[-5px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Upload Song
                                 <i class="fa-solid fa-music ml-[10px] mt-[3px]"></i>
                             </button>
@@ -39,8 +38,8 @@
                                     <div class="modal-body">
                                         <form action="" method="post" enctype="multipart/form-data">
                                             {% csrf_token %}
-                                            {{ s_form|crispy }}
-                                           
+                                            {{ song_form|crispy }}
+                                            <input type="hidden" name="song_form" value="song_form">
                                             <div class="song_post_btn ">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                 <input type="submit" value="Post Song" class="btn btn-primary">
@@ -51,53 +50,49 @@
                                 </div>
                             </div>
                         </div>
-                    </ul>
-                    <div class="flex gap-[15px] mt-[-1.5rem]">
-                        <a href="" class=""><i class="fa-brands fa-youtube fa-lg" style='color: #Ff0000'></i></a>
-                        <a href="" class=""><i class="fa-brands fa-facebook fa-lg" style='color: #00008B'></i></a>
-                        <a href="" class=""><i class="fa-brands fa-twitter fa-lg" ></i></a>
                     </div>
                 </div>
-                <div class="divider"></div>
-               <div class="parent_overlay">
-                    <div class="img_overlay">
-                        {% if artist_uploads.artist_image %}
-                            <img src="{{ artist_uploads.artist_image.url }}" alt="" class="cover_art">
-                        {% endif %}                    
-                    </div>
-                    <div class="overlay_text">
-                        <div class="p-0 m-0">
-                            <p class="genre_text py-0 my-0">Verified {{ artist_uploads.artist_genre }}</p>
-                            <h1 class="big_artist_name py-0 my-0">{{ artist_uploads.song_artist_name }}</h1>
-                            <p class="genre_text py-0 my-0">{{ artist_uploads.artist_genre }}</p>
+               <div class="mt-[1.5rem]">
+                    <div class="parent_overlay">
+                        <div class="img_overlay">
+                            {% if artist_uploads.artist_image %}
+                                <img src="{{ artist_uploads.artist_image.url }}" alt="" class="cover_art">
+                            {% endif %}                    
+                        </div>
+                        <div class="overlay_text">
+                            <div class="p-0 m-0">
+                                <p class="genre_text py-0 my-0">Verified {{ artist_uploads.artist_genre }}</p>
+                                <h1 class="big_artist_name py-0 my-0">{{ artist_uploads.artist }}</h1>
+                                <p class="genre_text py-0 my-0">{{ artist_uploads.artist_genre }}</p>
+                            </div>
                         </div>
                     </div>
                </div>
-            </div>          
         </div>
     </div>
 
     <!-- Music-main-section -->
-    <div class="container">
-        <div class="container">
+    <div class="__post_details_media_wrapper mt-[2rem]">
+        <div class="__post_details_media_container" >
             <div class="">
                 <h2 class="text-[18px] font-bold">Popular Songs</h2>
             </div>
+            {% for song in songs %}
             <div class="">
-                <button type="button" class="artist_detail_link " data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                <a type="button" class="artist_detail_link " data-bs-toggle="modal" data-bs-target="#exampleModal1-{{ song.id }}">
                     <div class="flex gap-[7px]">
                         <div class="artist_img_wrapper">
-                            {% if artist_uploads.artist_profile  %}
-                                <img src="{{ artist_uploads.artist_profile.url }}" alt="pic.png" class="artist_img_detail">                            
+                            {% if song.artist.artist_profile %}
+                                <img src="{{ song.artist.artist_profile.url }}" alt="pic.png" class="artist_img_detail">                            
                             {% endif %} 
                         </div>
                         <div class="">
-                            <h3 class="song_title">{{ artist_uploads.song_title }}</h3>
+                            <p class="song_title">{{ song.title }} - {{ song.genre }}</p>
                         </div>
                     </div>
-                </button>   
+                </a>   
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal1-{{ song.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content p-[30px]">                            
                         <div class="float-end close_btn">
@@ -106,77 +101,29 @@
                             <div class="modal-body">
                                 <div class="flex justify-between gap-[20px]">
                                     <div class="image_cover_art_wrapper">     
-                                        {% if artist_uploads.artist_profile  %}
-                                            <img src="{{ artist_uploads.artist_profile.url }}" alt="" class="image_cover_art">
+                                        {% if song.artist.artist_profile %}
+                                            <img src="{{ song.artist.artist_profile.url }}" alt="" class="image_cover_art">
                                         {% endif %} 
-                                        {% if artist_uploads.artist_song %}
-                                            <audio src="{{ artist_uploads.artist_song.url }}" controls class="song_track"></audio>  
+                                        {% if song.song_file %}
+                                            <audio src="{{ song.song_file.url }}" controls class="song_track"></audio>  
                                         {% endif %}                                     
                                     </div>
                                     <div class="">
                                         <h2 class="text-center mt-[10px] text-[#666665] font-bold">Start listening with a click or hit the Download button to download</h2>
-                                        <button class="downlod_btn"><a class="download_a" href="#!" download="">Download</a></button>                                         
+                                        <button class="downlod_btn"><a class="download_a" href="{{ song.song_file.url }}" download>Download</a></button>                                         
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>                         
+                </div>
             </div>
-
-            {% comment %}
-                <div class="">
-                    {% for song_upload in song_uploads %}
-                    <div class="flex flex-col">
-                            <button type="button" class="artist_detail_link " data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                <div class="flex gap-[7px]">
-                                    <div class="artist_img_wrapper">
-                                        {% if song_upload.artist_profile  %}
-                                            <img src="{{ song_upload.artist_profile.url }}" alt="pic.png" class="artist_img_detail">                            
-                                        {% endif %} 
-                                    </div>
-                                    <div class="">
-                                        <h3 class="song_title">{{ song_upload.song_title }}</h3>
-                                    </div>
-                                </div>
-                            </button>  
-                    </div>  
-                    {% endfor %} 
-                    
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg">
-                            <div class="modal-content p-[30px]">                            
-                                <div class="float-end close_btn">
-                                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="flex justify-between gap-[20px]">
-                                        <div class="image_cover_art_wrapper">     
-                                            {% if song_uploads.artist_profile_create  %}
-                                                <img src="{{ song_uploads.artist_profile_create.url }}" alt="" class="image_cover_art">
-                                            {% endif %} 
-                                            {% if song_uploads.artist_song_create %}
-                                                <audio src="{{ song_uploads.artist_song_create.url }}" controls class="song_track"></audio>  
-                                            {% endif %}                                     
-                                        </div>
-                                        <div class="">
-                                            <h2 class="text-center mt-[10px] text-[#666665] font-bold">Start listening with a click or hit the Download button to download</h2>
-                                            <button class="downlod_btn"><a class="download_a" href="#!" download="">Download</a></button>                                         
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-            {% endcomment %}
-
+            {% endfor %}
         </div>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {% comment %} <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content p-[30px]">                            
             <div class="float-end close_btn">
@@ -200,8 +147,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
+    </div> {% endcomment %}
 
    
 

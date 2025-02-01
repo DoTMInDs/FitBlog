@@ -462,9 +462,9 @@ main{
 }
 .music_links{
     text-decoration: none;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
-    color: #666665;
+    color: #3D5361;
 }
 .divider{
     width: 100%;
@@ -581,7 +581,6 @@ image-section
 }
 .artist_img_wrapper{
     width: 80px;
-    height: 80px;
     border-radius: 5px;
 }
 .artist_img_detail{
@@ -591,8 +590,8 @@ image-section
     border-radius: 5px;
 }
 .song_title{
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: medium;
 }
 .artist_detail_link{
     text-decoration: none;
@@ -600,7 +599,7 @@ image-section
     transition: color 0.5s ease;
 }
 .artist_detail_link:hover{
-    color: #0073df;
+    color: #be4545;
 }
 
 /* modal-audio */
