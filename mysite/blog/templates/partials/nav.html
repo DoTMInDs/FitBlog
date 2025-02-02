@@ -27,12 +27,11 @@
                                 <div class="flex items-center gap-[10px]">
                                     <div class="flex items-center">
                                         <a href="{% url "profile" user.username user.id %}" class="flex items-center text-[#3D5361] rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#3D5261] __nav_text_style transition">
-                                            {% if profile.image %}
-                                            <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ profile.image.url }} " alt="default.png">
+                                            {% if user.profilemodel.image %}
+                                                <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="Profile Image">
                                             {% else %}
-                                                <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="default.png">
+                                                <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src="{% static "images/default.png" %} " alt="Default Profile Image">
                                             {% endif %}
-                                            {% comment %} <i class="fa-duotone fa-solid fa-user mr-[0.5rem]"></i> {% endcomment %}
                                             My Profile
                                         </a>
                                     </div>
@@ -54,7 +53,6 @@
                                         Login
                                     </a>
                                 </div>
-                            <!-- </div>                                         -->
                         {% endif %}
                     </div>
                </div>
@@ -107,16 +105,16 @@
                     <li class="nav-item bg-[#3D5361]">
                         <a class="nav-link __nav_text" href="{% url "business-page" %}">Business</a>
                     </li>
-                    <li class="nav-item bg-[#cccccc] text-[#3D5361]">
+                    <li class="nav-item bg-[#521818] text-[#3D5361]">
                         <a class="nav-link __nav_text " href="{% url "music-page" %}">Music</a>
                     </li>
-                    <li class="nav-item bg-[#777777]">
+                    <li class="nav-item bg-[#3D5361]">
                         <a class="nav-link __nav_text" href="{% url "africa-page" %}">Africa</a>
                     </li>
-                    <li class="nav-item bg-[#3D5361]">
+                    <li class="nav-item bg-[#444444]">
                         <a class="nav-link __nav_text" href="{% url "ghanaweb-page" %}">GhanaWeb Tv</a>
                     </li>
-                    <li class="nav-item bg-[#444444]">
+                    <li class="nav-item bg-[#666666]">
                         <a class="nav-link __nav_text" href="{% url "opinions-page" %}">Opinions</a>
                     </li>
                 </ul>

@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 from blog.models import PostModel,ArticlePostModel
 from blog.forms import CommentForm,ArticleCommentForm,ArtistPostForm,AlbumForm,SongUploadForm
 from django.db.models import Q
-from .models import Artist,Album,SportsModel
+from .models import Artist,Album,SportsModel,Song
 
 from django.contrib.auth.decorators import login_required
 # from django.views.generic.list import ListView
@@ -67,22 +67,31 @@ def GhanawebPage(request):
 @login_required
 def MusicPage(request):
     artist_uploads = Artist.objects.all()
-    form = ArtistPostForm()    
+    albums = Album.objects.all()
+    form = ArtistPostForm()   
+    a_form = AlbumForm() 
 
     if request.method == "POST":
-        form = ArtistPostForm(request.POST, request.FILES)        
-        if form.is_valid() :
-            # instance = form.save(commit=False)
-            # instance.artist_name = request.user
-            # instance.save()
-            form.save()            
-            return redirect('music-page')
+        if 'form' in request.POST:
+            form = ArtistPostForm(request.POST, request.FILES)        
+            if form.is_valid() :
+                form.save()            
+                return redirect('music-page')
+        elif 'a_form' in request.POST:
+            a_form = AlbumForm(request.POST, request.FILES)
+            if a_form.is_valid():
+                a_form.save()
+                return redirect('music-page')
+        
     else:
         form = ArtistPostForm()
+        a_form = AlbumForm() 
 
     context = {
         "artist_uploads": artist_uploads,
+        "albums": albums,
         "form": form,
+        "a_form": a_form,
         
     }
     return render(request, 'core/music.html', context)
@@ -93,6 +102,7 @@ def AfricaPage(request):
 @login_required
 def ArtistDetailPage(request, artist_id):
     artist_uploads = get_object_or_404(Artist, id=artist_id)
+    songs = Song.objects.filter(artist=artist_uploads)
     
     album_form = AlbumForm()
     song_form = SongUploadForm()
@@ -110,20 +120,64 @@ def ArtistDetailPage(request, artist_id):
             if song_form.is_valid():
                 song = song_form.save(commit=False)
                 song.artist = artist_uploads
+                album_id = request.POST.get('album')
+                if album_id:
+                    song.album = get_object_or_404(Album, id=album_id)
                 song.save()
                 return redirect('artist-detail', artist_id=artist_uploads.id)
+
+    context = {
+        "artist_uploads": artist_uploads,
+        "songs": songs,
+        'album_form': album_form,
+        'song_form': song_form,
+    }
+    return render(request, 'artists/artist_detail.html', context)
+
+
+@login_required
+def all_artist(request):
+    artist_uploads = Artist.objects.all()
+
+    context = {
+        "artist_uploads": artist_uploads,
+    }
+    return render(request, 'artists/all_artist.html', context)
+    
+@login_required
+def all_album(request):
+    albums = Album.objects.all()
+
+    context = {
+        "albums": albums,
+    }
+    return render(request, 'artists/all_album.html', context)
+
+@login_required
+def AlbumDetail(request, album_id):
+    album = get_object_or_404(Album, id=album_id)
+    
+    song_form = SongUploadForm()
+    
+    if request.method == "POST":
+        if 'song_form' in request.POST:
+            song_form = SongUploadForm(request.POST, request.FILES)
+            if song_form.is_valid():
+                song = song_form.save(commit=False)
+                song.album = album
+                song.artist = album.artist
+                song.save()
+                return redirect('album-detail', album_id=album.id)
     else:
-        album_form = AlbumForm()
         song_form = SongUploadForm()
 
     context = {
-        'artist_uploads': artist_uploads,
-        'album_form': album_form,
-        'song_form': song_form,
-        'albums': artist_uploads.albums.all(),
-        'songs': artist_uploads.songs.all(),
+        "album": album,
+        "song_form": song_form,
+        'songs': album.songs.all(),
     }
-    return render(request, 'artists/artist_detail.html', context)
+    return render(request, 'artists/album_details.html', context)
+    
 
 def SportDetailPage(request, pk):
     posts = SportsModel.objects.get(id=pk)

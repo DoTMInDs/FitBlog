@@ -7,6 +7,10 @@
     <!-- Music-header -->
     <div class="__post_details_media_wrapper">
         <div class="__post_details_media_container">
+            <button onclick="goBack()" class="my-[1rem] rounded-full py-[6px] px-[18px] text-[#3D5361] text-[13px]">
+                <i class="fa-solid fa-circle-arrow-left mr-[0.5rem]"></i>
+                Back
+            </button>
                 <div class="border-b-[1px] border-[#3d5361c4]  w-full flex justify-start items-start">
                     <div class="flex gap-[20px]">
                         <p><a class="uppercase music_links" href="{% url 'music-page' %}">Home</a></p>
@@ -40,9 +44,9 @@
                                             {% csrf_token %}
                                             {{ song_form|crispy }}
                                             <input type="hidden" name="song_form" value="song_form">
-                                            <div class="song_post_btn ">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <input type="submit" value="Post Song" class="btn btn-primary">
+                                            <div class="flex gap-[10px] justify-center items-center __delet_btn_wrapper ">
+                                                <button type="button" class="_edit_detail_btn text-[#3D5361] border border-[#3D5361] rounded-full py-[10px] px-[5rem]" data-bs-dismiss="modal">Close</button>
+                                                <input type="submit" value="Upload Song" class="_edit_detail_btn text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
                                             </div>
                                         </form>
                                     </div>
@@ -53,20 +57,25 @@
                     </div>
                 </div>
                <div class="mt-[1.5rem]">
-                    <div class="parent_overlay">
-                        <div class="img_overlay">
-                            {% if artist_uploads.artist_image %}
-                                <img src="{{ artist_uploads.artist_image.url }}" alt="" class="cover_art">
-                            {% endif %}                    
-                        </div>
-                        <div class="overlay_text">
-                            <div class="p-0 m-0">
-                                <p class="genre_text py-0 my-0">Verified {{ artist_uploads.artist_genre }}</p>
-                                <h1 class="big_artist_name py-0 my-0">{{ artist_uploads.artist }}</h1>
-                                <p class="genre_text py-0 my-0">{{ artist_uploads.artist_genre }}</p>
+                    <div class="album_detail_bg">
+                        <div class="album_detail_wrapper">
+                            <div class="album_detail_img_wrapper">
+                                {% if artist_uploads.artist_image %}
+                                    <img src="{{ artist_uploads.artist_image.url }}" alt="" class="album_detail_image">
+                                {% endif %}
+                            </div>
+                            <div class="">
+                                <p class="album_detail_text "><i class="fa-solid fa-circle-check" style="color: #00c291;"></i> {{ artist_uploads.artist_genre }}</p>
+                                <h1 class="album_detail_title text-[8rem] font-bold text-[#fefefefc]">{{ artist_uploads.artist }}</h1>
+                                <p class="album_detail_text ">
+                                    <img src="{{ artist_uploads.artist_profile.url }}" alt="" class="w-[30px] h-[30px] rounded-full object-cover object-center">
+                                    <a href="#!" class="font-bold">{{ artist_uploads.artist_genre }} </a> 
+                                    <span>- {{artist_uploads.posted_on|date:"Y"}} - {{ album.songs.count }} songs</span>
+                                </p>
                             </div>
                         </div>
                     </div>
+                  
                </div>
         </div>
     </div>
@@ -155,38 +164,3 @@
 {% endblock content %}
 
 
-<!-- 
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Show a second modal and hide this one with the button below.
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Open second modal</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Modal 2</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Hide this modal and show the first with the button below.
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to first</button>
-      </div>
-    </div>
-  </div>
-</div>
-<button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Open first modal</button>
--->

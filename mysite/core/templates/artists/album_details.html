@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}Album {{albums.artist}}{% endblock  %}
+{% block content %}
+    {% include "partials/nav.html" %}
+    <!-- Album-header -->
+    <div class="__post_details_media_wrapper">
+        <div class="__post_details_media_container">
+                <button onclick="goBack()" class=" rounded-full py-[6px] px-[18px] text-[#3D5361] text-[13px]">
+                    <i class="fa-solid fa-circle-arrow-left mr-[0.5rem]"></i>
+                    Back
+                </button>
+                <div class="mt-[1.5rem]">
+                    <div class="album_detail_bg">
+                        <div class="album_detail_wrapper">
+                            <div class="album_detail_img_wrapper">
+                                {% if album.cover_image %}
+                                    <img src="{{ album.cover_image.url }}" alt="" class="album_detail_image">
+                                {% endif %}
+                            </div>
+                            <div class="">
+                                <p class="album_detail_text ">Album</p>
+                                <h1 class="album_detail_title text-[8rem] font-bold text-[#fefefefc]">{{ album.title }}</h1>
+                                <p class="album_detail_text ">
+                                    <img src="{{ album.artist.artist_profile.url }}" alt="" class="w-[30px] h-[30px] rounded-full object-cover object-center">
+                                    <a href="#!" class="font-bold">{{album.artist}} </a> 
+                                    <span>- {{album.release_date|date:"Y"}} - {{ album.songs.count }} songs</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-[0.5rem] bg-[#eee5e52d] rounded border-t border-[#3D5361] p-[1rem] w-full shadow-md">
+                        <button type="button" class="song_upload_btn text-[1.8rem] rounded-full  text-[#3D5361]" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa-solid fa-plus-circle mr-[10px] mt-[3px]"></i>
+                        </button>
+                            
+                        <div class=" mt-[1rem] album_detail_song_list_container">
+                            <div class="album_song_title_wrapper flex justify-between items-center">
+                                <div class="flex gap-[3rem] items-center">
+                                    <p class="font-bold text-[1.5rem] mt-[0.5rem]">#</p>
+                                    <h5 class=" text-[1.2rem] font-bold text-[#3D5361]"> Title</h5>
+                                </div>
+                                <div class="mr-[4.5rem]"><i class="fa-solid fa-clock"></i></div>
+                            </div>
+
+                            {% for song in album.songs.all %}
+                            <div class="flex justify-between items-center album_detail_song_list_wrapper ">
+                                <div class="flex items-center gap-[3rem] py-[1rem]">
+                                    <div class="album_detail_icon album_deatail_a_link"><a href="#!"><i class="fa-solid fa-play"></i></a></div>
+                                    <div class="">
+                                        <h5 class=" text-[1.2rem] font-bold text-[#3D5361] m-0 p-0"> {{song.title}}</h5>
+                                        <p class="text-[1rem] text-[#666666] m-0 p-0 album_deatail_a_link"><a href="#!" class="">{{song.artist}}</a></p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-[3rem] py-[1rem]">
+                                    <p class="album_detail_icon album_deatail_a_link"><a href="#!"><i class="fa-solid fa-download"></i></a></p>
+                                    <p class="text-[0.9rem] font-bold text-[#666666]">{{song.album.release_date|date:"yy"}}</p>
+                                    <p class="album_detail_icon album_deatail_a_link"><a href="#!"><i class="fa-solid fa-ellipsis"></i></a></p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+    
+                </div>
+        </div>
+    </div>
+
+ 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Post your song</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ song_form|crispy }}
+                    <input type="hidden" name="song_form" value="song_form">
+                    <div class="flex gap-[10px] justify-center items-center __delet_btn_wrapper ">
+                        <button type="button" class="_edit_detail_btn text-[#3D5361] border border-[#3D5361] rounded-full py-[10px] px-[5rem]" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" value="Upload Song" class="_edit_detail_btn text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+{% endblock content %}
+

@@ -34,13 +34,14 @@ class Album(models.Model):
         ordering = ['-release_date']
 
     def __str__(self):
-        return self.title
+        return f'{self.title} - {self.artist} - released on - {self.release_date}'
     
 class Song(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='songs')
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='songs')
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     genre = models.CharField(max_length=200, null=True)
-    song_file = models.FileField(upload_to='music/', null=True, blank=True, validators=[FileExtensionValidator(['M4A', 'FLAC', 'MP3', 'WAV', 'MP3'])])
+    song_file = models.FileField(upload_to='music/', null=True, blank=True, validators=[FileExtensionValidator(['m4a', 'flac', 'mp3', 'wav'])])
     posted_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

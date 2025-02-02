@@ -47,10 +47,7 @@ def sign_up(request):
         if form.is_valid():
             form.save()
             return redirect('login')
-        #     print("form is valid")
-        # else:
-        #     print(form.errors)
-
+       
     context = {'form':form}
     return render(request, 'users/sign_up.html', context)
 
@@ -78,32 +75,6 @@ def profile_view(request, username, id):
         'id': id
     }
     return render(request, 'users/profile.html', context)
-
-# @login_required
-# def profile(request, username, id):
-#     user = get_object_or_404(User, username=username, id=id)
-#     profile = get_object_or_404(ProfileModel, user=user)
-
-#     if request.method == "POST":
-#         u_form = UserUpdateForm(request.POST or None, instance=request.user)
-        # p_form = ProfileUpdateForm(request.POST or None, request.FILES or None, instance=request.user.profilemodel)
-#         if u_form.is_valid() and p_form.is_valid():
-#             u_form.save()
-#             p_form.save()
-#             return redirect('profile', username=username, id=id)
-
-#     else:
-#         u_form = UserUpdateForm(instance=request.user)
-#         p_form = ProfileUpdateForm(instance=request.user.profilemodel)
-    
-#     context = {
-#         'profile': profile,
-#         'u_form': u_form,
-#         'p_form': p_form,
-#         'username': username, 
-#         'id': id
-#     }
-#     return render(request, 'users/profile.html', context)
 
 @login_required
 def user_dashboard(request):
