@@ -3,7 +3,7 @@
 {% load tailwind_filters %}
 {% block title %}Dashboard{% endblock  %}
 {% block content %}
-    {% include "partials/nav.html" %}
+    {% include "dashboard/dashboard_nav.html" %}
     <div class=" flex justify-between __home_content">
         <div class="__dashboard_grid_card ">
             {% for article in articles %}
@@ -93,4 +93,7 @@
           </li>
         </ul>
     </nav>
+
+
+    {% include "partials/footer.html" %}
 {% endblock %}

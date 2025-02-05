@@ -41,6 +41,9 @@ body{
     gap: 20px;
     align-items: center;
 }
+._form_search{
+    z-index: 9999;
+}
 
 
 @media screen and (max-width:1000px) {
@@ -200,6 +203,7 @@ main{
     display: grid;
       grid-template-columns: repeat(2, 1fr); /* Two equal columns */
       gap: 20px;
+      margin-bottom: 2rem;
 }
 
 /* ------------------------------------------
@@ -460,6 +464,7 @@ main{
 .__music_container{
     margin-top: 10rem;
 }
+
 .music_links{
     text-decoration: none;
     font-size: 15px;
@@ -881,18 +886,25 @@ main{
         transition: font-size 0.5s ease;
     }
     .album_detail_img_wrapper{
-        width: 150px;
+        width: 250px;
         height: 180px;
         border-radius: 10px;
         transition: width 0.5s ease,
                     height 0.5s ease;
     }
     .album_detail_bg .album_detail_wrapper{
-        margin-top: 1rem;
         flex-direction: column;
         align-items: start;
         gap: 10px;
         transition: flex-direction 300ms ease;
+    }
+    .album_detail_wrapper .album_detail_img_wrapper{
+        margin-top: 1.2rem; 
+    }
+    .popular_artist_h2{
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #3D5361;
     }
 }
 @media screen and (max-width:450px) {

@@ -26,35 +26,16 @@
         {% endblock nav %}
     </nav>
     
-    {% comment %} <div class="fixed right-10 top-60 bg-white w-3/12 m-auto">
-        <div class="card-image h-40">
-            <video src="{% static 'images/v1.mp4' %}"
-             autoplay 
-             muted 
-             loop 
-             class="rounded-lg w-full">
-            </video>
-        </div>
-    </div>
-    <div class=" overflow-y-scroll bg-white w-3/12 m-auto">
-        <div class="w-3/12 m-auto absolute right-10 top-1/2 bg-white ">
-            <div class="card">
-                <h2 class="font-bold border-b border-b-gray-300 p-4">About</h2>
-                <p class="p-2">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis obcaecati
-                        quod, minima alias, assumenda fuga officiis repellendus eligendi nemo
-                        ratione voluptate odit quia nisi voluptas, doloremque 
-                        laborum perspiciatis eveniet accusantium?
-                </p>
-                <button class="bg-rose-500 text-white px-3 py-2 ml-2 rounded-md hover:bg-rose-700 transition my-6">Read More</button>
-            </div>
-        </div>
-   </div> {% endcomment %}
+  
     <main>
         {% block content %}
         {% endblock  %}
     </main>
 
+    <footer>
+        {% block footer %}
+        {% endblock footer %}
+    </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

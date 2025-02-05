@@ -7,16 +7,16 @@
     <!-- Music-header -->
     <div class="__post_details_media_wrapper">
         <div class="__post_details_media_container">
-            <button onclick="goBack()" class="my-[1rem] rounded-full py-[6px] px-[18px] text-[#3D5361] text-[13px]">
+            <button onclick="goBack()" class="mb-[1rem] rounded-full py-[6px] px-[18px] text-[#3D5361] text-[13px]">
                 <i class="fa-solid fa-circle-arrow-left mr-[0.5rem]"></i>
                 Back
             </button>
                 <div class="border-b-[1px] border-[#3d5361c4]  w-full flex justify-start items-start">
                     <div class="flex gap-[20px]">
-                        <p><a class="uppercase music_links" href="{% url 'music-page' %}">Home</a></p>
-                        <p><a class="uppercase music_links" href="">All Songs</a></p>
+                        <p><a class="uppercase music_links text-nowrap" href="{% url 'music-page' %}">Home</a></p>
+                        {% comment %} <p><a class="uppercase music_links" href="">All Songs</a></p> {% endcomment %}
                         <div class="dropdown">
-                            <button class="uppercase music_links dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="uppercase music_links text-nowrap dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-headphones-simple"></i>
                                 My Music
                             </button>
@@ -27,32 +27,35 @@
                             </ul>
                         </div>
                         <div class="">
-                            <button type="button" class="song_upload_btn text-[13px] rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] flex items-center mt-[-5px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            {% if artist_uploads.user == user %}
+                            <button type="button" class="text-nowrap song_upload_btn text-[13px] rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] flex items-center mt-[-5px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Upload Song
                                 <i class="fa-solid fa-music ml-[10px] mt-[3px]"></i>
                             </button>
+                            
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Post your song</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Post your song</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="" method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                {{ song_form|crispy }}
+                                                <input type="hidden" name="song_form" value="song_form">
+                                                <div class="flex gap-[10px] justify-center items-center __delet_btn_wrapper ">
+                                                    <button type="button" class="_edit_detail_btn text-[#3D5361] border border-[#3D5361] rounded-full py-[10px] px-[5rem]" data-bs-dismiss="modal">Close</button>
+                                                    <input type="submit" value="Upload Song" class="_edit_detail_btn text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        <form action="" method="post" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            {{ song_form|crispy }}
-                                            <input type="hidden" name="song_form" value="song_form">
-                                            <div class="flex gap-[10px] justify-center items-center __delet_btn_wrapper ">
-                                                <button type="button" class="_edit_detail_btn text-[#3D5361] border border-[#3D5361] rounded-full py-[10px] px-[5rem]" data-bs-dismiss="modal">Close</button>
-                                                <input type="submit" value="Upload Song" class="_edit_detail_btn text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -161,6 +164,7 @@
    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    {% include "partials/footer.html" %}
 {% endblock content %}
 
 

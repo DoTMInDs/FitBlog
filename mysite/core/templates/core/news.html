@@ -5,8 +5,8 @@
 {% block content %}
     {% include "partials/nav.html" %}
    
-    <div class="__home_content">
-        <div class="flex gap-2 news_page_main">
+    <div class="__home_content ">
+        <div class="flex gap-2 news_page_main ">
             <div class="w-[20%] bg-slate-100 h-[60%] __latest_news_wrapper">
                 <div class="">
                     <div class="bg-[#cccccc]">
@@ -93,10 +93,11 @@
                                 </div>
                                
                             </div> 
-                        {% endfor %}                                       
+                        {% endfor %}  
+                        
+                       
                     </div>
                 </div>
-               
             </div>
             <div class="w-[30%] ">
                 <div class="">
@@ -138,7 +139,26 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+    </nav>
+
+
+   
+
+
+    {% include "partials/footer.html" %}
     {% endblock content %}
     

@@ -66,8 +66,22 @@ def GhanawebPage(request):
 
 @login_required
 def MusicPage(request):
-    artist_uploads = Artist.objects.all()
-    albums = Album.objects.all()
+    # query = request.GET.get('search', '')
+    # if query:
+    #     artist_uploads = Artist.objects.filter(Q(artist__icontains=query) | Q(artist_genre__icontains=query))
+    #     albums = Album.objects.filter(Q(title__icontains=query) | Q(artist__artist__icontains=query))
+    # else:
+    #     artist_uploads = Artist.objects.all()
+    #     albums = Album.objects.all()
+    
+    query = request.GET.get('search')
+    if query:
+        artist_uploads = Artist.objects.filter(artist__icontains=query)
+        albums = Album.objects.filter(title__icontains=query)
+    else:
+        artist_uploads = Artist.objects.all()
+        albums = Album.objects.all()
+        
     form = ArtistPostForm()   
     a_form = AlbumForm() 
 
@@ -75,12 +89,16 @@ def MusicPage(request):
         if 'form' in request.POST:
             form = ArtistPostForm(request.POST, request.FILES)        
             if form.is_valid() :
-                form.save()            
+                artist = form.save(commit=False)
+                artist.user = request.user
+                artist.save()            
                 return redirect('music-page')
         elif 'a_form' in request.POST:
             a_form = AlbumForm(request.POST, request.FILES)
             if a_form.is_valid():
-                a_form.save()
+                album = a_form.save(commit=False)
+                album.user = request.user
+                album.save()
                 return redirect('music-page')
         
     else:
@@ -103,33 +121,20 @@ def AfricaPage(request):
 def ArtistDetailPage(request, artist_id):
     artist_uploads = get_object_or_404(Artist, id=artist_id)
     songs = Song.objects.filter(artist=artist_uploads)
-    
-    album_form = AlbumForm()
     song_form = SongUploadForm()
-   
-    if request.method == "POST":
-        if 'album_form' in request.POST:
-            album_form = AlbumForm(request.POST, request.FILES)
-            if album_form.is_valid():
-                album = album_form.save(commit=False)
-                album.artist = artist_uploads
-                album.save()
-                return redirect('artist-detail', artist_id=artist_uploads.id)
-        elif 'song_form' in request.POST:
-            song_form = SongUploadForm(request.POST, request.FILES)
-            if song_form.is_valid():
-                song = song_form.save(commit=False)
-                song.artist = artist_uploads
-                album_id = request.POST.get('album')
-                if album_id:
-                    song.album = get_object_or_404(Album, id=album_id)
-                song.save()
-                return redirect('artist-detail', artist_id=artist_uploads.id)
+    
+    if request.method == "POST" and 'song_form' in request.POST:
+        song_form = SongUploadForm(request.POST, request.FILES)
+        if song_form.is_valid():
+            song = song_form.save(commit=False)
+            song.artist = artist_uploads
+            song.user = request.user
+            song.save()
+            return redirect('artist-detail', artist_id=artist_uploads.id)
 
     context = {
         "artist_uploads": artist_uploads,
         "songs": songs,
-        'album_form': album_form,
         'song_form': song_form,
     }
     return render(request, 'artists/artist_detail.html', context)

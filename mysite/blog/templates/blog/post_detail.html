@@ -81,7 +81,11 @@
                                 <div style="height:250px; overflow-y: scroll;" class="card card-body my-[20px]">
                                     {% for comment in articles.articlecomment_set.all %}
                                         <div class="flex gap-[20px]">
-                                            <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{comment.user.profilemodel.image.url }} " alt="">
+                                            {% if comment.user.profilemodel.image %}
+                                                <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{comment.user.profilemodel.image.url }} " alt="">
+                                                {% else %}
+                                                <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src="{% static "images/default.png" %} " alt="">
+                                            {% endif %}
                                             <p class="flex flex-col text-[15px] text-[#6b6565]"> {{ comment.content }}
                                                 <small class="text-[10px] text-[#a09e9e] capitalize">{{ comment.user.username }}</small>
                                             </p>
@@ -95,4 +99,6 @@
             </div>
         </div>
     </div>
+
+    {% include "partials/footer.html" %}
 {% endblock %}

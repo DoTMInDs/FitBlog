@@ -10,14 +10,14 @@
             <div class="border-b-[1px] border-[#3d5361c4] w-full flex justify-start items-start">
                 <div class="flex gap-[20px]">
                     <p>
-                        <a class="uppercase  music_links" href="{% url 'music-page' %}">
+                        <a class="uppercase  music_links text-nowrap" href="{% url 'music-page' %}">
                             <i class="fa-solid fa-house-chimney"></i>
                             Home
                         </a>
                     </p>
-                    <p><a class="uppercase  music_links" href="">All Songs</a></p>
+                    {% comment %} <p><a class="uppercase  music_links text-nowrap" href="">All Songs</a></p> {% endcomment %}
                     <div class="dropdown">
-                        <button class="uppercase music_links" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                        <button class="uppercase music_links text-nowrap" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                             <i class="fa-solid fa-plus-circle"></i>
                             Album
                         </button>
@@ -47,7 +47,7 @@
                        
                     </div>
                     <div class="">
-                        <button type="button" class="text-[13px] rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] mt-[-21px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button type="button" class="text-[13px] text-nowrap rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] mt-[-21px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="fa-solid fa-music mr-[10px] mt-[3px]"></i>
                             Create Artist
                         </button>
@@ -81,9 +81,9 @@
             <!-- Music-main-section -->
             <div class="mt-[2rem]">
                 <div class="flex justify-between">
-                    <h2 class="text-[22px] text-[#3D5361] font-bold">Popular Artists</h2>
+                    <h2 class="text-[22px] text-[#3D5361] font-bold popular_artist_h2">Popular Artists</h2>
                     <p class="text-[#fff]">
-                        <a class="text_decoration" href="{% url "all-artist" %}">Show all
+                        <a class="text_decoration text-nowrap" href="{% url "all-artist" %}">Show all
                             <i class="fa-solid fa-arrow-up-right-from-square ml-[0.5rem]"></i>
                         </a>
                     </p>
@@ -116,9 +116,9 @@
 
             <div class="mt-[2rem]">
                 <div class="flex justify-between">
-                    <h2 class="text-[22px] text-[#3D5361] font-bold">Popular albums and singles</h2>
+                    <h2 class="text-[22px] text-[#3D5361] font-bold popular_artist_h2 ">Popular albums and singles</h2>
                     <p class="text-[#fff]">
-                        <a class="text_decoration" href="{% url "all-album" %}">
+                        <a class="text_decoration text-nowrap" href="{% url "all-album" %}">
                             Show all
                             <i class="fa-solid fa-arrow-up-right-from-square ml-[0.5rem]"></i>
                         </a>
@@ -152,4 +152,8 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-{% endblock content %}
+
+    {% include "partials/footer.html" %}
+    {% endblock content %}
+
+

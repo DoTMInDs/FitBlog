@@ -31,10 +31,11 @@
                         </div>
                     </div>
                     <div class="mt-[0.5rem] bg-[#eee5e52d] rounded border-t border-[#3D5361] p-[1rem] w-full shadow-md">
-                        <button type="button" class="song_upload_btn text-[1.8rem] rounded-full  text-[#3D5361]" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fa-solid fa-plus-circle mr-[10px] mt-[3px]"></i>
-                        </button>
-                            
+                        {% if album.artist.user == user %}
+                            <button type="button" class="song_upload_btn text-[1.8rem] rounded-full  text-[#3D5361]" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fa-solid fa-plus-circle mr-[10px] mt-[3px]"></i>
+                            </button>
+                        {% endif %}
                         <div class=" mt-[1rem] album_detail_song_list_container">
                             <div class="album_song_title_wrapper flex justify-between items-center">
                                 <div class="flex gap-[3rem] items-center">
@@ -90,6 +91,9 @@
         </div>
         </div>
     </div>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    {% include "partials/footer.html" %}
 {% endblock content %}
 

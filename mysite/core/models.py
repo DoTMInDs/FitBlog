@@ -11,7 +11,7 @@ class ArtistName(models.Model):
         return self.name_of_artist
 
 class Artist(models.Model):        
-    user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     artist = models.CharField(max_length=200, null=True,unique=True)
     artist_genre = models.CharField(max_length=200,null=True)
     artist_image=models.ImageField(upload_to='images/',null=True,blank=True)
