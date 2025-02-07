@@ -18,10 +18,7 @@ listen_addresses = 'localhost'
 
 from dotenv import load_dotenv
 
-try:
-    load_dotenv()
-except:
-    print('no .env file to load')
+load_dotenv()
 
 
 
