@@ -37,7 +37,7 @@ class Album(models.Model):
         return f'{self.title} - {self.artist} - released on - {self.release_date}'
     
 class Song(models.Model):
-    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='songs')
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='songs', null=True,blank=True)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     genre = models.CharField(max_length=200, null=True)
