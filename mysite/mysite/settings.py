@@ -12,15 +12,18 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
-import socket
-socket.getaddrinfo('localhost', 8001)
-listen_addresses = 'localhost'
+# import socket
+# socket.getaddrinfo('localhost', 8001)
+# listen_addresses = 'localhost'
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-
+# os.environ
+# print(os.environ)
+for k in os.environ:
+    print(f"{k}={os.environ[k]}")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
