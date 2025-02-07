@@ -14,8 +14,8 @@ class Artist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     artist = models.CharField(max_length=200, null=True,unique=True)
     artist_genre = models.CharField(max_length=200,null=True)
-    artist_image=models.ImageField(upload_to='images/',null=True,blank=True)
-    artist_profile=models.ImageField(upload_to='images/',null=True,blank=True)
+    artist_image=models.ImageField(upload_to='images/',null=True,blank=True,validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'jfif'])])
+    artist_profile=models.ImageField(upload_to='images/',null=True,blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'jfif'])])
     posted_on=models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -28,7 +28,7 @@ class Album(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='albums')
     title = models.CharField(max_length=200)
     release_date = models.DateField()
-    cover_image = models.ImageField(upload_to='album_covers/', null=True, blank=True)
+    cover_image = models.ImageField(upload_to='album_covers/', null=True, blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'jfif'])])
 
     class Meta:
         ordering = ['-release_date']
