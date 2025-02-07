@@ -21,9 +21,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # os.environ
-# print(os.environ)
+print('here are the environment variables')
 for k in os.environ:
     print(f"{k}={os.environ[k]}")
+print('end')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
