@@ -10,8 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+import logging
 from pathlib import Path
 
+logger = logging.getLogger(__name__)
 # import socket
 # socket.getaddrinfo('localhost', 8001)
 # listen_addresses = 'localhost'
@@ -21,10 +23,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # os.environ
-print('here are the environment variables')
+logger.info('here are the environment variables')
 for k in os.environ:
-    print(f"{k}={os.environ[k]}")
-print('end')
+    logger.info(f"{k}={os.environ[k]}")
+logger.info('end')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
