@@ -15,9 +15,10 @@ from pathlib import Path
 import socket
 socket.getaddrinfo('localhost', 8001)
 listen_addresses = 'localhost'
-# from dotenv import load_dotenv
 
-# load_dotenv()
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 
@@ -29,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o@6l9jnqjt$b(um_15oqbe&invv6we2e01475o^r48okm70ef5'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -110,12 +111,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blog_db4',
-        'USER': 'blog_user',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': os.environ.get("DB_ENGINE", 'django.db.backends.postgresql'),
+        'NAME': os.environ.get("DB_NAME",'blog_db4'),
+        'USER': os.environ.get("DB_USER", 'blog_user'),
+        'PASSWORD': os.environ.get("DB_PASSWORD", 'admin'),
+        'HOST': os.environ.get("DB_HOST", 'localhost'),
+        'PORT': os.environ.get("DB_PORT", '5432'),
     }
 }
 
