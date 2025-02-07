@@ -3,31 +3,18 @@ from blog.models import PostModel,ArticlePostModel
 from blog.forms import CommentForm,ArticleCommentForm,ArtistPostForm,AlbumForm,SongUploadForm
 from django.db.models import Q
 from .models import Artist,Album,SportsModel,Song
-
 from django.contrib.auth.decorators import login_required
-# from django.views.generic.list import ListView
+# from django.contrib import messages
 
-# from django.core.paginator import Paginator
+# import requests
+# import logging
+# from django.conf import settings
 
+# from .forms import PaymentForm
+# from .models import Payment
 
-# Create your views here.
-# class NewsListView(ListView):
-#     paginate_by = 2
-#     model = ArticlePostModel
-#     template_name = 'core/news.html'
-#     def listing(request):        
-#         posts = PostModel.objects.all()
-#         articles = ArticlePostModel.objects.all()
-#         paginator = Paginator(articles, 5)  # Show 25 contacts per page.
+# logger = logging.getLogger(__name__)
 
-#         page_number = request.GET.get("page")
-#         page_obj = paginator.get_page(page_number)
-#         context = {
-#             'articles': articles,
-#             'posts': posts,
-#             'page_obj': page_obj,
-#         }
-#         return render(request, 'core/news.html', context)
 
 @login_required
 def NewsPage(request):
@@ -193,3 +180,53 @@ def SportDetailPage(request, pk):
         'post_mod': post_mod,
     }
     return render(request, 'artists/sport_detail.html', context)
+
+
+
+# @login_required
+# def payment_view(request):
+#     if request.method == 'POST':
+#         form = PaymentForm(request.POST)
+#         if form.is_valid():
+#             amount = form.cleaned_data['amount']
+#             phone_number = form.cleaned_data['phone_number']
+
+#             headers = {
+#                 'Authorization': f'Bearer {settings.MTN_MOMO_PRIMARY_KEY}',
+#                 'Ocp-Apim-Subscription-Key': settings.MTN_MOMO_API_KEY,
+#                 'X-Reference-Id': settings.MTN_MOMO_API_USER_ID,
+#                 'X-Target-Environment': 'sandbox',  # Use 'sandbox' for testing, 'mtncameroon' for production
+#                 'Content-Type': 'application/json'
+#             }
+
+#             payload = {
+#                 'amount': str(amount),
+#                 'currency': 'GHS',  # Change to the appropriate currency
+#                 'externalId': '123456',
+#                 'payer': {
+#                     'partyIdType': 'MSISDN',
+#                     'partyId': phone_number
+#                 },
+#                 'payerMessage': 'Payment for services',
+#                 'payeeNote': 'Thank you for your payment'
+#             }
+
+#             response = requests.post(f'{settings.MTN_MOMO_BASE_URL}/collection/v1_0/requesttopay', headers=headers, json=payload)
+
+#             if response.status_code == 202:
+#                 transaction_id = response.json().get('transactionId')
+#                 Payment.objects.create(
+#                     user=request.user,
+#                     amount=amount,
+#                     momo_transaction_id=transaction_id
+#                 )
+#                 messages.success(request, 'Payment successful!')
+#                 return redirect('home')
+#             else:
+#                 messages.error(request, 'Payment failed. Please try again.')
+#         else:
+#             messages.error(request, 'Invalid form submission.')
+#     else:
+#         form = PaymentForm()
+
+#     return render(request, 'core/payment.html', {'form': form})

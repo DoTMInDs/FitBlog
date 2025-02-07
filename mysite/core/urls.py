@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+# from .views import payment_view
 
 urlpatterns = [
     path('news/', views.NewsPage, name='news-page' ),
@@ -9,6 +10,7 @@ urlpatterns = [
     path('ghanaweb/', views.GhanawebPage, name='ghanaweb-page' ),
     path('music/', views.MusicPage, name='music-page' ),
     path('africa/', views.AfricaPage, name='africa-page' ),
+    # path('payment/', payment_view, name='payment'),
 
     path('all_artist/', views.all_artist, name='all-artist' ),
     path('all_album/', views.all_album, name='all-album' ),

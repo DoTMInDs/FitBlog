@@ -4,12 +4,16 @@
             <h3 class="text-[1.5rem] font-bold">FitBlog</h3>
             <ul class="text-[1rem] list-none text-center md:text-left flex flex-col md:flex-row gap-4">
                 <li class="flex items-center justify-center md:justify-start">
-                    <i class="fa-solid fa-newspaper mr-[10px]"></i>
-                    Latest News
+                    <a href="{% url "news-page" %}" class="no-underline text-[#fefefe]">
+                        <i class="fa-solid fa-newspaper mr-[10px]"></i>
+                        Latest News
+                    </a>
                 </li>
                 <li class="flex items-center justify-center md:justify-start">
+                   <a href="{% url "music-page" %}" class="no-underline text-[#fefefe]">
                     <i class="fa-solid fa-music mr-[10px]"></i>
                     Music
+                   </a>
                 </li>
                 <li class="flex items-center justify-center md:justify-start">
                     <i class="fa-solid fa-film mr-[10px]"></i>

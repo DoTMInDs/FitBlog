@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404 # type: ignore
 from django.contrib.auth.forms import UserCreationForm # type: ignore
 from django.contrib.auth.models import User
-from django.contrib.auth import  logout # type: ignore
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth, messages # type: ignore
 from django.contrib.auth.decorators import login_required # type: ignore
 from django.db.models import Q
@@ -20,10 +20,10 @@ def login_user(request):
     if request.method == 'POST':
         username = request.POST.get("username")
         password = request.POST.get('password')
-        user = auth.authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            auth.login(request, user)
+            login(request, user)
             return redirect('home')
         else:
             messages.error(request, "Please input a valid username and password")

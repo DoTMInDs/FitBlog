@@ -7,16 +7,10 @@ from django.db.models import Q
 
 from django.core.paginator import Paginator
 
-
-# from django.http import HttpResponse
-# from django.views.generic.base import TemplateView
-# from .models import BlogProfile
-
-
 def HomePageView(request):
     posts = PostModel.objects.all()
     articles = ArticlePostModel.objects.all()
-
+    
     filter_query = request.GET.get('search') if request.GET.get('search') != None else ''
     articles = ArticlePostModel.objects.filter(
         Q(title__icontains=filter_query) |
@@ -24,11 +18,17 @@ def HomePageView(request):
         Q(sub_title__icontains=filter_query) |
         Q(article_content__icontains=filter_query)
     )
+    
+    
+     # Pagination for articles
+    article_paginator = Paginator(articles, 2)  # Show 5 articles per page
+    article_page_number = request.GET.get('article_page')
+    article_page_obj = article_paginator.get_page(article_page_number)
 
+   
     context = {
+        'article_page_obj': article_page_obj,
         'posts': posts,
-        'articles': articles,
-        
     }
     return render(request, 'home.html', context)
 

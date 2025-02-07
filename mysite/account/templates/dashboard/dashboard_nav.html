@@ -12,38 +12,29 @@
                 </div>
 
                 <div class="flex items-center gap-[20px]">
+                    <button type="button" class="text-[#fefefefe] text-nowrap bg-[#3D5361] text-[13px] flex items-center text-[#fff] py-[5px] px-[15px] rounded-full mr-[-1.5rem]" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class="fa-solid fa-plus-circle mr-[10px]"></i>
+                         post
+                    </button>
                     <div class="flex gap-[20px] items-center search-wrap">
-                        <div class="flex gap-[15px]">
-                            <a href="" class=""><i class="fa-brands fa-youtube fa-xl" style='color: #Ff0000'></i></a>
-                            <a href="" class=""><i class="fa-brands fa-facebook fa-xl" style='color: #00008B'></i></a>
-                            <a href="" class=""><i class="fa-brands fa-twitter fa-xl" ></i></a>
-                        </div>
                         <form action="" method="get">
-                            <div class="flex items-center w-[250px] bg-gray-50 border border-gray-300 px-4 rounded-full shadow-md">
+                            <div class="flex items-center w-[350px] bg-gray-50 border border-gray-300 px-4 rounded-full shadow-md">
                                 <i class="fa-solid fa-magnifying-glass fa-lg text-gray-300 cursor-pointer"></i>
                                 <input type="search" name="search" placeholder="Search FitBlog..." class="w-full  py-[5px] px-[3px] bg-transparent outline-none">
                             </div>
                         </form>
                     </div>
-                    <div class="">
+                    <div class="mr-[-1.5rem]">
                         {% if user.is_authenticated %}
-                            <div class="flex items-center ">
-                                <div class="flex items-center gap-[10px]">
-                                    <div class="flex items-center">
-                                        <a href="{% url "profile" user.username user.id %}" class="flex items-center text-[#3D5361] rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#3D5261] __nav_text_style transition">
-                                            {% if user.profilemodel.image %}
-                                            <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="Profile Image">
-                                            {% else %}
-                                                <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {% static "images/default.png" %} " alt="Default Profile Image">
-                                            {% endif %}
-                                            My Profile
-                                        </a>
-                                    </div>
-                                    <a href="{% url "logout" %}" class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] text-[13px] font-semibold hover:text-[#fcfcfcfc] __nav_text_style transition">
-                                        <i class="fa-solid fa-right-from-bracket mr-[3px]"></i>
-                                        Logout
-                                    </a>
-                                </div>
+                            <div class="flex items-center">
+                                <a type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop3" class="flex items-center text-[#3D5361] rounded-full py-[6px] px-[18px] bg-[#ffffff9f] text-[13px] font-semibold hover:text-[#3D5261] __nav_text_style transition">
+                                    {% if user.profilemodel.image %}
+                                        <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="Profile Image">
+                                    {% else %}
+                                        <img class="w-[30px] h-[30px] rounded-[50%] object-cover object-center mr-[10px]" src="{% static "images/default.png" %} " alt="Default Profile Image">
+                                    {% endif %}
+                                    <small class="font-semibold text-[14px] capitalize text-[#154d8b]"> {{ user.profilemodel.full_name }} </small>
+                                </a>
                             </div>
                     
                         {% else %}
@@ -65,29 +56,6 @@
                     </div>
                 </div>
             </div>
-            <div class="_nav_container">
-                <div class="flex justify-between items-center">
-                        {% if user.is_authenticated %}
-                            <div class="flex items-center gap-[10px]">
-                                <p class="font-semibold text-[13px] text-nowrap bg-[#fff] py-[2px] rounded-full text-[#6d6d6d]"> Welcome <small class="font-semibold text-[13px] capitalize text-[#154d8b]"> {{ user.profilemodel.full_name }} </small></p>
-                                <button type="button" class="text-[#fefefefe] text-nowrap bg-[#3D5361] text-[13px] flex items-center text-[#fff] py-[5px] px-[15px] rounded-full mb-[15px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Create post
-                                    <i class="fa-brands fa-blogger-b ml-[10px] mt-[3px]"></i>
-                                </button>
-                            </div>
-                            <div>
-                                <marquee direction="left" class="text-[#3D5361]">
-                                    Welcome to fitblog!!! 
-                                </marquee>
-                            </div>
-                            <p id="current-time" class="text-nowrap font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"></p>
-                        {% else %}
-                            <p class="font-semibold text-[13px] bg-[#ffffffb4] px-[10px] text-nowrap py-[2px] rounded-full text-[#6d6d6d]">You are here:Home</p>
-                            <p id="current-time" class=" text-nowrap font-semibold text-[13px] bg-[#ffffffb4] px-[10px] py-[2px] rounded-full text-[#6d6d6d]"></p> 
-                        {% endif %}
-                </div>
-            </div>
-
             <div class="mobil_search_wrapper">
                 <div class="menu_toggle" id="mobile_menu">
                     <span class="m_bar"></span>
@@ -97,13 +65,14 @@
                 {% if user.is_authenticated %}
                     <div class="flex gap-[20px] items-center ">
                         <form action="" method="get" class="_form_search">
-                            <div class="flex items-center w-[100%] bg-slate-50 border-[1px] border-[#3d53618a] px-4 rounded-full shadow-md">
+                            <div class="flex items-center bg-slate-50 border-[1px] border-[#3d53618a] px-4 rounded-full shadow-md">
                                 <i class="fa-solid fa-magnifying-glass fa-lg text-[#3D5361] cursor-pointer"></i>
                                 <input type="search" name="search" placeholder="Search FitBlog..." class="w-full   py-[5px] px-[3px] bg-transparent outline-none">
                             </div>
                         </form>
                     </div>
                 {% endif %}
+               
             </div>
 
             <div class="__nav-links _nav_container">
@@ -132,7 +101,6 @@
                 </ul>
             </div>  
  
-
               <!--Mobile-responsive-->
               <div class="list_t">
                 <ul class="nav_v no-search" id="nav-links">
@@ -161,4 +129,63 @@
             </div>  
         </nav>
 
+         <!-- profile-Modal -->
+         <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen-lg-down">
+            <div class="modal-content">
+                <div class="flex justify-end p-[1.5rem]">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <div class="flex items-center gap-[1.5rem]">
+                        <div class="">
+                            {% if user.profilemodel.image %}
+                                <img class="w-[50px] h-[50px] rounded-[50%] object-cover object-center mr-[10px]" src=" {{ user.profilemodel.image.url }} " alt="Profile Image">
+                            {% else %}
+                                <img class="w-[50px] h-[50px] rounded-[50%] object-cover object-center mr-[10px]" src="{% static "images/default.png" %} " alt="Default Profile Image">
+                            {% endif %}
+                        </div>
+                        <div class="">
+                            <h2 class="text-[1.4rem] text-[#444444] font-bold">{{ user.profilemodel.full_name }}</h2>
+                            <small class='text-[0.8rem] text-[#555555]'>Genius Level 1</small>
+                        </div>
+                        </div>
+                        <div class="mt-[2rem]">
+                            <div class="i_icons">
+                                <a href="{% url "profile" user.username user.id %}" class="flex items-center gap-[2rem] text-[#555555] p-[1rem] hover:bg-[#ebebeb] __nav_text_style">
+                                   <p> <i class="fa-regular fa-user p_user"></i></p>
+                                    <p class="">Manage account</p>
+                                </a>
+                            </div>
+                            <div class="i_icons">
+                                <a href="{% url "user-dashboard" %}" class='flex gap-[2rem] items-center p-[1rem] text-[#555555] hover:bg-[#ebebeb] __nav_text_style'>
+                                    <p> <i class="fa-solid fa-user"></i></p>
+                                    <p class="">Dashboard</p>
+                                </a>
+                            </div>
+                            <div class="i_icons">
+                                <a href="" class='flex gap-[2rem] items-center p-[1rem] text-[#555555] hover:bg-[#ebebeb] __nav_text_style'>
+                                    <p><i class="fa-solid fa-user-pen"></i></p>
+                                    <p class="">Reviews</p>
+                                </a>
+                            </div>
+                            <div class="i_icons">
+                                <a href="" class='flex gap-[2rem] items-center p-[1rem] text-[#555555] hover:bg-[#ebebeb] __nav_text_style'>
+                                    <p><i class="fa-regular fa-heart"></i></p>
+                                    <p class="">Saved</p>
+                                </a>
+                            </div>
+                            <div class="i_icons">
+                                <a href="{% url "logout" %}" class='flex gap-[2rem] text-[#555555] items-center p-[1rem] hover:bg-[#ebebeb] __nav_text_style'>
+                                    <p><i class="fa-solid fa-arrow-right-from-bracket"></i></p>
+                                    <p class="">Sign out</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+            </div>
+        </div>
     {% endblock %}

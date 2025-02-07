@@ -4,9 +4,55 @@
 {% block title %}Home{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    <div class="w-full flex justify-between h-full __home_content">
+    
+    <div class="w-full flex flex-col justify-between h-full __home_content">
+        <div class="flex gap-[10px] w-[100%] mb-[2rem]">
+            <div id="carouselExampleAutoplaying" class="carousel carousel_wrapper slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  </div>
+                <div class="carousel-inner ">
+                 {% for blog_post in posts %}   
+                    <a href="{% url "blog-postmodel-detail" blog_post.id %}" class="">
+                        <div class="carousel-item  carousel_item {% if forloop.first %} active {% endif %}">
+                            <div class="carousel_img_wrapper">
+                                {% if blog_post.image %} 
+                                    <img src="{{blog_post.image.url}}" class="carousel_img"> 
+                                {% endif %}
+                            </div>
+                            <div class="carousel-caption">                                
+                                <div class="flex flex-col m-0 p-0 max-w-[650px] w-[100%]">
+                                    <h5 class="text-left text-[28px] m-0 p-0">{{ blog_post.title|truncatewords:6 }}</h5>
+                                    <p class="text-left m-0 p-0 text-[#fefefe] text-[20px] font-verdana overflow-hidden"><small >{{blog_post.content|truncatewords:14}}</small></p>
+                                </div>
+                                <div class="flex gap-[10px] mt-[1rem] w-[100%]">
+                                    <div class="">
+                                        <img src="{{blog_post.author.profilemodel.image.url}}" 
+                                        alt="" class="w-[30px] h-[30px] rounded-[50%]">
+                                    </div>
+                                    <div class="">
+                                        <p>{{ blog_post.author }} • <span> {{blog_post.created_on|date:"D, M, Y"}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </a>     
+                 {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
         <div class="__grid_card ">
-            {% for article in articles %}
+            {% for article in article_page_obj %}
                     <div class="card text-bg-light ">
                         <div class="card-body">
                             <h5 class="card-title"> {{ article.title }} </h5> 
@@ -63,109 +109,45 @@
                        
                     </div> 
             {% endfor %}
-
-            {% for blog_post in posts %}
-                <div class="card text-bg-light ">
-                    <div class="card-body">
-                        <h5 class="card-title"> {{ blog_post.title }} </h5> 
-                        <div class="flex  justify-between items-center">
-                            <p class="card-text text-nowrap text-[13px] text-[#3d5361c4] font-semibold">
-                                <small>{{blog_post.created_on}}</small>
-                            </p>
-                            <p class="text-[13px] text-nowrap text-[#3d5361c4] font-semibold">
-                                <i class="fa-solid fa-comments px-[2px]"></i>
-                                {{blog_post.post_comment_count}}
-                                 Comments
-                            </p>
-                        </div>
-                        <div class="flex justify-between items-center gap-[10px]">
-                            <p class="card-text flex text-nowrap items-center gap-[5px] text-[13px] text-[#444] font-semibold">
-                               <a href="{% url "profile" blog_post.author.username blog_post.author.id  %}" class="text-[#3d5361c4]">
-                                <i class="fa-solid fa-user"></i>
-                                {{ blog_post.author }} 
-                               </a>
-                            </p> 
-                            <p class="d-inline-block text-truncate"><small class="text-[12px] px-[8px] py-[3px] font-medium bg-[#3D5361] text-[#fcfcfcfc] rounded-full">{{ blog_post.slug|truncatewords:8 }}</small></p>
-                        </div>                           
-                        <div class=" flex gap-3">
-                            {% if blog_post.image %}
-                                <img src="{{blog_post.image.url}}" class="img-thumbnail w-[100px]" alt="...">
-                            {% endif %}
-                            <p class="card-text text-[#3D5361] overflow-hidden"><small >{{blog_post.content|truncatewords:14}}</small></p>
-                        </div>
-                    </div>
-                    <div class="px-[1rem] pb-[1rem] flex justify-between items-center">
-                        <button class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] text-[13px]">
-                           <a href="{% url "blog-postmodel-detail" blog_post.id %}" class="__detail_link">
-                            <i class="fa-solid fa-eye mr-[0.5rem]"></i>
-                            Detail
-                           </a>
-                        </button>                               
-                    </div>
-                </div> 
-            {% endfor %}
         </div>
     </div>
 
+      <!-- Pagination for Articles -->
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
+            {% if article_page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link bg-[#3D5361] text-[#fefefefe] hover:bg-[#2c3e50]" href="?article_page={{ article_page_obj.previous_page_number }}">Previous</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link bg-[#3D5361] text-[#fefefefe]">Previous</a>
+                </li>
+            {% endif %}
+            {% for num in article_page_obj.paginator.page_range %}
+                {% if article_page_obj.number == num %}
+                    <li class="page-item active">
+                        <a class="page-link bg-[#3D5361] text-[#fefefefe] hover:bg-[#2c3e50]" href="?article_page={{ num }}">{{ num }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link bg-[#3D5361] text-[#fefefefe] hover:bg-[#2c3e50]" href="?article_page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if article_page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link text-[#3D5361] bg-[#3D5361] text-[#fefefefe] hover:bg-[#2c3e50]" href="?article_page={{ article_page_obj.next_page_number }}">Next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link bg-[#3D5361] text-[#fefefefe]">Next</a>
+                </li>
+            {% endif %}
         </ul>
     </nav>
 
-
-    <!-- Modal -->    
-  {% comment %} <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit Profile <i class="fa-regular fa-pen-to-square"></i></h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="flex justify-center flex-col items-center w-full p-[10px] gap-[25px]">
-              <div class="w-[200px]">
-                  <img src="{{ user.profilemodel.image.url }}" alt="profile.png" class="rounded-[50%] w-[200px] h-[200px] object-cover object-center">
-              </div>
-              <div class="w-[100%]">
-                <div class="">
-                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
-                        <h3 class="text-[18px] basis-2/6">Firstname</h3>
-                        <p class="mt-[10px] basis-3/5"></p>
-                    </div>
-                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
-                      <h3 class="text-[18px] basis-2/6">Username</h3>
-                      <p class="mt-[10px] basis-3/5"></p>
-                    </div>
-                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
-                      <h3 class="text-[18px] basis-2/6">Email address</h3>
-                      <p class="mt-[10px] basis-3/5"> </p>
-                    </div>
-                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
-                      <h3 class="text-[18px] basis-2/6">Talks About</h3>
-                      <p class="mt-[10px] basis-3/5"> </p>
-                    </div>
-                    <div class="flex items-center border-t border-[#e7e0e07e] py-[10px]">
-                      <h3 class="text-[18px] basis-2/6">About me</h3>
-                      <p class="mt-[10px] basis-3/5"> </p>
-                    </div>
-                 </div>
-              </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </div> {% endcomment %}
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   {% include "partials/footer.html" %}
 {% endblock content %}
 
