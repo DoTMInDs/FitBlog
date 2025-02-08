@@ -14,8 +14,8 @@ class Artist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     artist = models.CharField(max_length=200, null=True,unique=True)
     artist_genre = models.CharField(max_length=200,null=True)
-    artist_image=models.ImageField(upload_to='images/',null=True,blank=True,validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'jfif'])])
-    artist_profile=models.ImageField(upload_to='images/',null=True,blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'jfif'])])
+    artist_image=models.ImageField(upload_to='artist_cover/',null=True,blank=True,validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
+    artist_profile=models.ImageField(upload_to='artist_profile/',null=True,blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
     posted_on=models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -28,7 +28,7 @@ class Album(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='albums')
     title = models.CharField(max_length=200)
     release_date = models.DateField()
-    cover_image = models.ImageField(upload_to='album_covers/', null=True, blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'jfif'])])
+    cover_image = models.ImageField(upload_to='album_covers/', null=True, blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
 
     class Meta:
         ordering = ['-release_date']
@@ -41,6 +41,7 @@ class Song(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     genre = models.CharField(max_length=200, null=True)
+    cover_image = models.ImageField(upload_to='song_covers/', null=True, blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
     song_file = models.FileField(upload_to='music/', null=True, blank=True, validators=[FileExtensionValidator(['m4a', 'flac', 'mp3', 'wav'])])
     posted_on = models.DateTimeField(auto_now_add=True)
 

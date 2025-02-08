@@ -45,6 +45,7 @@
                                             <form action="" method="post" enctype="multipart/form-data">
                                                 {% csrf_token %}
                                                 {{ song_form|crispy }}
+                                                <input type="hidden" name="cover_image" value="cover_image">
                                                 <input type="hidden" name="song_form" value="song_form">
                                                 <div class="flex gap-[10px] justify-center items-center __delet_btn_wrapper ">
                                                     <button type="button" class="_edit_detail_btn text-[#3D5361] border border-[#3D5361] rounded-full py-[10px] px-[5rem]" data-bs-dismiss="modal">Close</button>
@@ -94,8 +95,8 @@
                 <a type="button" class="artist_detail_link " data-bs-toggle="modal" data-bs-target="#exampleModal1-{{ song.id }}">
                     <div class="flex gap-[7px]">
                         <div class="artist_img_wrapper">
-                            {% if song.artist.artist_profile %}
-                                <img src="{{ song.artist.artist_profile.url }}" alt="pic.png" class="artist_img_detail">                            
+                            {% if song.cover_image %}
+                                <img src="{{ song.cover_image.url }}" alt="song cover image" class="artist_img_detail">                            
                             {% endif %} 
                         </div>
                         <div class="">
@@ -114,7 +115,7 @@
                                 <div class=" play-song-wrapper">
                                     <div class="image_cover_art_wrapper">     
                                         {% if song.artist.artist_profile %}
-                                            <img src="{{ song.artist.artist_profile.url }}" alt="" class="image_cover_art">
+                                            <img src="{{ song.artist.artist_profile.url }}" alt="artist profile" class="image_cover_art">
                                         {% endif %} 
                                         {% if song.song_file %}
                                             <audio src="{{ song.song_file.url }}" controls class="song_track"></audio>  

@@ -29,7 +29,7 @@ class ArtistPostForm(forms.ModelForm):
 class SongUploadForm(forms.ModelForm):
     class Meta:
         model = Song
-        fields = ['title', 'genre', 'song_file', 'album']
+        fields = ['title', 'genre', 'cover_image', 'song_file', 'album']
 
 class AlbumForm(forms.ModelForm):
     artist = forms.ModelChoiceField(queryset=Artist.objects.all(), required=True, label="Select Artist")

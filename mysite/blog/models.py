@@ -23,7 +23,7 @@ class Profile(models.Model):
 class PostModel(models.Model):
     title=models.CharField(max_length=200, unique=True)
     slug=models.SlugField(max_length=200, unique=True)
-    image=models.ImageField(upload_to='images/',null=True,blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'jfif'])])
+    image=models.ImageField(upload_to='images/',null=True,blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
     author=models.ForeignKey(User, on_delete=models.CASCADE)
     created_on=models.DateTimeField(auto_now_add=True)
     updated_on=models.DateTimeField(auto_now=True)
@@ -45,7 +45,7 @@ class PostModel(models.Model):
 class ArticlePostModel(models.Model):
     title=models.CharField(max_length=200, unique=True)
     sub_title=models.CharField(max_length=200, unique=True,null=True)
-    image=models.ImageField(upload_to='images/',null=True,blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'jfif'])])
+    image=models.ImageField(upload_to='images/',null=True,blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
     author=models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     slug=models.SlugField(max_length=200, unique=True)
     article_content=models.TextField(null=True)
