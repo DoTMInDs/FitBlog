@@ -21,7 +21,7 @@ def HomePageView(request):
     
     
      # Pagination for articles
-    article_paginator = Paginator(articles, 2)  # Show 5 articles per page
+    article_paginator = Paginator(articles, 5)  # Show 5 articles per page
     article_page_number = request.GET.get('article_page')
     article_page_obj = article_paginator.get_page(article_page_number)
 
