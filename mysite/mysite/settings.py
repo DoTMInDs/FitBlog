@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 import logging
 from pathlib import Path
+# import dj_database_url
 
 logger = logging.getLogger(__name__)
 # import socket
