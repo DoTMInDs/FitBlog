@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 import logging
 from pathlib import Path
-# import dj_database_url
+import cloudinary_storage
 
 logger = logging.getLogger(__name__)
 # import socket
@@ -40,7 +40,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = ('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(' ')
 
@@ -64,30 +64,17 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'crispy_tailwind',
-    # 'embed_video',
-
-    # 'tailwind',
-    # 'theme'
-
-    # 'blog',
-    # 'account',
+    
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 CRISPY_TEMPLATE_PACK = 'tailwind'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
 
-# TAILWIND_APP_NAME = 'theme'
-
-# INTERNAL_IPS = [
-#     "127.0.0.1",
-# ]
-
-# NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -171,10 +158,6 @@ STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-# Directory where collectstatic will gather all static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR / 'media/')
 
@@ -194,3 +177,17 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
+}
+
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': 'dq90mk1vl',
+#     'API_KEY': '937423518831634',
+#     'API_SECRET': 'RO8L3kjpaVHNzXXJ5e0AJRwMK7w'
+# }
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
