@@ -12,12 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 import logging
 from pathlib import Path
-import cloudinary_storage # type: ignore
 
 logger = logging.getLogger(__name__)
-# import socket
-# socket.getaddrinfo('localhost', 8001)
-# listen_addresses = 'localhost'
 
 from dotenv import load_dotenv
 
@@ -182,12 +178,5 @@ CLOUDINARY_STORAGE = {
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
 }
-
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': 'dq90mk1vl',
-#     'API_KEY': '937423518831634',
-#     'API_SECRET': 'RO8L3kjpaVHNzXXJ5e0AJRwMK7w'
-# }
-
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
