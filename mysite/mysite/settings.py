@@ -61,8 +61,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_tailwind',
     
-    'cloudinary',
-    'cloudinary_storage'
+    # 'cloudinary',
+    # 'cloudinary_storage'
 ]
 
 CRISPY_TEMPLATE_PACK = 'tailwind'
@@ -173,10 +173,10 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
-}
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+#     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+#     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
+# }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
