@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 import logging
 from pathlib import Path
-import cloudinary_storage
+import cloudinary_storage # type: ignore
 
 logger = logging.getLogger(__name__)
 # import socket
