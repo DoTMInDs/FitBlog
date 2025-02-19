@@ -5,19 +5,19 @@
 {% block content %}
     {% include "partials/nav.html" %}
     <!-- Music-header -->
-    <div class="__post_details_media_wrapper __music_container">
-        <div class="__post_details_media_container">
-            <div class="border-b-[1px] border-[#3d5361c4] w-full flex justify-start items-start">
+    <div class="px-[0px] md:px-0  w-[100%] md:w-[80%] m-auto mobile-padding ">
+        <div class="w-[100%] px-[0.5rem]  mobile-ads-container">
+            <div class="border-b border-slate-300 w-full flex justify-start items-start">
                 <div class="flex gap-[20px]">
-                    <p>
-                        <a class="uppercase  music_links text-nowrap" href="{% url 'music-page' %}">
+                    <p class="mobile-back-btn">
+                        <a class="uppercase text-[13px] no-underline font-semibold text-[#3b5361] text-nowrap" href="{% url 'home' %}">
                             <i class="fa-solid fa-house-chimney"></i>
                             Home
                         </a>
                     </p>
                     {% comment %} <p><a class="uppercase  music_links text-nowrap" href="">All Songs</a></p> {% endcomment %}
                     <div class="dropdown">
-                        <button class="uppercase music_links text-nowrap" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                        <button class="uppercase text-[13px] no-underline font-semibold text-[#3b5361] text-nowrap" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                             <i class="fa-solid fa-plus-circle"></i>
                             Album
                         </button>
@@ -47,9 +47,9 @@
                        
                     </div>
                     <div class="">
-                        <button type="button" class="text-[13px] text-nowrap rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] mt-[-21px]" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="fa-solid fa-music mr-[10px] mt-[3px]"></i>
-                            Create Artist
+                        <button type="button" class="uppercase text-[13px] no-underline font-semibold text-[#3b5361] text-nowrap" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <i class="fa-solid fa-music "></i>
+                            Add Artist
                         </button>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,7 +83,7 @@
                 <div class="flex justify-between">
                     <h2 class="text-[22px] text-[#3D5361] font-bold popular_artist_h2">Popular Artists</h2>
                     <p class="text-[#fff]">
-                        <a class="text_decoration text-nowrap" href="{% url "all-artist" %}">Show all
+                        <a class="no-underline text-[#ec2929a9] font-semibold text-[14px] font-verdana  text-nowrap" href="{% url "all-artist" %}">Show all
                             <i class="fa-solid fa-arrow-up-right-from-square ml-[0.5rem]"></i>
                         </a>
                     </p>
@@ -91,24 +91,24 @@
                 <div class="flex gap-[20px] music_artist_container">
                     <div class=" music_artist_wrapper">
                         {% for artist_upload in artist_uploads %}
-                            <a href="{% url 'artist-detail' artist_upload.id %}" class="all_artist_wrapper_link">
-                            <div class="relative">
-                                    <div class="all_artist_icon_overlay">
-                                        <i class="fa-solid fa-play all_artist_play_icon"></i>
-                                    </div>
-                                    <div class="all_artist_grid_container">
-                                        <div class="all_artistimg_wrapper">
-                                            {% if artist_upload.artist_profile %}
-                                                <img src="{{ artist_upload.artist_profile.url }}" class="all_artist_img" alt="...">
-                                            {% endif %}
+                            <div class="all_artist_wrapper_link no-underline w-[100%] text-[#3b5361]">
+                                <div class="relative rounded-[10px] hover:bg-slate-200 p-[3px]">
+                                        <div class="all_artist_icon_overlay">
+                                            <a href="{% url 'artist-detail' artist_upload.id %}" class="no-underline text-[#3b5361]"><i class="fa-solid fa-play all_artist_play_icon"></i></a>
                                         </div>
-                                        <div class="all_artist_content">
-                                            <h3 class="all_artist_name">{{ artist_upload.artist }}</h3>
-                                            <p class="all_artist_genre">{{ artist_upload.artist_genre }}</p>
+                                        <div class="all_artist_grid_container">
+                                            <div class="h-[150px] rounded-[50%]  w-[150px]">
+                                                {% if artist_upload.artist_profile %}
+                                                    <img src="{{ artist_upload.artist_profile.url }}" class="rounded-[50%] w-[150px] h-[150px] object-cover object-center" alt="...">
+                                                {% endif %}
+                                            </div>
+                                            <div class="all_artist_content">
+                                                <h3 class="all_artist_name">{{ artist_upload.artist }}</h3>
+                                                <p class="all_artist_genre">{{ artist_upload.artist_genre }}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                            </div>
-                            </a>    
+                                </div>
+                            </div>    
                         {% endfor %}                 
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                 <div class="flex justify-between">
                     <h2 class="text-[22px] text-[#3D5361] font-bold popular_artist_h2 ">Popular albums and singles</h2>
                     <p class="text-[#fff]">
-                        <a class="text_decoration text-nowrap" href="{% url "all-album" %}">
+                        <a class="no-underline text-[#ec2929a9] font-semibold text-[14px] font-verdana  text-nowrap" href="{% url "all-album" %}">
                             Show all
                             <i class="fa-solid fa-arrow-up-right-from-square ml-[0.5rem]"></i>
                         </a>
@@ -127,15 +127,15 @@
                 <div class="flex gap-[20px] music_artist_container">
                     <div class=" music_artist_wrapper">
                         {% for album in albums %}
-                            <a href="{% url "album-detail" album.id %}" class="all_artist_wrapper_link">
-                                <div class="relative">
+                            <div class="all_artist_wrapper_link no-underline w-[100%] text-[#3b5361]">
+                                <div class="relative rounded-[10px] hover:bg-slate-200 p-[3px]">
                                         <div class="all_artist_icon_overlay">
-                                            <i class="fa-solid fa-play all_artist_play_icon"></i>
+                                            <a href="{% url "album-detail" album.id %}" class="no-underline text-[#3b5361]"><i class="fa-solid fa-play all_artist_play_icon"></i></a>
                                         </div>
                                         <div class="all_artist_grid_container">
-                                            <div class="all_artistimg_wrapper all_artist_album_and_singles_img_wrapper">
+                                            <div class="h-[150px] rounded-[50%]  w-[150px]">
                                                 {% if album.cover_image %}
-                                                    <img src="{{ album.cover_image.url }}" class="all_artist_img all_artist_album_and_singles_img" alt="...">
+                                                    <img src="{{ album.cover_image.url }}" class="rounded-[10px] w-[150px] h-[150px] object-cover object-center" alt="...">
                                                 {% endif %}
                                             </div>
                                             <div class="all_artist_content">
@@ -144,7 +144,7 @@
                                             </div>
                                         </div>
                                 </div>
-                            </a>    
+                            </div>    
                         {% endfor %}                 
                     </div>
                 </div>

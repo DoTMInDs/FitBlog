@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}Song{% endblock  %}
+{% block content %}
+    {% include "partials/nav.html" %}
+
+       <!-- Music-main-section -->
+       <div class="px-[0px] md:px-0  w-[100%] md:w-[80%] m-auto mobile-padding">
+        <div class="w-[100%] px-[0.5rem] md:w-[70%]">
+            <button onclick="goBack()" class="mobile-back-btn rounded-full ml-[0.3rem] pb-[0.5rem] text-[#3D5361] text-[13px]">
+                <i class="fa-solid fa-circle-arrow-left mr-[0.5rem]"></i>
+                Back
+            </button>
+            <div class="flex justify-between mobile-product-text">
+                <h2 class="text-[18px] font-bold">All Songs</h2>
+            </div>
+
+            <div class="flex gap-[20px] all_artist_container mobile-ads-container">
+                <div class="all_artist_wrapper">
+                    {% for song in songs %}
+                        <a href="{% url "artist-detail" song.artist.id %}" class="all_artist_wrapper_link no-underline text-[#3b5361]">
+                           <div class="relative ">
+                                <div class="all_artist_icon_overlay">
+                                    <i class="fa-solid fa-play all_artist_play_icon"></i>
+                                </div>
+                                <div class="all_artist_grid_container">
+                                    <div class="all_artistimg_wrapper all_artist_album_and_singles_img_wrapper">
+                                        {% if song.cover_image %}
+                                            <img src="{{ song.cover_image.url }}" class="all_artist_img all_artist_album_and_singles_img" alt="...">
+                                        {% endif %}
+                                    </div>
+                                    <div class="all_artist_content">
+                                        <h3 class="all_artist_name">{{ song.title }}</h3>
+                                        <p class="all_artist_genre">{{ song.artist }}</p>
+                                    </div>
+                                </div>
+                           </div>
+                        </a>    
+                    {% endfor %}                 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% include "partials/footer.html" %}
+{% endblock %}
+

@@ -5,9 +5,9 @@
 {% block content %}
     {% include "partials/nav.html" %}
     <!-- Album-header -->
-    <div class="__post_details_media_wrapper">
-        <div class="__post_details_media_container">
-                <button onclick="goBack()" class=" rounded-full py-[6px] px-[18px] text-[#3D5361] text-[13px]">
+    <div class="px-[0.5rem] md:px-0  w-[100%] md:w-[80%] m-auto mobile-padding">
+        <div class="mb-[80px]">
+                <button onclick="goBack()" class="mobile-back-btn rounded-full py-[6px] px-[18px] text-[#3D5361] text-[13px]">
                     <i class="fa-solid fa-circle-arrow-left mr-[0.5rem]"></i>
                     Back
                 </button>
@@ -71,7 +71,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered modal-lg mobile-album-song">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Post your song</h1>

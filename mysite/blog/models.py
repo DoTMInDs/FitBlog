@@ -80,5 +80,38 @@ class PostComment(models.Model):
     def __str__(self) :
         return self.post_content
          
-
+class Item(models.Model):
+    class ItemStatus(models.TextChoices):
+        BRAND_NEW = "BRAND NEW",_("brand new")
+        FOREIGN_USED = "FOREIGN USED",_("foreign used")
+        LOCAL_USED = "LOCAL USED",_("local used")
+        USED = "USED",_("used")
+    class ItemType(models.TextChoices):
+        AUTOMATIC = "AUTOMATIC",_("automatic")
+        MANUAL = "MANUAL",_("manual")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) 
+    description = models.CharField(max_length=200)
+    price = models.DecimalField(default=0, decimal_places=2, max_digits=12)
+    title = models.CharField(max_length=150)
+    image=models.ImageField(upload_to='item_image/',null=True,blank=True,validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
+    location = models.CharField(max_length=50)
+    contact = models.CharField(max_length=20, null=True,blank=True)
+    market_price = models.CharField(max_length=100,blank=True,null=True)
+    enable = models.BooleanField(default=False)
+    item_status = models.CharField(max_length=12,choices=ItemStatus,default=1,null=True,blank=True)
+    item_type = models.CharField(max_length=9,choices=ItemType,default=1,null=True,blank=True)
+    date_posted = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ('-date_posted',)
+    
+    def __str__(self) -> str:
+        return self.title
+    
+class ItemImage(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='item_images/',null=True,blank=True,validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
+    
+    def __str__(self):
+        return f"Image for {self.item.title}"
          

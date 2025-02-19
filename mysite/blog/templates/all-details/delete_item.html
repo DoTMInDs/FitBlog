@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}Market store{% endblock  %}
+{% block content %}
+    {% include "partials/nav.html" %}
+
+    <div class="px-[0px] md:px-0  w-[100%] md:w-[80%] m-auto mobile-padding">
+        <div class="w-[100%]  px-[0.5rem]">
+            <div class=" w-full flex justify-between h-full ">
+                <div class="">
+                    <div class=" text-bg-light ">
+                        <div class="alert alert-danger ">
+                            Are you sure you want to delete <small class="font-bold text-[18px] text-rose-500 capitalize">{{ items.title }}?</small> it will be permanently removed.
+                            This action cannot be undone.
+                        </div>
+                        <form action="" method="post">
+                            {% csrf_token %}
+
+                            <div class="flex gap-[10px] justify-end items-end __delet_btn_wrapper">
+                                <button class="_edit_detail_btn text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
+                                    <a href="{% url "business-page" %}" class="text-[#fefefe] btn_link_cancel">cancel</a>
+                                </button>
+                                <button type="submit" class="_edit_detail_btn text-[#fefefefe] bg-[#FF0000] rounded-full py-[10px] px-[5rem]"> Yes, Delete</button>
+                            </div>
+                        </form>
+                    </div> 
+                </div>               
+            </div>
+        </div>
+    </div>
+
+    {% include "partials/footer.html" %}
+{% endblock %}

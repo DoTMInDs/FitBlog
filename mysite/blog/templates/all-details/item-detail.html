@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tailwind_filters %}
+{% block title %}Home{% endblock  %}
+{% block content %}
+    {% include "partials/nav.html" %}
+    <div class="px-[0.5rem] md:px-0  w-[100%] md:w-[80%] m-auto mobile-padding">
+        <div class="w-[100%]">
+           <div class="flex gap-[1rem] items-center mobile-back-btn">
+                <button onclick="goBack()" class=" rounded-full ml-[0.3rem] text-[#3D5361] text-[13px]">
+                    <i class="fa-solid fa-circle-arrow-left mr-[0.5rem]"></i>
+                    Back
+                </button>
+                {% if item.user == request.user %}
+                    <button class="uppercase music_links font-semibold text-[#3b5361] mb-[0.5px] text-[13px] text-nowrap" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4">
+                        <i class="fa-solid fa-edit"></i>
+                        product
+                    </button>
+                {% endif %}
+                 <!-- Modal -->
+                    <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-fullscreen-lg-down">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                        <i class="fa fa-solid fa-edit mr-[0.3rem]"></i>
+                                        Edit your Product
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        {{ e_form|crispy }}
+
+                                        <div class="my-[1rem] border border-slate-500 w-[100%]">
+                                            {{image_form|crispy}}
+                                        </div>
+                                       
+                                        <input type="hidden" name="e_form" value="e_form">
+                                        <div class=" flex gap-[10px] justify-center items-center __delet_btn_wrapper">
+                                            <button type="button" class="_edit_detail_btn text-[#3D5361] border border-[#3D5361] rounded-full py-[10px] px-[5rem]" data-bs-dismiss="modal">Cancel</button>
+                                            <input type="submit" value="Save product" class="_edit_detail_btn text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+           </div>
+            <div class="item_container mobile-ads-container">
+                <div class="item_image_container border border-slate-300 rounded">
+                    <div class="item_image_lg_wrapper ">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" class="item_image_lg w-[100%] rounded-top" alt="item image">
+                        {% endif %}
+                        <div class="item_image_cover_wrapper">
+                            {% for image in item.images.all %}
+                                <div class="img_cover">
+                                    {% if image.image %}
+                                        <img src="{{ image.image.url }}" class="item_image_grid " alt="item image">
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            {% comment %} <div class="img_cover">
+                                <img src="{% static "images/laptop.jpeg" %}" class="item_image_grid " alt="item image">
+                            </div>
+                            <div class="img_cover">
+                                <img src="{% static "images/laptop.jpeg" %}" class="item_image_grid " alt="item image">
+                            </div>
+                            <div class="img_cover">
+                                <img src="{% static "images/laptop.jpeg" %}" class="item_image_grid " alt="item image">
+                            </div>
+                            <div class="img_cover">
+                                <img src="{% static "images/laptop.jpeg" %}" class="item_image_grid " alt="item image">
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="p-[1rem] item_image_content">
+                        <p class="text-[#999999] font-semibold text-[13px] font-regular flex items-center gap-[0.5rem] m-0 p-0">
+                            <i class="fa fa-solid fa-location-dot"></i>
+                            {{ item.location }}, {{ item.date_posted }}
+                        </p>
+                        <p class="text-[#999999] font-semibold text-[13px] font-regular flex items-center gap-[0.5rem] m-0 p-0">
+                            <i class="fa fa-solid fa-eye"></i>
+                            45 views
+                        </p>
+                        <h3 class="text-slate-600 text-[25px] mt-[1rem] font-semibold">{{ item.title }}</h3>
+                        <p class="text-[15px] text-[#3b5361]">{{ item.description }}</p>
+                    </div>
+                </div>
+                <div class="item_price_wrapper ">
+                    <div class="p-[1rem] first_price_card mb-[10px] border border-slate-300 rounded">
+                        <div class="item_price_content ">
+                            <h1 class="text-[2rem] font-semibold text-[#3b5361]">GHS {{ item.price }}</h1>
+                            <p class="bg-slate-100 p-[0.5rem] rounded text-[13px] w-[100px] text-center">Negotiable</p>
+                            <p class="border border-slate-100 p-[0.5rem] rounded text-[13px]">Market price: GHS {{ item.market_price }}</p>                            
+                        </div>
+                    </div>
+                    <div class="p-[1rem] first_price_card border border-slate-300 rounded">
+                        <div class="item_price_content flex items-center gap-[10px]">
+                            <div class="user_image w-[50px] h-[50px] rounded-[50%]">
+                                {% if item.user.profilemodel.image %}
+                                    <img src="{{item.user.profilemodel.image.url}}" class="w-[50px] h-[50px]  rounded-[50%]" alt="user image">
+                                {% else %}
+                                    <img src="{% static "images/default.png" %}" class="w-[50px] h-[50px]  rounded-[50%]" alt="user image">
+                                {% endif %}
+                            </div>
+                            <div class="user_content">
+                                <h2 class="text-[16px] font-semibold m-0 p-0 text-[#3b5361]">{{ item.user }}</h2>
+                                <small class="text-[10px] text-[#3b5361]">Tyically replies within minuites</small>
+                            </div>
+                        </div>
+                        <button class="block w-[100%] my-[1rem] text-center py-[0.6rem] rounded bg-[#3b5361] text-[#fefefe]">{{item.contact}}</button>
+                        <button class="block w-[100%] my-[1rem] text-center py-[0.6rem] rounded border border-slate-600 text-[#3b5361] "><i class="fa fa-solid fa-phone mr-[0.3rem]"></i> Call Now</button>
+                    </div>
+                    <div class="p-[1rem] my-[10px] first_price_card border border-slate-300 rounded">
+                        <h3 class="text-[#3b5361] text-center font-bold text-[18px]">Safety Tips</h3>
+                        <ul class="list_style_dot text-[13px] font-semibold text-slate-500">
+                            <li>Avoid sending any prepayments</li>
+                            <li>Meet with the seller at a safe public place</li>
+                            <li>Inspect what you're going to buy to make sure it's what you need</li>
+                            <li>Check all the docs and only pay if you're satisfied</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

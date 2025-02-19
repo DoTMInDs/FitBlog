@@ -4,14 +4,14 @@
 {% block title %}Dashboard{% endblock  %}
 {% block content %}
     {% include "dashboard/dashboard_nav.html" %}
-    <div class=" flex justify-between __home_content">
-        <div class="__dashboard_grid_card ">
+    <div class=" flex justify-between px-[0.5rem] md:px-0  w-[100%] md:w-[80%] m-auto">
+        <div class=" grid grid-cols-1 md:grid-cols-2 gap-[20px] md:mb-[2rem] mb-[0rem]">
             {% for article in articles %}
-                <div class="__dashboard_grid_wrapper">
-                    <div class="card text-bg-light p-[20px]">                            
-                        <div class="card-body">
+                <div class="">
+                    <div class="border border-slate-400 rounded text-bg-light p-[20px]">                            
+                        <div class="">
                             <h5 class="card-title"> {{ article.title }} </h5> 
-                            <div class="flex  justify-between items-center">
+                            <div class="flex justify-between items-center">
                                 <p class="card-text text-[13px] text-[#444] font-semibold">
                                     <i class="fa-solid fa-clock"></i>
                                     <small>{{ article.dated_on|date:"M. d, Y" }}</small>
@@ -94,6 +94,8 @@
         </ul>
     </nav>
 
+
+    
 
     {% include "partials/footer.html" %}
 {% endblock %}

@@ -1,9 +1,13 @@
 from django.shortcuts import render,redirect, get_object_or_404
+from django.contrib import messages
 from blog.models import PostModel,ArticlePostModel
 from blog.forms import CommentForm,ArticleCommentForm,ArtistPostForm,AlbumForm,SongUploadForm
 from django.db.models import Q
 from .models import Artist,Album,SportsModel,Song
+from blog.models import Item,ItemImage
 from django.contrib.auth.decorators import login_required
+
+from .forms import ItemForm,ItemEditForm,ItemImageFormSet
 # from django.contrib import messages
 
 # import requests
@@ -42,8 +46,91 @@ def SportsPage(request):
     }
     return render(request, 'core/sports.html',context)
 
+@login_required
 def  BusinessPage(request):
-    return render(request, 'core/business.html')
+    items = Item.objects.all()
+    form = ItemForm()
+    image_formset = ItemImageFormSet(queryset=ItemImage.objects.none())
+    
+    filter_query = request.GET.get('search') if request.GET.get('search') != None else ''
+    items = Item.objects.filter(
+        Q(title__icontains=filter_query) |
+        Q(location__icontains=filter_query) |
+        Q(description__icontains=filter_query) 
+    )
+    
+    if request.method == "POST":
+        form = ItemForm(request.POST, request.FILES)
+        image_formset = ItemImageFormSet(request.POST, request.FILES)
+        
+        if form.is_valid() and image_formset.is_valid():
+            item = form.save(commit=False)
+            item.user = request.user
+            item.save()
+            
+            for image_form in image_formset:
+                image = image_form.save(commit=False)
+                image.item = item
+                image.save()
+            
+            messages.success(request, 'Item created successfully!')
+            return redirect('business-page')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    
+    context = {
+        "items": items,
+        "form": form,
+        'image_formset': image_formset,
+    }
+    return render(request, 'core/business.html',context)
+
+@login_required
+def item_detail(request, pk):
+    item = get_object_or_404(Item, id=pk)
+    images = item.images.exclude(image__isnull=True)
+    # e_form = ItemEditForm()
+    # image_form = ItemImageFormSet()
+
+    if request.method == "POST":
+        e_form = ItemEditForm(request.POST, request.FILES, instance=item)
+        image_form = ItemImageFormSet(request.POST, request.FILES, queryset=item.images.all())
+
+        if e_form.is_valid() and image_form.is_valid():
+            e_form.save()
+            images = image_form.save(commit=False)
+            for image in images:
+                image.item = item 
+                image.save()
+            for deleted_image in image_form.deleted_objects:
+                deleted_image.delete()
+            messages.success(request, 'Item and images updated successfully!')
+            return redirect('item-detail', pk=item.pk)
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    
+    else:
+        e_form = ItemEditForm(instance=item)
+        image_form = ItemImageFormSet(queryset=item.images.all())
+
+    context = {
+        "item": item,
+        "e_form": e_form,
+        "image_form": image_form,
+        "images": images,
+    }
+    return render(request, "all-details/item-detail.html", context)
+
+@login_required
+def delete_item(request, pk):
+    items = Item.objects.get(id=pk)
+    if request.method == 'POST':
+        items.delete()
+        return redirect('business-page')
+    context = {
+        'items': items,
+    }
+    return render(request, 'all-details/delete_item.html', context)
 
 def OpinionsPage(request):
     return render(request, 'core/opinions.html')
@@ -53,22 +140,14 @@ def GhanawebPage(request):
 
 @login_required
 def MusicPage(request):
-    # query = request.GET.get('search', '')
-    # if query:
-    #     artist_uploads = Artist.objects.filter(Q(artist__icontains=query) | Q(artist_genre__icontains=query))
-    #     albums = Album.objects.filter(Q(title__icontains=query) | Q(artist__artist__icontains=query))
-    # else:
-    #     artist_uploads = Artist.objects.all()
-    #     albums = Album.objects.all()
-    
-    query = request.GET.get('search')
+    query = request.GET.get('search', '')
     if query:
-        artist_uploads = Artist.objects.filter(artist__icontains=query)
-        albums = Album.objects.filter(title__icontains=query)
+        artist_uploads = Artist.objects.filter(Q(artist__icontains=query) | Q(artist_genre__icontains=query))
+        albums = Album.objects.filter(Q(title__icontains=query) | Q(artist__artist__icontains=query))
     else:
         artist_uploads = Artist.objects.all()
         albums = Album.objects.all()
-        
+    
     form = ArtistPostForm()   
     a_form = AlbumForm() 
 
@@ -128,8 +207,14 @@ def ArtistDetailPage(request, artist_id):
 
 
 @login_required
-def all_artist(request):
+def all_artist(request):    
     artist_uploads = Artist.objects.all()
+    
+    filter_query = request.GET.get('search') if request.GET.get('search') != None else ''
+    artist_uploads = Artist.objects.filter(
+        Q(artist__icontains=filter_query) |
+        Q(artist_genre__icontains=filter_query)
+    )
 
     context = {
         "artist_uploads": artist_uploads,
@@ -139,6 +224,12 @@ def all_artist(request):
 @login_required
 def all_album(request):
     albums = Album.objects.all()
+    
+    filter_query = request.GET.get('search') if request.GET.get('search') != None else ''
+    albums = Album.objects.filter(
+        Q(artist__artist__icontains=filter_query) |
+        Q(title__icontains=filter_query)
+    )
 
     context = {
         "albums": albums,
@@ -182,51 +273,3 @@ def SportDetailPage(request, pk):
     return render(request, 'artists/sport_detail.html', context)
 
 
-
-# @login_required
-# def payment_view(request):
-#     if request.method == 'POST':
-#         form = PaymentForm(request.POST)
-#         if form.is_valid():
-#             amount = form.cleaned_data['amount']
-#             phone_number = form.cleaned_data['phone_number']
-
-#             headers = {
-#                 'Authorization': f'Bearer {settings.MTN_MOMO_PRIMARY_KEY}',
-#                 'Ocp-Apim-Subscription-Key': settings.MTN_MOMO_API_KEY,
-#                 'X-Reference-Id': settings.MTN_MOMO_API_USER_ID,
-#                 'X-Target-Environment': 'sandbox',  # Use 'sandbox' for testing, 'mtncameroon' for production
-#                 'Content-Type': 'application/json'
-#             }
-
-#             payload = {
-#                 'amount': str(amount),
-#                 'currency': 'GHS',  # Change to the appropriate currency
-#                 'externalId': '123456',
-#                 'payer': {
-#                     'partyIdType': 'MSISDN',
-#                     'partyId': phone_number
-#                 },
-#                 'payerMessage': 'Payment for services',
-#                 'payeeNote': 'Thank you for your payment'
-#             }
-
-#             response = requests.post(f'{settings.MTN_MOMO_BASE_URL}/collection/v1_0/requesttopay', headers=headers, json=payload)
-
-#             if response.status_code == 202:
-#                 transaction_id = response.json().get('transactionId')
-#                 Payment.objects.create(
-#                     user=request.user,
-#                     amount=amount,
-#                     momo_transaction_id=transaction_id
-#                 )
-#                 messages.success(request, 'Payment successful!')
-#                 return redirect('home')
-#             else:
-#                 messages.error(request, 'Payment failed. Please try again.')
-#         else:
-#             messages.error(request, 'Invalid form submission.')
-#     else:
-#         form = PaymentForm()
-
-#     return render(request, 'core/payment.html', {'form': form})

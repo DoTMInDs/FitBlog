@@ -1,35 +1,42 @@
-<footer class="bg-[#3D5361] text-[#fefefefe] py-[2rem] mt-[2rem]">
-    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        <div class="flex flex-col items-center md:items-start mb-4 md:mb-0">
-            <h3 class="text-[1.5rem] font-bold">FitBlog</h3>
-            <ul class="text-[1rem] list-none text-center md:text-left flex flex-col md:flex-row gap-4">
-                <li class="flex items-center justify-center md:justify-start">
+<footer class="bg-[#3D5361] text-[#fefefefe] py-[2rem] mt-[2rem] footer">
+    <div class="md:max-w-[80%] m-auto max-w-[100%] px-[2rem]"><h3 class="text-[1.5rem] font-bold">FitBlog</h3></div>
+    <div class="md:max-w-[80%] m-auto max-w-[100%] px-[2rem] flex justify-between ">
+        <div class=" ">
+            <div class="text-[1rem] flex flex-col gap-[10px]">
+                <div class="  ">
                     <a href="{% url "news-page" %}" class="no-underline text-[#fefefe]">
                         <i class="fa-solid fa-newspaper mr-[10px]"></i>
                         Latest News
                     </a>
-                </li>
-                <li class="flex items-center justify-center md:justify-start">
+                </div>
+                <div class="  ">
                    <a href="{% url "music-page" %}" class="no-underline text-[#fefefe]">
                     <i class="fa-solid fa-music mr-[10px]"></i>
                     Music
                    </a>
-                </li>
-                <li class="flex items-center justify-center md:justify-start">
-                    <i class="fa-solid fa-film mr-[10px]"></i>
-                    Entertainment
-                </li>
-                <li class="flex items-center justify-center md:justify-start">
-                    <i class="fa-solid fa-heartbeat mr-[10px]"></i>
-                    Health & Wellness
-                </li>
-            </ul>
+                </div>
+                <div class="  ">
+                   <a href="{% url "business-page" %}" class="no-underline text-[#fefefe]">
+                    <i class="fa-solid fa-cart-shopping mr-[10px]"></i>
+                    Market Store
+                   </a>
+                </div>
+               
+            </div>
         </div>
-        <div class="flex items-center gap-[10px] md:gap-[20px] mb-4 md:mb-0">
-            <a href="#" class="text-[#fefefefe]"><i class="fa-brands fa-facebook fa-lg md:fa-xl"></i></a>
-            <a href="#" class="text-[#fefefefe]"><i class="fa-brands fa-twitter fa-lg md:fa-xl"></i></a>
-            <a href="#" class="text-[#fefefefe]"><i class="fa-brands fa-instagram fa-lg md:fa-xl"></i></a>
-            <a href="#" class="text-[#fefefefe]"><i class="fa-brands fa-youtube fa-lg md:fa-xl"></i></a>
+        <div class="flex flex-col  gap-[10px] ">
+            <a href="#!" class="flex items-center no-underline gap-[1rem] text-[#fefefefe]">
+                <i class="fa-brands fa-github fa-lg md:fa-xl"></i>
+                GitHub
+            </a>
+            <a href="#!" class="flex items-center no-underline gap-[1rem] text-[#fefefefe]">
+                <i class="fa-brands fa-linkedin fa-lg md:fa-xl"></i>
+                LinkedIn
+            </a>
+            <a href="#!" class="flex items-center no-underline gap-[1rem] text-[#fefefefe]">
+                <i class="fa-brands fa-gitlab fa-lg md:fa-xl"></i>
+                GitLab
+            </a>
         </div>
     </div>
     <div class="container mx-auto mt-[2rem] text-center">

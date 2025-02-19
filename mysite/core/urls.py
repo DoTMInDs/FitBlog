@@ -18,4 +18,7 @@ urlpatterns = [
     path('artist_detail/<int:artist_id>/', views.ArtistDetailPage, name='artist-detail' ),
     path('sport_detail/<int:pk>/', views.SportDetailPage, name='sport-detail' ),
     
+    path('delete_item/<int:pk>/', views.delete_item, name='delete-item'),
+    path('item_detail/<int:pk>/', views.item_detail, name='item-detail'),
+    
 ]

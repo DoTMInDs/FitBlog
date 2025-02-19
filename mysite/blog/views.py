@@ -1,7 +1,8 @@
-from django.shortcuts import render,redirect # type: ignore
+from django.shortcuts import render,redirect,get_object_or_404 # type: ignore
 from django.contrib.auth.decorators import login_required
 
-from .models import PostModel,ArticlePostModel
+from .models import PostModel,ArticlePostModel,Item
+from core.models import Song,Artist
 from.forms import CommentForm,ArticleCommentForm
 from django.db.models import Q
 
@@ -10,6 +11,8 @@ from django.core.paginator import Paginator
 def HomePageView(request):
     posts = PostModel.objects.all()
     articles = ArticlePostModel.objects.all()
+    songs = Song.objects.all()
+    items = Item.objects.all()
     
     filter_query = request.GET.get('search') if request.GET.get('search') != None else ''
     articles = ArticlePostModel.objects.filter(
@@ -29,8 +32,29 @@ def HomePageView(request):
     context = {
         'article_page_obj': article_page_obj,
         'posts': posts,
+        'songs': songs,
+        'items': items,
     }
     return render(request, 'home.html', context)
+
+@login_required
+def all_items(request):
+    items = Item.objects.filter()
+
+    context = {
+        "items": items,
+    }
+    return render(request, 'all-details/all-items.html', context)
+
+
+@login_required
+def all_songs(request):
+    songs = Song.objects.filter()
+
+    context = {
+        "songs": songs,
+    }
+    return render(request, 'all-details/artist-songs.html', context)
 
 @login_required
 def post_detail(request, pk):
