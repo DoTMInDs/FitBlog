@@ -1105,4 +1105,7 @@ BUSINESS-SECTION
     .mobile-song-modal{
         padding: 4rem 0rem;
     }
+    .Page{
+        display: none;
+    }
 }
