@@ -6,6 +6,7 @@ from django.db.models import Q
 from .models import Artist,Album,SportsModel,Song
 from blog.models import Item,ItemImage
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 from .forms import ItemForm,ItemEditForm,ItemImageFormSet
 # from django.contrib import messages
@@ -31,9 +32,15 @@ def NewsPage(request):
         Q(author__username__icontains=filter_query) |
         Q(sub_title__icontains=filter_query) 
     )
+    
+     # Pagination for articles
+    article_paginator = Paginator(articles, 5)  # Show 5 articles per page
+    article_page_number = request.GET.get('article_page')
+    article_page_obj = article_paginator.get_page(article_page_number)
 
     context = {
-        'articles': articles,
+        # 'articles': articles,
+        'article_page_obj': article_page_obj,
         'posts': posts,
     }
     return render(request, 'core/news.html', context)

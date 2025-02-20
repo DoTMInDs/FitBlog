@@ -22,15 +22,21 @@ def HomePageView(request):
         Q(article_content__icontains=filter_query)
     )
     
+    filter_query = request.GET.get('search') if request.GET.get('search') != None else ''
+    items = Item.objects.filter(
+        Q(title__icontains=filter_query) |
+        Q(location__icontains=filter_query) 
+    )
     
-     # Pagination for articles
-    article_paginator = Paginator(articles, 5)  # Show 5 articles per page
-    article_page_number = request.GET.get('article_page')
-    article_page_obj = article_paginator.get_page(article_page_number)
+    
+    # # Pagination for articles
+    # article_paginator = Paginator(articles, 5)  # Show 5 articles per page
+    # article_page_number = request.GET.get('article_page')
+    # article_page_obj = article_paginator.get_page(article_page_number)
 
    
     context = {
-        'article_page_obj': article_page_obj,
+        'articles': articles,
         'posts': posts,
         'songs': songs,
         'items': items,

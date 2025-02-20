@@ -4,8 +4,8 @@
 {% block title %}Profile{% endblock  %}
 {% block content %}
     {% include "partials/nav.html" %}
-    <div class="flex justify-center items-center w-full  mt-[12rem] mb-[4rem] mobile-profile">
-        <div class="w-[65%] m-auto p-[30px] rounded shadow border-t-[4px] border-slate-500  bg-slate-50 __profile-container">
+    <div class="flex justify-center items-center px-[0.5rem] md:px-0  w-[100%] md:w-[80%] m-auto mobile-profile mobile-profile-modal">
+        <div class="w-[100%] md:w-[65%] m-auto p-[30px] rounded shadow border-t-[4px] border-slate-500  bg-slate-50">
           <h1 class="font-bold text-[18px] md:text-[25px] text-[#3D5361]">Member Information</h1>
           <hr>
             <div class="flex justify-between items-center mb-[2rem]">
@@ -80,9 +80,9 @@
                     {{ p_form|crispy }}
 
                     <div class="modal-footer ">
-                      <div class="flex justify-center items-center w-full gap-[20px]">
-                        <button type="button" class="px-[50px] py-[12px] rounded-full border-[1px] border-[#3D5361] bg-[#fcfcfc]" data-bs-dismiss="modal">cancel</button>
-                        <button type="submit" class="bg-[#3D5361] px-[50px] py-[12px] rounded-full text-[#fefefefe] text-[14px] font-medium">Save</button>
+                      <div class="flex justify-center items-center w-full gap-[20px] __delet_btn_wrapper">
+                        <button type="button" class="md:w-[100%] w-[100%] px-[50px] py-[12px] rounded-full border-[1px] border-slate-300 bg-[#fcfcfc]" data-bs-dismiss="modal">cancel</button>
+                        <button type="submit" class="md:w-[100%] w-[100%] bg-[#3D5361] px-[50px] py-[12px] rounded-full text-[#fefefefe] text-[14px] font-medium">Save</button>
                       </div>
                     </div>
                    

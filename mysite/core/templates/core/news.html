@@ -5,15 +5,15 @@
 {% block content %}
     {% include "partials/nav.html" %}
    
-    <div class="px-[1rem] md:px-0  w-[100%] md:w-[80%] m-auto mobile-padding">
+    <div class="px-[1rem] md:px-0  w-[100%] md:w-[80%] m-auto mobile-padding ">
         <div class="flex gap-2  ">
-            <div class="w-[100%] px-[0.5rem] ">
+            <div class="w-[100%] px-[0.5rem] mb-[30px] mobile-profile-modal">
                 <div class=" bg-[#3D5361]">
                     <h2 class="p-[5px] text-[#fefefefe] text-[15px]">General News</h2> 
                 </div>
                 <div class="w-full flex justify-between h-full ">
-                    <div class="mb-[50px] grid grid-cols-1 md:grid-cols-2 gap-[20px] md:mb-[2rem] mb-[0rem]">
-                        {% for article in articles %}
+                    <div class="new-grid-wrapper gap-[0px] md:gap-[20px] ">
+                        {% for article in article_page_obj %}
                             <div class="card text-bg-light mb-[1rem]">
                                 <div class="card-body">
                                     <h5 class="card-title"> {{ article.title }} </h5> 
@@ -35,7 +35,7 @@
                                                 {{ article.author }} 
                                             </a>
                                         </p> 
-                                        <p class="font-bold text-[12px] d-inline-block text-truncate"><small class="font-medium bg-[#3D5361] text-[#fcfcfcfc] rounded-full px-[8px] py-[3px]">{{ article.slug }}</small></p>
+                                        <p class="font-bold text-[12px] d-inline-block text-truncate"><small class="font-medium bg-slate-500 text-[#fcfcfcfc] rounded-full px-[8px] py-[3px]">{{ article.slug }}</small></p>
                                     </div>                           
                                     <div class=" flex gap-3">
                                         {% if article.image %}
@@ -46,7 +46,7 @@
                                    
                                 </div>
                                 <div class="px-[1rem] pb-[1rem] flex justify-between items-center">
-                                    <button class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] text-[13px]">
+                                    <button class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-slate-500 text-[13px]">
                                        <a href="{% url "blog-post-detail" article.id %}" class="__detail_link">
                                         <i class="fa-solid fa-eye mr-[0.5rem]"></i>
                                         Detail
@@ -55,7 +55,7 @@
                                     <div class="">
                                         {% if article.author == request.user %}
                                             <button>
-                                                <a href="{% url "user-dashboard-edit" article.id %}" class="text-[#fefefefe] bg-[#3D5361] rounded-full py-[0.3rem] px-[0.8rem]">
+                                                <a href="{% url "user-dashboard-edit" article.id %}" class="text-[#fefefefe] bg-slate-500 rounded-full py-[0.3rem] px-[0.8rem]">
                                                     <i class="fa-regular fa-pen-to-square text-[12px]"></i>
                                                 </a>
                                             </button>
@@ -125,6 +125,48 @@
         </div>
 
     </div>
+
+     <!-- Pagination for Articles -->
+     <div class="pagination flex justify-center items-center">
+        <div class="flex items-center gap-[0.5rem]">
+            {% if article_page_obj.has_previous %}
+                <a href="?article_page={{ article_page_obj.previous_page_number }}" class="text-[#3b5361] flex items-center gap-[0.5rem] no-underline text-nowrap text-[14px]">
+                    <i class="fa fa-solid fa-arrow-left mx-[0.3rem]"></i>
+                    Prev
+                </a>
+                {% else %}
+                <a class="text-[#3b5361] flex items-center gap-[0.5rem] no-underline text-nowrap text-[14px] disabled">
+                    <i class="fa fa-solid fa-arrow-left mx-[0.3rem]"></i>
+                    Prev
+                </a>
+            {% endif %}
+            {% for num in article_page_obj.paginator.page_range %}
+                <div class="flex items-center gap-[0.3rem]">
+                    {% if article_page_obj.number == num %}
+                        <li class="">
+                            <a class="no-underline text-[#fefefe] font-semibold text-[10px] md:text-[14px] bg-slate-400 py-[0.3rem] px-[0.5rem] text-center w-[25px] h-[25px] rounded-full" href="?article_page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="no-underline text-[#3b5361] font-semibold text-[10px] md:text-[14px] hover:bg-slate-200 py-[0.3rem] px-[0.5rem] text-center w-[25px] h-[25px] rounded-full" href="?article_page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            {% if article_page_obj.has_next %}
+                <a href="?article_page={{ article_page_obj.next_page_number }}" class="text-[#3b5361] text-nowrap no-underline flex items-center gap-[0.5rem] text-[14px]">
+                    Next
+                    <i class="fa fa-solid fa-arrow-right mx-[0.3rem]"></i>
+                </a>
+            {% else %}
+                <a class="text-[#3b5361] text-nowrap no-underline flex items-center gap-[0.5rem] text-[14px]">
+                    Next
+                    <i class="fa fa-solid fa-arrow-right mx-[0.3rem]"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
 
     {% include "partials/footer.html" %}
     {% endblock content %}

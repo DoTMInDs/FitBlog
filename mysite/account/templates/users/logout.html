@@ -10,12 +10,12 @@
                 <h1 class="text-[28px] font-sans font-semibold my-[5px] text-center">Logout</h1>
             </div>
             <p class="text-center">Are you sure you want to logout?</p>
-            <div class="flex gap-[10px] justify-center items-center __delet_btn_wrapper mt-5">
-                <button class="_edit_detail_btn text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
-                    <a href="{% url "home" %}" class="text-[#fefefe] btn_link_cancel">cancel</a>
+            <div class="flex gap-[10px] justify-center items-center w-[100%] md:flex-col-reverse mt-5">
+                <button class="text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
+                    <a href="{% url "home" %}" class="text-[#fefefe] no-underline">cancel</a>
                 </button>
-                <button type="submit" class="_edit_detail_btn text-[#fefefefe] bg-[#FF0000] rounded-full py-[10px] px-[5rem]">
-                    <a href="{% url "home" %}" class="text-[#fefefe] text-nowrap font-bold btn_link_cancel">Yes, Logout</a> 
+                <button type="submit" class="text-[#fefefefe] bg-[#FF0000] rounded-full py-[10px] px-[5rem]">
+                    <a href="{% url "home" %}" class="text-[#fefefe] text-nowrap font-bold no-underline capitalize">Yes, Logout</a> 
                 </button>
             </div>
         </form>

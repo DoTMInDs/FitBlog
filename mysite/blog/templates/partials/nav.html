@@ -36,7 +36,7 @@
                 {% if user.is_authenticated %}
                     <div class="flex gap-[20px] items-center hidden md:block">
                         <form action="" method="get">
-                            <div class="flex items-center w-[250px] bg-gray-50 border border-gray-300 px-4 rounded-full shadow-md">
+                            <div class="flex items-center w-[100%] bg-slate-100 border border-slate-500 px-4 rounded-full">
                                 <i class="fa-solid fa-magnifying-glass text-[13px] text-[#3b5361] cursor-pointer" ></i>
                                 <input type="search" name="search" placeholder="Search FitBlog..." class="w-full  py-[5px] px-[6px] bg-transparent outline-none">
                             </div>
@@ -77,15 +77,15 @@
         </div>
         {% if user.is_authenticated %}
             <div class=" md:hidden flex z-[9999] gap-[20px]">
-                <div class="menu_toggle" id="mobile_menu">
-                    <span class="m_bar"></span>
-                    <span class="m_bar"></span>
-                    <span class="m_bar"></span>
+                <div class="menu_toggle justify-end items-end flex-col w-[30px] my-auto mx-0 md:hidden flex cursor-pointer z-[9999]" id="mobile_menu">
+                    <span class="m_bar w-[28px] h-[2.5px] bg-[#3b5361] my-[2.5px] mx-0 transition-all-[0.5s]"></span>
+                    <span class="m_bar w-[28px] h-[2.5px] bg-[#3b5361] my-[2.5px] mx-0 transition-all-[0.5s]"></span>
+                    <span class="m_bar w-[28px] h-[2.5px] bg-[#3b5361] my-[2.5px] mx-0 transition-all-[0.5s]"></span>
                 </div>
                 {% if user.is_authenticated %}
                     <div class="flex gap-[20px] items-center ">
                         <form action="" method="get" class=" w-[100%]">
-                            <div class="flex items-center w-[100%] bg-gray-50 border-[1px] border-[#3d53618a] px-4 rounded-full shadow-md">
+                            <div class="flex items-center w-[100%] bg-slate-100 border border-slate-500 px-4 rounded-full">
                                 <i class="fa-solid fa-magnifying-glass text-[13px] text-[#3b5361] cursor-pointer"></i>
                                 <input type="search" name="search" placeholder="Search FitBlog..." class="w-full  py-[5px] px-[6px] bg-transparent outline-none">
                             </div>
@@ -95,8 +95,8 @@
             </div>
          
             <!--Mobile-responsive-->
-            <div class="list_t">
-                <ul class="nav_v " id="nav-links">
+            <div class="list_t md:hidden flex relative">
+                <ul class="nav_v no-list-style transition-h-[0.5s] z-[999]" id="nav-links">
                     <li class="text-[#fefefe] border-b border-[#62879e4b] py-[1.2rem] px-[1rem] hover:bg-[#6a7f8d28]">
                         <i class="fa-regular fa-newspaper mr-[0.5rem]"></i>
                         <a class="no-underline text-[#fefefe] text-[15px]" href="{% url "news-page" %}">News</a>
@@ -151,13 +151,13 @@
                                 </a>
                             </div>
                             <div class="">
-                                <a href="#!" class='flex gap-[2rem] items-center p-[1rem] text-[#555555] no-underline text-nowrap hover:bg-[#ebebeb]'>
+                                <a href="#!" class=' flex gap-[2rem] items-center p-[1rem] text-[#555555] no-underline text-nowrap hover:bg-[#ebebeb]'>
                                     <p><i class="fa-solid fa-user-pen"></i></p>
                                     <p class="">Reviews</p>
                                 </a>
                             </div>
-                            <div class="">
-                                <a href="#!" class='flex gap-[2rem] items-center p-[1rem] text-[#555555] no-underline text-nowrap hover:bg-[#ebebeb]'>
+                            <div class="" >
+                                <a href="#!" class=' flex gap-[2rem] items-center p-[1rem] text-[#555555] no-underline text-nowrap hover:bg-[#ebebeb]'>
                                     <p><i class="fa-regular fa-heart"></i></p>
                                     <p class="">Saved</p>
                                 </a>

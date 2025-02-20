@@ -61,7 +61,7 @@
                 </p>
             </div>
             <div class="__grid_card ">
-                {% for article in article_page_obj %}
+                {% for article in articles %}
                     <div class=" text-bg-light home_card">
                         <div class="card_body">
                             <h5 class="card-title"> {{ article.title|truncatewords:4 }} </h5> 
@@ -84,7 +84,7 @@
                                         {{ article.author }} 
                                     </a>
                                 </p> 
-                                <p class="d-inline-block text-truncate"><small class=" text-[12px] px-[8px] py-[3px] font-medium bg-[#3D5361] text-[#fcfcfcfc] rounded-full">{{ article.slug|truncatewords:3 }}</small></p>
+                                <p class="d-inline-block text-truncate"><small class=" text-[12px] px-[8px] py-[3px] font-medium bg-slate-500 text-[#fcfcfcfc] rounded-full">{{ article.slug|truncatewords:3 }}</small></p>
                             </div>                           
                             <div class=" flex gap-3 img_wrapper">
                                 {% if article.image %}
@@ -94,7 +94,7 @@
                             </div>
                         </div>
                         <div class="mt-[1rem] flex justify-between items-center">
-                            <button class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-[#3D5361] text-[13px]">
+                            <button class="rounded-full py-[6px] px-[18px] text-[#fefefefe] bg-slate-500 text-[13px]">
                                 <a href="{% url "blog-post-detail" article.id %}" class="__detail_link">
                                 <i class="fa-solid fa-eye mr-[0.5rem]"></i>
                                 Detail
@@ -103,7 +103,7 @@
                             <div class="">
                                 {% if article.author == request.user %}
                                     <button>
-                                        <a href="{% url "user-dashboard-edit" article.id %}" class="text-[#fefefefe] bg-[#3D5361] rounded-full py-[0.3rem] px-[0.8rem]">
+                                        <a href="{% url "user-dashboard-edit" article.id %}" class="text-[#fefefefe] bg-slate-500 rounded-full py-[0.3rem] px-[0.8rem]">
                                             <i class="fa-regular fa-pen-to-square text-[12px]"></i>
                                         </a>
                                     </button>
@@ -136,7 +136,7 @@
                     <div class="all_artist_wrapper_link  no-underline w-[100%] text-[#3b5361]">
                             <div class="relative rounded-[10px] hover:bg-slate-200 p-[3px]">
                                 <div class="all_artist_icon_overlay">
-                                    <a href="{% url "artist-detail" song.artist.id %}" class=""><i class="fa-solid fa-play all_artist_play_icon"></i></a>
+                                    <a href="{% url "artist-detail" song.artist.id %}" class="no-underline"><i class="fa-solid fa-play all_artist_play_icon"></i></a>
                                 </div>
                                 <div class="all_artist_grid_container">
                                     <div class="h-[150px] rounded-[10px]  w-[150px]">
@@ -205,40 +205,7 @@
         </div>
     </div>
 
-      <!-- Pagination for Articles -->
-    {% comment %} <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            {% if article_page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link bg-[#3D5361] text-[#fefefefe] hover:bg-[#2c3e50]" href="?article_page={{ article_page_obj.previous_page_number }}">Previous</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link bg-[#3D5361] text-[#fefefefe]">Previous</a>
-                </li>
-            {% endif %}
-            {% for num in article_page_obj.paginator.page_range %}
-                {% if article_page_obj.number == num %}
-                    <li class="page-item active">
-                        <a class="page-link bg-[#3D5361] text-[#fefefefe] hover:bg-[#2c3e50]" href="?article_page={{ num }}">{{ num }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link bg-[#3D5361] text-[#fefefefe] hover:bg-[#2c3e50]" href="?article_page={{ num }}">{{ num }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-            {% if article_page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link text-[#3D5361] bg-[#3D5361] text-[#fefefefe] hover:bg-[#2c3e50]" href="?article_page={{ article_page_obj.next_page_number }}">Next</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link bg-[#3D5361] text-[#fefefefe]">Next</a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav> {% endcomment %}
+   
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   {% include "partials/footer.html" %}

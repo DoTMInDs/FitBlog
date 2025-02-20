@@ -18,10 +18,10 @@
                             {% csrf_token %}
 
                             <div class="flex gap-[10px] justify-end items-end __delet_btn_wrapper">
-                                <button class="_edit_detail_btn text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
-                                    <a href="{% url "business-page" %}" class="text-[#fefefe] btn_link_cancel">cancel</a>
+                                <button class="no-underline text-nowrap text-[#fefefefe] bg-[#3D5361] rounded-full py-[10px] px-[5rem]">
+                                    <a href="{% url "business-page" %}" class="text-[#fefefe] no-underline text-nowrap">cancel</a>
                                 </button>
-                                <button type="submit" class="_edit_detail_btn text-[#fefefefe] bg-[#FF0000] rounded-full py-[10px] px-[5rem]"> Yes, Delete</button>
+                                <button type="submit" class="no-underline text-nowrap text-[#fefefefe] bg-[#FF0000] rounded-full py-[10px] px-[5rem]"> Yes, Delete</button>
                             </div>
                         </form>
                     </div> 

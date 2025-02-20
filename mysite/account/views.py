@@ -5,13 +5,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import auth, messages # type: ignore
 from django.contrib.auth.decorators import login_required # type: ignore
 from django.db.models import Q
-
-
-from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm,UserPostForm,PostEditForm
+from django.core.paginator import Paginator
 
 from blog.models import ArticlePostModel
 from .models import ProfileModel
-# from django.core.paginator import Paginator
+from .forms import CreateUserForm, UserUpdateForm, ProfileUpdateForm,UserPostForm,PostEditForm
+
 
 
 
@@ -87,6 +86,11 @@ def user_dashboard(request):
         Q(author__username__icontains=filter_query) |
         Q(sub_title__icontains=filter_query) 
     )
+    
+    # Pagination for articles
+    article_paginator = Paginator(articles, 5)  # Show 5 articles per page
+    article_page_number = request.GET.get('article_page')
+    article_page_obj = article_paginator.get_page(article_page_number)
 
     if request.method == "POST":
         user_post_form = UserPostForm(request.POST, request.FILES)
@@ -100,7 +104,8 @@ def user_dashboard(request):
             print('there is an error somewhere')
             user_post_form = UserPostForm()
     context = {
-        'articles': articles,
+        # 'articles': articles,
+        'article_page_obj': article_page_obj,
         'user_post_form': user_post_form,
     }
     return render(request, 'dashboard/dashboard.html',context)

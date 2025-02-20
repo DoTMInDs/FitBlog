@@ -9,6 +9,10 @@ from blog.models import ArticlePostModel
 
 
 class CreateUserForm(UserCreationForm):
+    username = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Enter your username....'}))
+    email = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Enter your email....'}))
+    password1 = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Enter your password....'}))
+    password2 = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Confirm your password....'}))
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
@@ -21,6 +25,8 @@ class CreateUserForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
+    username = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Enter your username....'}))
+    email = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Enter your email....'}))
     class Meta:
         model = User
         fields = [ "username", "email"]
@@ -30,6 +36,9 @@ class UserUpdateForm(forms.ModelForm):
             self.fields[fieldname].help_text = None
 
 class ProfileUpdateForm(forms.ModelForm):
+    full_name = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Enter your fullname....'}))
+    about = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Tell us something about you....'}))
+    talks_about = forms.CharField(label="",widget=forms.TextInput(attrs={'placeholder': 'Type something here....'}))
     class Meta:
         model = ProfileModel
         fields = [ "full_name", "image", "about", "talks_about"]
