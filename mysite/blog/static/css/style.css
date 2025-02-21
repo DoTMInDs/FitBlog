@@ -923,6 +923,7 @@ BUSINESS-SECTION
         right: 0;
         z-index: 999999;
         padding: 0.6rem 1rem;
+        padding-bottom: 1.5rem;
    }
    .mobile-footer-container{
         display: flex;
@@ -932,7 +933,7 @@ BUSINESS-SECTION
     .mobile-list-items{
         position: absolute;
         left: 0;
-        bottom: 60px;
+        bottom: 75px;
         right: 0;
         width: 100%;
         margin-bottom: -15rem;
