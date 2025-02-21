@@ -29,6 +29,8 @@ logger.info('end')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
@@ -36,7 +38,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get("DEBUG", False))
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(' ')
 
@@ -61,8 +63,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_tailwind',
     
-    # 'cloudinary',
-    # 'cloudinary_storage'
+    'pwa',
 ]
 
 CRISPY_TEMPLATE_PACK = 'tailwind'
@@ -174,10 +175,56 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
-# CLOUDINARY_STORAGE = {
-#     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-#     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-#     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET')
-# }
-
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+PWA_APP_NAME = 'FitBlog'
+PWA_APP_DESCRIPTION = "A blog App with Music and Shopping integrated"
+PWA_APP_THEME_COLOR = '#0A0302'
+PWA_APP_BACKGROUND_COLOR = '#ffffff'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/images/main-logo-new.png',
+        'sizes': '160x160'
+    },
+    {
+        'src': '/static/images/big-esse-pwa-logo2.png',
+        'sizes': '160x160'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+   {
+        'src': '/static/images/main-logo-new.png',
+        'sizes': '160x160'
+    },
+   {
+        'src': '/static/images/big-esse-pwa-logo2.png',
+        'sizes': '160x160'
+    }
+   
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': '/static/images/icons/splash-640x1136.png',
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'
+PWA_APP_SHORTCUTS = [
+    {
+        'name': 'Shortcut',
+        'url': '/target',
+        'description': 'Shortcut to a page in my application'
+    }
+]
+PWA_APP_SCREENSHOTS = [
+    {
+      'src': '/static/images/icons/splash-750x1334.png',
+      'sizes': '750x1334',
+      "type": "image/png"
+    }
+]
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'blog', 'static/js/serviceworker.js')
