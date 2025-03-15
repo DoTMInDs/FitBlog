@@ -44,7 +44,7 @@ class Song(models.Model):
     title = models.CharField(max_length=200)
     genre = models.CharField(max_length=200, null=True)
     cover_image = CloudinaryField('image', folder='song_cover', null=True, blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
-    song_file = CloudinaryField('image', folder='music', null=True, blank=True)
+    song_file = models.FileField(upload_to='music', null=True, blank=True)
     posted_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
