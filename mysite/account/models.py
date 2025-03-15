@@ -1,11 +1,11 @@
 from django.db import models # type: ignore
 from django.contrib.auth.models import User # type: ignore
 from django.core.validators import FileExtensionValidator # type: ignore
-
+from cloudinary.models import CloudinaryField
 
 class ProfileModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    image = models.ImageField(default='default.png', upload_to='profile',blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
+    image = CloudinaryField('image', folder='profile_pics',null=True ,blank=True, validators=[FileExtensionValidator(['png', 'jpg','jpeg', 'WebP', 'avif', 'jfif'])])
     full_name = models.CharField(null=True,max_length=200)
     about = models.TextField(null=True)
     talks_about = models.CharField(max_length=255, default='anything', null=True)

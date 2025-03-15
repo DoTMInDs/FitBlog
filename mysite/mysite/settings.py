@@ -160,7 +160,7 @@ STATICFILES_DIR = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR / 'media/')
+# MEDIA_ROOT = os.path.join(BASE_DIR / 'media/')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
@@ -176,7 +176,7 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET')
 }
 STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smpt.gmail.com'
