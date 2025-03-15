@@ -3,12 +3,13 @@
 {% load tailwind_filters %}
 {% block title %}Sign In{% endblock  %}
 {% block content %}
-    <div class="flex justify-center items-center w-full h-[100%]  __form_container_sign_up ">
-        <form action="" method="post" class="__form_container_bg p-[30px] opacity rounded shadow bg-slate-50 ">
+    <div class="flex justify-center items-center w-full h-[100%]">
+        <form action="" method="post" class="md:w-[450px] w-[100%] p-[30px] rounded bg-slate-50 border border-slate-300">
             <div class="">
-                <h1 class="text-[28px] font-sans font-semibold my-[20px] text-center">Login</h1>
+                <h1 class="text-[28px] text-slate-500 font-sans font-semibold my-[20px] text-center">Login</h1>
             </div>
             {% csrf_token %}  
+            <input type="hidden" name="next" value="{{ next }}">
             {% if messages %}
                 <div class="mb-[10px]">
                     {% for message in messages %}
@@ -17,64 +18,37 @@
                 </div>
             {% endif %}
             <div class="">
-                <div class="my-[10px]">
-                    <label for="id_username" class="mb-[8px]">Username</label>
-                    <input type="text" id="id_username" name="username" class="border border-slate-300 rounded outline-none w-full bg-white py-[10px] px-[10px]" placeholder="" required>
+                <div class="my-[1rem] border border-slate-300 rounded  bg-white flex items-center px-[1rem]">
+                    <i class="fa fa-regular fa-user text-slate-400"></i>
+                    <input type="text" id="id_username" name="username" class="py-[0.5rem] px-[10px] outline-none w-full" placeholder="Enter username..." required>
                 </div>
-                <div class="my-[10px]">
-                    <label for="id_password" class="mb-[8px]">Password</label>
-                    <input type="password" id="id_password" name="password" class="border border-slate-300 outline-none rounded w-full bg-white py-[10px] px-[10px]" placeholder="" required>
+                <div class="my-[1rem] border border-slate-300 rounded w-full bg-white flex items-center px-[1rem]">
+                    <i class="fa fa-solid fa-lock text-slate-400"></i>
+                    <input type="password" id="id_password" name="password" class=" outline-none w-full py-[0.5rem] px-[10px]" placeholder="Enter password..." required>
+                    <i id="toggleEye" class="fa fa-solid fa-eye-slash cursor-pointer text-slate-400" onclick="togglePassword()"></i>
                 </div>
             </div>     
-            <p class="text-right text-[#FF0000]"><a href="{% url "password_reset" %}" class='text-[#FF0000]'>Forgot password?</a></p>
-            <button type="submit" class="rounded-[2rem] text-[#fff] bg-[#3D5361] px-[30px] py-[10px] w-full mt-[30px]">Login</button>
-                <p class="text-[12px] py-[20px] font-medium font-[poppins] text-center">New to FitBlog? <a href="{% url "sign_up" %}" class="text-[#FF0000] hover:text-[#595454]">Create account</a></p>
+            <p class="text-right font-open-sans mt-[0.5rem]"><a href="#!" class='text-rose-500'>Forgot password?</a></p>
+            <button type="submit" class="rounded text-[#fff] bg-slate-500 px-[30px] py-[10px] w-full mt-[30px]">Login</button>
+                <p class="text-[13px] py-[20px] font-open-sans text-center">New to FitBlog <a href="{% url "sign_up" %}" class="text-rose-500 hover:text-[#595454]">Create account</a></p>
         </form>
     </div>
+
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('id_password');
+            const eyeIcon = document.querySelector('#toggleEye');
+    
+            if(passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            }
+        }
+    </script>
 {% endblock  %}
 
 
-<!---
-    <div class="w-[80%] m-auto h-[100vh] p-[20px]">
-            <div class="flex justify-center items-center w-full h-[100%] ">
-                <form action="" method="post">
-                    {% csrf_token %}
-                   <div class="w-[600px] p-[30px] rounded shadow bg-slate-50">
-                    <div class="fieldWrapper">
-                        {{ form.errors }}
-                    </div>
-                    {{ form.non_field_errors }}
-
-                        <h2 class="text-slate-700 text-center font-[poppins] font-medium text-[22px] mt-[20px]">Sign in to your account</h2>
-                        {% comment %} {{ form.email.label }} <br>
-                        {{ form.email }}<br>
-                        {{ form.password.label }} <br>
-                        {{ form.password1 }} {% endcomment %}
-                        
-                       <div class="w-full">
-                            <label for="username" class="text-[14px] font-[poppins] font-medium">Username</label>
-                            <input type="text" name="username" id="id_username" placeholder="" class="w-full border outline-none rounded border-slate-200 py-[10px]">
-                        </div>
-                        <div class="w-full">
-                            <label for="password1" class="text-[14px] font-[poppins] font-medium flex justify-between">
-                                Password
-                                <span ><a href="" class="font-[poppins] font-light text-[10px] hover:text-[#595454] transition text-[#2888E1]">Forgot your password?</a></span>
-                            </label>
-                            <input type="password" name="password1" id="id_password1" placeholder="" class="w-full border outline-none rounded border-slate-200 py-[10px]">
-                        </div>
-                        <div class="check flex gap-2">
-                            <input type="checkbox" name="news" id="news" class="">
-                            <p class="text-[#595454] font-[poppins] text-[12px]">
-                                Stay signed in for a week 
-                            </p>
-                        </div>
-                        <button type="submit" class="text-[#fff] bg-blue-400 px-[30px] py-[10px] w-full mt-[30px]">Sign Up</button>
-                   </div>
-                </form>
-            </div>
-            <div class="field-foot bg-[#f3ececbe] w-full p-5 rounded-br-2xl absolute bottom-0">
-                <p class="text-[12px] font-medium font-[poppins] text-center">New to FitBlog? <a href="{% url "sign_up" %}" class="text-[#2888E1] hover:text-[#595454]">Create account</a></p>
-            </div>
-        </div>
-    </div>
--->

@@ -50,6 +50,8 @@ class UserPostForm(forms.ModelForm):
         fields = ("title", "sub_title", "article_content", "image", "slug")
 
 class PostEditForm(forms.ModelForm):
+    article_content = forms.CharField(widget=forms.Textarea(attrs={'rows': 8}))
+    slug = forms.SlugField(required=False)
     class Meta:
         model = ArticlePostModel
         fields = ("title", "article_content", "image", "slug")

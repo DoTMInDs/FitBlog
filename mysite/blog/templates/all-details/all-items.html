@@ -16,24 +16,24 @@
                 <h2 class="text-[18px] font-bold">All Product</h2>
             </div>
 
-            <div class="flex gap-[20px] all_artist_container mobile-ads-container">
-                <div class="all_items_wrapper ">
+            <div class="w-full flex justify-between mt-[1rem] mobile-ads-container">
+                <div class="item-grid w-full">
                     {% for item in items %}
-                        <div class="item_wrapper_link relative no-underline w-[100%]">
-                            <div class="item_edit">
+                        <div class=" relative no-underline w-[100%]">
+                            <div class="absolute right-[10px] top-[10px]">
                                 {% if item.user == request.user %} 
                                     <a href="{% url "delete-item" item.id %}" class="text-[#fefefefe] bg-rose-500 rounded-full p-[0.3rem] px-[0.8rem]">
                                         <i class="fa-solid fa-trash-can text-[12px]"></i>                                         
                                     </a> 
                                 {% endif %}
                             </div>
-                            <div class="item_card border border-slate-200 rounded">
-                                <div class="item_image_wrapper rounded-top">
+                            <div class="border border-slate-200 rounded">
+                                <div class="rounded-[10px]">
                                     {% if item.image %}
-                                        <img src="{{ item.image.url }}" class="item_image rounded-top" alt="item image">
+                                        <img src="{{ item.image.url }}" class="w-[100%] object-center object-cover rounded-[10px]" alt="item image">
                                     {% endif %}
                                 </div>
-                                <div class="item_content overflow-hidden p-[0.5rem]">
+                                <div class=" overflow-hidden p-[0.5rem]">
                                     <h2 class="text-teal-500 text-[18px] font-bold ">GHS{{ item.price }}</h2>
                                     <h3 class="text-slate-600 text-[15px] font-semibold">{{ item.title }}</h3>
                                     <p class="text-[#3b5361] text-[14px] font-regular">{{ item.content|truncatewords:8 }}</p>
@@ -41,20 +41,20 @@
                                         <i class="fa fa-solid fa-location-dot"></i>
                                         {{ item.location }}
                                     </p>
-                                    <div class="flex items-center justify-between gap-[0.5rem]">
-                                        <div class="flex gap-[3px] items-center">
-                                            <small class="bg-slate-200 p-[0.3rem] text-nowrap text-[#3b5361] rounded-[3px] text-[10px]">{{item.item_status}}</small>
-                                            {% if item.item_type %}
-                                                <small class="bg-slate-200 p-[0.3rem] text-nowrap text-[#3b5361] rounded-[3px] text-[10px]">{{item.item_type}}</small>
-                                                {% else %}
-                                                <small class=""></small>
-                                            {% endif %}
-                                        </div>
-                                        <button class="bg-slate-200 p-[0.3rem] flex gap-[0.3rem] items-center text-nowrap text-[#3b5361] rounded-[3px] text-[10px]">
-                                            <i class="fa fa-solid fa-eye"></i>
-                                            <a href="{% url "item-detail" item.id %}" class="no-underline text-[#3b5361] uppercase">View</a>
-                                        </button>
+                                </div>
+                                <div class="flex items-center justify-between gap-[0.5rem] border-t border-slate-200 p-[0.5rem]">
+                                    <div class="flex gap-[3px] items-center">
+                                        <small class="bg-slate-200 p-[0.3rem] text-nowrap text-[#3b5361] rounded-[3px] text-[10px]">{{item.item_status}}</small>
+                                        {% if item.item_type %}
+                                            <small class="bg-slate-200 p-[0.3rem] text-nowrap text-[#3b5361] rounded-[3px] text-[10px]">{{item.item_type}}</small>
+                                            {% else %}
+                                            <small class=""></small>
+                                        {% endif %}
                                     </div>
+                                    <button class="bg-slate-200 p-[0.3rem] flex gap-[0.3rem] items-center text-nowrap text-[#3b5361] rounded-[3px] text-[10px]">
+                                        <i class="fa fa-solid fa-eye"></i>
+                                        <a href="{% url "item-detail" item.id %}" class="no-underline text-[#3b5361] uppercase">View</a>
+                                    </button>
                                 </div>
                             </div>
                         </div>

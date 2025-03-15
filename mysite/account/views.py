@@ -31,7 +31,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return render(request, 'users/logout.html')
+    return redirect('home')
     
 
 def reset_password(request):
@@ -51,8 +51,8 @@ def sign_up(request):
     return render(request, 'users/sign_up.html', context)
 
 @login_required
-def profile_view(request, username, id):
-    user = get_object_or_404(User, username=username, id=id)
+def profile_view(request):
+    user = request.user
     profile = get_object_or_404(ProfileModel, user=user)
 
     if request.method == "POST":
@@ -61,7 +61,7 @@ def profile_view(request, username, id):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            return redirect('profile', username=username, id=id)
+            return redirect('profile')
     else:
         u_form = UserUpdateForm(instance=user)
         p_form = ProfileUpdateForm(instance=profile)
@@ -70,8 +70,6 @@ def profile_view(request, username, id):
         'profile': profile,
         'u_form': u_form,
         'p_form': p_form,
-        'username': username, 
-        'id': id
     }
     return render(request, 'users/profile.html', context)
 

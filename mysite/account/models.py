@@ -1,7 +1,6 @@
 from django.db import models # type: ignore
 from django.contrib.auth.models import User # type: ignore
 from django.core.validators import FileExtensionValidator # type: ignore
-# from django.core.validators import EmailValidator
 
 
 class ProfileModel(models.Model):

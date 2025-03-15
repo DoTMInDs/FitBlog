@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 import logging
 from pathlib import Path
+import cloudinary_storage 
+
 
 logger = logging.getLogger(__name__)
 
@@ -27,7 +29,6 @@ logger.info('end')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 
 
@@ -59,6 +60,8 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'account.apps.AccountConfig',
     'core.apps.CoreConfig',
+    'cloudinary',
+    'cloudinary_storage',
 
     'crispy_forms',
     'crispy_tailwind',
@@ -72,6 +75,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,6 +83,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -146,7 +151,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -154,7 +158,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR / 'media/')
@@ -166,6 +169,14 @@ LOGIN_URL = 'login'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET')
+}
+STATIC_ROOT = os.path.join(BASE_DIR / 'staticfiles')
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smpt.gmail.com'

@@ -6,7 +6,7 @@
     {% include "partials/nav.html" %}
 
        <!-- Music-main-section -->
-    <div class="px-[0px] md:px-0  w-[100%] md:w-[80%] m-auto mobile-padding">
+    <div class="px-[0px] md:px-0  w-[100%] md:w-[80%] m-auto space_buttom">
         <div class="">
             <button onclick="goBack()" class="mobile-back-btn my-[1rem] rounded-full py-[6px] ml-[0.5rem]  text-[#3D5361] text-[13px]">
                 <i class="fa-solid fa-circle-arrow-left mr-[0.5rem]"></i>
@@ -16,23 +16,23 @@
                 <h2 class="text-[18px] ml-[0.5rem] font-bold">Popular Artists</h2>
             </div>
 
-            <div class="flex gap-[20px] all_artist_container ads_container">
-                <div class="all_artist_wrapper">
+            <div class="w-full">
+                <div class="music-grid">
                     {% for artist_upload in artist_uploads %}
-                        <div class=" rounded-[10px] hover:bg-slate-200 p-[3px] all_artist_wrapper_link">
-                            <div class="all_artist_grid_container">
-                                <div class="all_artistimg_wrapper">
-                                    <div class="all_artist_icon_overlay">
-                                        <a href="{% url 'artist-detail' artist_upload.id %}" class="no-underline text-[#3b5361]"><i class="fa-solid fa-play all_artist_play_icon"></i></a>
-                                    </div>
+                        <div class=" rounded-[10px] hover:bg-slate-200 p-[3px] ">
+                            <div class="relative rounded-[10px] hover:bg-slate-200 p-[3px]">
+                                <div class="absolute right-[10px] top-[10px] bg-yellow-300 flex justify-center items-center w-[40px] h-[40px] rounded-full ">
+                                    <a href="{% url 'artist-detail' artist_upload.id %}" class="no-underline hover:text-slate-700 text-slate-800"><i class="fa-solid fa-play "></i></a>
+                                </div>
+                                <div class="h-[200px] rounded-[10px]">
                                     {% if artist_upload.artist_image %}
-                                        <img src="{{ artist_upload.artist_image.url }}" class="all_artist_img" alt="...">
+                                        <img src="{{ artist_upload.artist_image.url }}" class="w-[100%] h-[100%] rounded-[10px] object-center object-cover" alt="...">
                                     {% endif %}
                                 </div>
-                                <div class="all_artist_content">
-                                    <h3 class="all_artist_name">{{ artist_upload.artist }}</h3>
-                                    <p class="all_artist_genre">{{ artist_upload.artist_genre }}</p>
-                                </div>
+                            </div>
+                            <div class="">
+                                <h3 class="text-slate-700 text-[18px]">{{ artist_upload.artist }}</h3>
+                                <p class="text-rose-500 font-medium text-[14px]">{{ artist_upload.artist_genre }}</p>
                             </div>
                         </div>
                     {% endfor %}                 

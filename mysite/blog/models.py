@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.validators import EmailValidator
 from django.core.validators import FileExtensionValidator
 
+
 # Create your models here.
 STATUS = ((0, "Draft"), (1, "Published"))
     

@@ -19,15 +19,7 @@ closeSearch.addEventListener('click', () => {
     // console.log('clicked')
 })
 
-// Mobile menu
-const mobileMenu = document.getElementById('mobile_menu');
-const navLinks = document.getElementById('nav-links');
 
-mobileMenu.addEventListener('click', () => {
-    mobileMenu.classList.toggle('change');
-    navLinks.classList.toggle('showing');
-    // console.log('clicked');
-});
 
 function goBack() {
     window.history.back();

@@ -3,873 +3,130 @@
     padding: 0;
     box-sizing: border-box;
 }
-/* ------------------------------------------------
-                        nav-section 
----------------------------------------------------*/
-.post-mod-detail-wrapper{
-    display: flex;
-    gap: 20px;
-}
-@media screen and (max-width:1000px) {
-    .change .m_bar:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
-    .change .m_bar:nth-child(2) {
-        opacity: 0;
-    }
-    .change .m_bar:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
-    .list_t .nav_v.showing{
-        height: 500px;
-        margin-top: 0;
-        opacity: 1;
-        transition: height 200ms ease-in-out, 
-                    opacity 500ms ease;
-       }
-    
-    .list_t .nav_v li{
-        display: none;
-        opacity: 0;
-        transition: opacity 500ms ease,
-                    display 300ms ease;
-    }
-    .list_t .nav_v li:last-child{
-        border-bottom: none;
-    }
-    .list_t .nav_v.showing li{
-        display: block;
-        opacity: 1;
-        transition: opacity 500ms ease,
-                    display 300ms ease;
-    }
-    .list_t .nav_v{
-        margin-top: -65px;
-        background: #3D5361;
-        position: absolute;
-        width: 100%;
-        padding: 2rem 2rem;
-        top: 10px;
-        height: 0;
-        opacity: 0;
-    }
-    .post-mod-detail-container .post-mod-detail-wrapper{
-        display: flex;
-        flex-direction: column;
-    }
-}
-/* -------------------------------------------------
-                    register
----------------------------------------------------- */
-@media screen and (max-width:700px) {
-    .__form_container_sign_up .__form_container_bg{
-        border-top: 3px solid #3d536150;
-        border-radius: 10px;
-        padding: 0 1rem;
-        width: 380px;
-        margin: auto;
-        transition: width 300ms ease;
-     }
-     .__form_container_sign_up .__form_container{
-        border-top: 3px solid #3d536150;
-        border-radius: 10px;
-        padding: 0 1rem;
-        width: 380px;
-        margin: auto;
-        transition: width 300ms ease;
-     }
-}
-
-/* ----------------------------------
-            home-styling
-------------------------------------- */
-.__nav-links ul li .__nav_text{
-    color: #fff;
-}
- .__grid_card{
-    padding-bottom: 50px;
-    display: inline-flex;
-    gap: 1rem;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-}
-.home_card{
-    width: 400px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 1.5rem;
-}
-.img_wrapper{
-    width: 100%;
-    display: flex;
-    gap: 1rem;
-    height: 60px;
-    overflow: hidden;
-}
- .__post_card{
-    height: 300px;
- }
- .__dashboard_user{
-    margin-top: 6rem;
- }
-
-
-/* ------------------------------------------
-                nav-link-a-styling
---------------------------------------------- */
-
-.__card-main-absolute{
-    position: absolute;
-    bottom: 25px;
-}
-.form{
-    border-radius: 10px;
-    margin: 0 50px;
-}
-.__login-form{
-    box-shadow: none;
-}
-.input-field{
-    margin: 20px 0;
-}
-.register-wrap{
-    width: 60%;
-    margin: auto;
-}
-.__form-text{
-    padding: 50px 40px;
-}
-
-
-/* ----------------------------------------------------
-                        sign-in
--------------------------------------------------------- */
-.__form_container_bg{
-    padding: 0 2rem;
-    width: 450px;
-    margin: auto;
-    transition: width 300ms ease;
- }
-.__form_container{
-    padding: 0 2rem;
-    width: 450px;
-    margin: auto;
-    transition: width 300ms ease;
- }
-.__login{
-    width: 50%;
-    margin: auto;
-}
-.login-form{
-    margin-top: 120px;
-    transition: width 300ms ease;
-}
-
-/* collapse-body */
-.collapse-body{
+#staticBackdrop1 {
     display: none;
+    z-index: 1000;
 }
-.active-collapse{
+#staticBackdrop1.account {
     display: block;
 }
-._new-a a{
-    text-decoration: none;
-    padding-left: 10px;
+#staticBackdrop2 {
+    display: none;
+    z-index: 1000;
 }
-
-@media screen and (max-width:1500px) {
-    .register-wrap{
-        width: 80%;
-        margin: auto;
-    }
+#staticBackdrop2.account2 {
+    display: block;
 }
-@media screen and (max-width:1400px) {
-    .register-wrap{
-        width: 90%;
-        margin: auto;
-    }
+#postModal {
+    transition: opacity 0.3s ease;
+    z-index: 99999;
 }
-@media screen and (max-width:1200px) {
-    .register-wrap{
-        width: 90%;
-        margin: auto;
-    }
-    .__nav{
-        width: 90%;
-        margin: auto;
-    }
+.hidden {
+    display: none !important;
 }
-@media screen and (max-width:1000px) {
-    .__home_content{
-       width: 100%;
-       padding:0 15px;
-       transition: width 300ms ease;
-    }
-    ._nav_container{
-        width: 100%;
-        transition: width 300ms ease;
-    }
-    .register-wrap{
-        flex-wrap: wrap;
-    }
-    .img-box{
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 0px;
-        border-bottom-left-radius: 0px;
-    }
-    .register-wrap .content2{
-        border-top-right-radius: 0px;
-        border-bottom-left-radius: 10px;
-    }
-    .img-box .__copyright{
-        padding-top: 20px;
-        padding-bottom: 50px;
-    }
-    .links{
-        display: none;
-    }
-    .__btns{
-        display: none;
-    }
-    
-    .__profile-container{
-        width: 95%;
-        margin: auto;
-    }
-    .login-form{
-        margin-top: 120px;
-        width: 500px;
-        transition: width 300ms ease;
-    }
-    .__post_details_media_wrapper .__post_details_media_container{
-        width: 100%;
-        padding: 0 30px;
-        transition: width 300ms ease;
-        color: #3d5361;
-    }
-    .__delet_btn_wrapper{
-        flex-direction: column-reverse;
-        width: 100%;
-    }
-
-}
-@media screen and (max-width:900px) {
-    .content2{
-        padding: 0 10px;
-    }
-    .login-form{
-        margin-top: 120px;
-        width: 500px;
-        transition: width 300ms ease;
-    }
-    ._nav_container{
-        width: 100%;
-    }
-}
-.play_modal_body .play-song-wrapper{
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    align-items: center;
+.main-nav {
+    display: block;
 }
 @media screen and (max-width:700px) {
-    .content2{
-        padding: 0 10px;
-    }
-    .form{
-        margin: 0 10px;
-    }
-    .login-form{
-        width: 500px;
-        transition: width 300ms ease;
-    }
-    .__post_detail_content{
-        margin-top: 8rem;
-    }
-    ._form_search{
-        transition: width 300ms ease;
-    }
-    .play_modal_body .play-song-wrapper{
-        display: flex;
-        gap: 2rem;
-        align-items: start;
-        flex-direction: column;
-    }
-    
-}
-
-@media screen and (max-width:500px) {
-    .login-form{
-        width: 95%;
-        transition: width 300ms ease;
-    }
-}
-
-/* ----------------------------------------------------------
-                        Post-Detail
-------------------------------------------------------------- */
-.__post_details_media_container{
-    width: 80%;
-    margin: auto;
-}
-._detail_account_section{
-   width: 100%;
-}
-.__detail_link{
-    text-decoration: none;
-    color: #f7f7f7;
-}
-.__post_edit_container{
-    width: 80%;
-    margin: auto;
-}
-
-/* ----------------------------------------------------------
-                        Music-section
-------------------------------------------------------------- */
-.__music_container{
-    margin-top: 10rem;
-}
-
-
-.divider{
-    width: 100%;
-    height: 1px;
-    background-color: hsla(60, 0%, 40%, 0.199);
-}
-
-/* artist-detail */
-.parent_overlay{
-    position: relative;
-}
-.cover_art{
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    object-position: center;    
-}
-.img_overlay{
-    position: relative;
-}
-.img_overlay::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 300px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.11), rgba(0, 0, 0, 0.884));
-}
-.overlay_text{
-    top: 10%;
-    position: absolute;
-    bottom: 0;
-    padding: 20px;
-}
-.big_artist_name{
-    color: #FFFFFF;
-    font-size: 8rem;  
-    font-weight: 800;
-}
-.genre_text{
-    font-size: 1.3rem;
-    color: #ffffff; 
-    font-weight: bold;
-}
-.artist_img_wrapper{
-    width: 80px;
-    border-radius: 5px;
-}
-.artist_img_detail{
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 5px;
-}
-.song_title{
-    font-size: 15px;
-    font-weight: medium;
-}
-.artist_detail_link{
-    text-decoration: none;
-    color: #000000;
-    transition: color 0.5s ease;
-}
-.artist_detail_link:hover{
-    color: #be4545;
-}
-
-/* modal-audio */
-@media screen and (max-width:700px) {
-    .image_cover_art_wrapper{
-        width: 100%;    
-    }
-}
-.image_cover_art_wrapper{
-    /* width: 800px;    
-    margin: auto; */
-    height: 300px;
-    border-radius: 15px;
-    position: relative;
-}
-.image_cover_art{
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    object-position: center;
-    border-radius: 15px;
-}
-.song_track{
-    position: absolute;
-    left: 50%;
-    bottom: 5px;
-    transform: translate(-50%,-50%);
-}
-
-.downlod_btn{
-    background: #000000;
-    padding: 10px 25px;
-    border-radius: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 6rem;
-    transition: background 0.5s ease;
-    border: 1px solid #000000;
-}
-.downlod_btn:hover {
-    background: #FFFFFF;
-}
-.downlod_btn:hover .download_a{
-    color: #000000;
-}
-.downlod_btn .download_a{
-    color: #FFFFFF;
-    font-weight: bold;
-    font-size: 18px;
-    text-decoration: none;
-    transition: color 0.5s ease;
-}
-.close_btn{
-    display: flex;
-    justify-content: end;
-    align-items: end;
-}
-.song_post_btn{
-    display: flex;
-    justify-content: end;
-    align-items: end;
-    gap: 10px;
-    margin-top: 3rem;
-}
-
-/* ---------------------------------------------------------------------------
-                    News-Scetion
------------------------------------------------------------------------------- */
-@media screen and (max-width:1000px) {
-    .__latest_news_wrapper{
+    .main-nav {
         display: none;
     }
-  
 }
-.new-grid-wrapper{
+.news-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(350px, 1fr));
+    gap: 1rem;
+}
+.dash-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(300px, 1fr));
+    gap: 1rem;
+}
+.item-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px, 1fr));
+    gap: 1rem;
+}
+.music-grid{
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(250px, 1fr));
-    width: 100%;
+    gap: 1rem;
 }
-
-/* ---------------------------------------------------------------------------
-                    Carousel-image-home
------------------------------------------------------------------------------- */
-.carousel_img_wrapper::after{
-    content: "";
-    width: 100%;
-    height: 350px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 25px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.9));
-}
-
-
-
-/* ---------------------------------------------------------------------------
-                    Sport & entertainment-carousel_item
-/*---------------------------------------------------------------------------- */
-
-.music_artist_container {
-    overflow: hidden;
-}
-.music_artist_wrapper {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    scroll-snap-type: proximity;
-}
-.music_artist_wrapper a {
-    scroll-snap-align: start;
-}
-.img_container {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-}
-.artist_img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 1px solid #66666c63;
-    object-fit: cover;
-    object-position: center;
-}
-.artist_name {
-    padding: 10px;
-    text-align: center;
-}
-.artist_wrapper_link {
-    width: 150px;
-    text-decoration: none;
-    color: inherit;
-    padding: 10px;
-    transition: background 0.5s ease;
-    border-radius: 20px;
-}
-.artist_wrapper_link:hover {
-    background: #dfd8d873;
-}
-.icon_overlay {
-    position: absolute;
-    bottom: 40%;
-    right: 20%;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: greenyellow;
-    transition: bottom 0.5s ease;
-    opacity: 0;
-}
-.artist_wrapper_link:hover .icon_overlay {
-    bottom: 45%;
-    display: flex;
-    opacity: 1;
-    transition: opacity 200ms ease, bottom 300ms ease, display 300ms ease;
-}
-
-
-/* ---------------------------------------------------------------------------
-                    All-Artist-Page
------------------------------------------------------------------------------- */
-.all_artist_container .all_artist_wrapper{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    grid-gap: 10px;
-    width: 100%;
-}
-.all_artist_grid_container{
-    position: relative;
-}
-.all_artist_icon_overlay{
-    z-index: 99;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    display: none;
-}
-.all_artist_wrapper_link:hover .all_artist_icon_overlay{
-    display: flex;
-    transition: display 0.5s ease;
-}
-.all_artist_icon_overlay .all_artist_play_icon{
-    background-color: yellow;
-    font-size: 15px;
-    padding: 5px;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;   
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #000000;
-}
-.all_artistimg_wrapper{
-    width: 100%;
-    height: 150px;
-    border-radius: 50%;
-}
-.all_artistimg_wrapper .all_artist_img{
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-}
-.all_artist_content{
-    margin-top: 1rem;
-}
-.all_artist_content .all_artist_name{
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-.all_artist_content .all_artist_genre{
-    color: #be4545;
-    font-weight: 500;
-}
-
-
-/* ---------------------------------------------------------------------------
-                    All-Artist-album-and-singles
------------------------------------------------------------------------------- */   
-
 .album_detail_bg{
     background: linear-gradient(rgb(61, 83, 97),rgb(82, 24, 24));
     width: 100%;
     height: 350px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
-.album_detail_wrapper{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    height: 350px;
-    width: 95%;
-    margin: auto;
-    gap: 3rem;
+.songHiddenDropDown {
+    display: none !important;
 }
-.album_detail_img_wrapper{
-    width: 250px;
-    height: 280px;
-    border-radius: 10px;
+#musicDropDown {
+    z-index: 50;
 }
-.album_detail_img_wrapper .album_detail_image{
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    object-fit: cover;
-    object-position: center;
+#addSongDropdown {
+    z-index: 1000;
 }
-.album_detail_title{
-    font-size: 8rem;
-    transition: font-size 0.5s ease;
-    text-wrap: nowrap;
-    font-weight: 800;
-    margin: 0;
-    padding: 0;
+.song-dropdown {
+    position: relative;
+    z-index: 40;
 }
-@media screen and (max-width:1580px) {
-    .album_detail_title{
-        font-size: 7rem;
-        text-wrap: nowrap;
-        transition: font-size 0.5s ease;
-    }
+
+.change .m_bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
 }
-@media screen and (max-width:1480px) {
-    .album_detail_title{
-        font-size: 5rem;
-        text-wrap: nowrap;
-        transition: font-size 0.5s ease;
-    }
+.change .m_bar:nth-child(2) {
+    opacity: 0;
 }
-@media screen and (max-width:1100px) {
-    .album_detail_title{
-        font-size: 4.5rem;
-        text-wrap: nowrap;
-        transition: font-size 0.5s ease;
-    }
+.change .m_bar:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
 }
-@media screen and (max-width:1000px) {
-    .album_detail_title{
-        font-size: 4rem;
-        text-wrap: nowrap;
-        transition: font-size 0.5s ease;
-    }
-   
-}
-@media screen and (max-width:700px) {
-    .album_detail_title{
-        font-size: 3rem;
-        text-wrap: nowrap;
-        transition: font-size 0.5s ease;
-    }
-    .album_detail_img_wrapper{
-        width: 250px;
-        height: 180px;
-        border-radius: 10px;
-        transition: width 0.5s ease,
-                    height 0.5s ease;
-    }
-    .album_detail_bg .album_detail_wrapper{
-        flex-direction: column;
-        align-items: start;
-        gap: 10px;
-        transition: flex-direction 300ms ease;
-    }
-    .album_detail_wrapper .album_detail_img_wrapper{
-        margin-top: 1.2rem; 
-    }
-    .popular_artist_h2{
-        font-size: 1.2rem;
-        font-weight: 800;
-        color: #3D5361;
-    }
-}
-@media screen and (max-width:450px) {
-    .album_detail_title{
-        font-size: 3rem;
-        text-wrap: nowrap;
-        transition: font-size 0.5s ease;
-    }
-    .album_detail_img_wrapper{
-        width: 150px;
-        height: 180px;
-        border-radius: 10px;
-        transition: width 0.5s ease,
-                    height 0.5s ease;
-    }
-   
-}
-.album_detail_text{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 10px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #f7f7f7;
-    margin: 0;
-    padding: 0;
-}
-.album_detail_text a{
-    text-decoration: none;
-    color: #f7f7f7;
-}
-.album_detail_text:hover a {
-    text-decoration: underline;
-    /* color: #521818; */
-}
-.album_song_title_wrapper{
-    border-bottom: 1px solid #3d536156;
-    padding: 0 1rem;
-}
-.album_detail_song_list_container .album_detail_song_list_wrapper{
-    padding: 0 1rem;
-    /* margin: 1rem 0; */
-}
-.album_detail_song_list_wrapper:hover {
-    background: linear-gradient(rgba(233, 227, 227, 0.5),rgba(233, 227, 227, 0.5));
-}
-.album_detail_song_list_wrapper:hover .album_detail_icon{
+.list_t .nav_v.showing{
+    height: 500px;
+    background: #3D5361;
+    margin-top: 0;
     opacity: 1;
-    transition: opacity 0.5s ease;
+    transition: height 200ms ease-in-out, 
+                background 200ms ease-in-out, 
+                opacity 500ms ease;
+   }
+
+.list_t .nav_v li{
+    display: none;
+    opacity: 0;
+    transition: opacity 500ms ease,
+                display 300ms ease;
 }
-.album_deatail_a_link a{
-    text-decoration: none;
-    color: #3d5361a9;
+.list_t .nav_v li:last-child{
+    border-bottom: none;
 }
-.album_deatail_a_link a:hover{
-    text-decoration: underline;
-    color: #3d5361;
+.list_t .nav_v.showing li{
+    display: block;
+    opacity: 1;
+    transition: opacity 500ms ease,
+                display 300ms ease;
 }
-.album_detail_icon{
+.list_t .nav_v{
+    margin-top: -150px;
+    background: none;
+    position: absolute;
+    width: 100%;
+    padding: 2rem 2rem;
+    top: 10px;
+    height: 0;
     opacity: 0;
 }
 
-/* -----------------------------------------------------------------------------------
-BUSINESS-SECTION
-------------------------------------------------------------------------------------*/
-.item_container{
-    display: flex;
-    gap: 10px;
-    
-}
-@media screen and (max-width:900px) {
-    .item_container{
-        flex-direction: column;
-        margin-top: 10px;
-    }
-    .item_price_wrapper{
-        display: flex;
-        gap: 10px;
-        width: 100%;
-    }
-    .first_price_card{
-        width: 100%;
-    }
-  
-}
-@media screen and (max-width:600px) {
-    .item_container{
-        flex-direction: column;
-        margin-top: 10px;
-    }
-    .item_price_wrapper{
-       flex-direction: column;
-    }
-  
-}
-.all_items_wrapper{
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: 10px;
-    position: relative;
-}
-.item_image_container{
-    flex-basis: 70%;
-}
-.item_price_wrapper{
-    flex-basis: 30%;
-}
-.list_style_dot li{
-    list-style-type: disc;
-}
-.item_wrapper_link:hover .item_edit{
-    display: flex;
-}
 
-.item_edit {
-    display: flex;
-    gap: 5px;
-    display: none;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    z-index: 99;
-}
-.item_image_cover_wrapper{
-    width: 100%;
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-.img_cover{
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #3b536131;
-}
-.item_image_grid{
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
-    object-position: center;
-    border-radius: 5px;
-}
-
+/* -----------------------------------------------------------------------------------------------
+                                                                                    PWA-MOBILE-VIEW 
+-------------------------------------------------------------------------------------------------*/
 .mobile-nav-wrapper{
     display: none;
 }
 .mobile-footer-wrapper{
     display: none;
 }
-
-/* -----------------------------------------------------------------------------------------------
-                                                                                    PWA-MOBILE-VIEW 
--------------------------------------------------------------------------------------------------*/
 @media screen and (max-width:414px) {
    .nav-web-view{
         display: none;
@@ -923,6 +180,7 @@ BUSINESS-SECTION
         right: 0;
         z-index: 999999;
         padding: 0.6rem 1rem;
+        padding-bottom: 1.5rem;
    }
    .mobile-footer-container{
         display: flex;
@@ -932,7 +190,7 @@ BUSINESS-SECTION
     .mobile-list-items{
         position: absolute;
         left: 0;
-        bottom: 60px;
+        bottom: 75px;
         right: 0;
         width: 100%;
         margin-bottom: -15rem;
@@ -992,17 +250,21 @@ BUSINESS-SECTION
     .mobile-profile-modal{
         padding-bottom: 50px;
     }
+    .space_buttom{
+        padding-bottom: 80px;
+    }
+    .spolight_mobile{
+        display: none;
+    }
+    .pagination{
+        display: none;
+    }
     .mobile-album-song{
         padding: 4rem 0;
     }
     .mobile-song-modal{
         padding: 4rem 0rem;
     }
-    .Page{
-        display:   .new-grid-wrapper{
-            /* gap: 0; */
-        }
-       
     .album_detail_img_wrapper{
         width: 250px;
         height: 180px;
